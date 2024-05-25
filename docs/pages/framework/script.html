@@ -1,0 +1,103 @@
+<header>
+    index.js
+</header>
+<p>
+    主体结构如下：
+</p>
+<pre tag="javascript">
+export default function (createPage) {
+    createPage({
+        
+        // 数据
+        data:{},
+
+        // 自定义方法
+        doit(){},
+
+        // 生命周期勾子
+        onLoad(){}
+    });
+};
+</pre>
+<h2>
+    数据
+</h2>
+<p>
+    定义在data中的数据，会参与页面的双向绑定，获取的时候，获取的时候使用（比如有个数据info）：
+</p>
+<pre tag="javascript">
+    this.data.info
+</pre>
+<p>
+    如果需要设置，应该借助
+    <span class="warn">$setData</span>
+    方法：
+</p>
+<pre tag="javascript">
+this.$setData({
+    info: "新的值"
+});
+</pre>
+<h2>
+    自定义方法
+</h2>
+<p>
+    除了生命周期勾子外，定义的方法都是自定义方法，当然，包括生命周期勾子，你都可以主动调用。
+</p>
+<h2>
+    生命周期勾子
+</h2>
+<table>
+    <thead>
+        <tr>
+            <td>
+                函数名
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                onLoad
+            </td>
+            <td>
+                页面加载
+            </td>
+        </tr>
+        <tr>
+            <td>
+                onReady
+            </td>
+            <td>
+                页面加载完成
+            </td>
+        </tr>
+        <tr>
+            <td>
+                onShow
+            </td>
+            <td>
+                页面显示
+            </td>
+        </tr>
+        <tr>
+            <td>
+                onHide
+            </td>
+            <td>
+                页面隐藏
+            </td>
+        </tr>
+        <tr>
+            <td>
+                onUnload
+            </td>
+            <td>
+                页面被关闭
+            </td>
+        </tr>
+    </tbody>
+</table>

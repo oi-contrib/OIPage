@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>官方文档 | OIPage 跨端前端框架，支持H5+各种小程序等，并支持扩展前端开发框架</title>
+    <link rel="shortcut icon" href="./images/logo.png">
+    <meta name="keywords" content="zxl20070701 1904314465@qq.com oipage framework">
+    <script src="./js/min/pageby.min.js"></script>
+    <link rel="stylesheet" href="./styles/common.css">
+    <script src="./js/system.js"></script>
+    <script src="./js/tool.js"></script>
+    <script>
+        // 控制是否需要缓存
+        var host = window.location.host;
+        window.needCache = !(/^127\.0\.0\.1/.test(host) || /^localhost/.test(host) || host == "");
+    </script>
+</head>
+
+<body>
+    <div class="tips">
+        当前OIPage还处于开发阶段，敬请期待～（当然，你可以
+        <a href="https://github.com/oi-contrib/OIPage/issues" target="_blank">Issue</a>
+        给我们提建议）
+    </div>
+    <header>
+        <div class="main-navbar">
+            <div class="left">
+                <a target="_blank" href="https://github.com/oi-contrib">
+                    <div>OI开源</div>
+                    <div>和你分享一些有趣的主意</div>
+                </a>
+                <span>
+                    OIPage
+                </span>
+            </div>
+            <nav>
+                <a active="yes" href="javascript:void(0)">
+                    OIPage
+                </a>
+                <a target="_blank" href="https://oi-contrib.github.io/VISLite">
+                    VISLite
+                </a>
+                <a target="_blank" href="https://oi-contrib.github.io/uniQuery">
+                    uniQuery
+                </a>
+            </nav>
+            <div class="right">
+                当前版本：
+                <a href="https://www.npmjs.com/package/oipage" target="_blank">
+                    v<span id="version-id"></span>
+                </a>
+            </div>
+        </div>
+        <div class="sub-navbar">
+            <nav id="nav-id">
+                <span tag="introduce">
+                    介绍
+                </span>
+                <span tag="course">
+                    教程
+                </span>
+                <span tag="framework">
+                    框架
+                </span>
+                <span tag="component">
+                    组件
+                </span>
+                <span tag="api">
+                    API
+                </span>
+                <a target="_blank" href="https://github.com/oi-contrib/OIPage">
+                    GitHub
+                </a>
+            </nav>
+        </div>
+    </header>
+    <div class="view">
+        <div class="menu" id="menu-id"></div>
+        <div class="content" id="content-id"></div>
+    </div>
+    <script src="./js/menu.js"></script>
+</body>
+
+</html>

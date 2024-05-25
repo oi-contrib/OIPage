@@ -1,0 +1,16 @@
+{
+  "name": "oipage-test",
+  "version": "0.0.0",
+  "description": "OIPage测试项目",
+  "scripts": {
+    "dev:h5": "oipage --dev h5",
+    "dev:mp-weixin": "oipage --dev mp-weixin",
+    "dev:mp-alipay": "oipage --dev mp-alipay",
+    "build:h5": "oipage --build h5",
+    "build:mp-weixin": "oipage --build mp-weixin",
+    "build:mp-alipay": "oipage --build mp-alipay"
+  },
+  "dependencies": {
+    "oipage": "file:../oipage-0.1.0-alpha.1.tgz"
+  }
+}

@@ -1,0 +1,73 @@
+#!/usr/bin/env node
+
+'use strict';
+
+process.title = 'oipage';
+
+const devby = require("devby");
+const { options, help } = require('./options');
+const pkg = require("../package.json");
+const runDev = require("../script/command/dev");
+const runBuild = require("../script/command/build");
+const alignment = require("../script/config/alignment");
+
+// 组装好缩写和全写的映射
+let shortHands = {};
+for (let key in options) {
+    if (options[key].short) shortHands["-" + options[key].short] = "--" + key;
+}
+
+// 命令行传递的参数
+const parsed = devby.options(shortHands, process.argv);
+
+(() => {
+    // 打印版本
+    if (Array.isArray(parsed.version)) {
+        devby.log("\nOIPage@v" + pkg.version + "\n");
+    }
+
+    // 判断是否需要帮助
+    else if (Array.isArray(parsed.help)) {
+        // 打印具体的配置提示
+        if (parsed.help.length > 0) {
+            let help0 = parsed.help[0];
+
+            // 缩写转全拼
+            if (help0.length == 1) {
+                help0 = shortHands["-" + help0];
+            }
+
+            if (help0) {
+                help0 = help0.replace(/^--/, "");
+
+                // 根据需要帮助的命令获取对应的信息
+                const help0Option = options[help0];
+                if (help0Option) {
+                    devby.log(`
+` + help0Option.demo + `         ` + help0Option.info + `
+                  `);
+
+                    return;
+                }
+
+            }
+        }
+
+        devby.log(help);
+    }
+
+    // 开发
+    else if (Array.isArray(parsed.dev)) {
+        runDev(alignment.command(parsed));
+    }
+
+    // 打包
+    else if (Array.isArray(parsed.build)) {
+        runBuild(alignment.command(parsed));
+    }
+
+    // 默认
+    else {
+        devby.log(help);
+    }
+})();

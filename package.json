@@ -1,0 +1,49 @@
+{
+  "name": "oipage",
+  "version": "0.1.0-alpha.1",
+  "description": "📰跨端前端框架，支持H5+各种小程序等，并支持扩展前端开发框架",
+  "typings": "./types/index.d.ts",
+  "scripts": {
+    "init": "npm install && devby --copy ./node_modules/pageby/dist/pageby.min.js ./docs/js/min/pageby.min.js",
+    "dev:docs": "devby -s 20000",
+    "build:docs": "node ./build/index.js",
+    "pack": "npm pack",
+    "dev:h5": "node bin/run --dev h5 --root ./test",
+    "dev:mp-weixin": "node bin/run --dev mp-weixin --root ./test",
+    "dev:mp-alipay": "node bin/run --dev mp-alipay --root ./test",
+    "build:h5": "node bin/run --build h5 --root ./test",
+    "build:mp-weixin": "node bin/run --build mp-weixin --root ./test",
+    "build:mp-alipay": "node bin/run --build mp-alipay --root ./test"
+  },
+  "bin": {
+    "oipage": "bin/run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oi-contrib/OIPage.git"
+  },
+  "keywords": [
+    "oi-contrib",
+    "oipage",
+    "framework"
+  ],
+  "author": {
+    "name": "zxl20070701",
+    "url": "https://zxl20070701.github.io/notebook/home.html"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oi-contrib/OIPage/issues"
+  },
+  "homepage": "https://oi-contrib.github.io/OIPage",
+  "dependencies": {
+    "devby": "^0.7.0-alpha.4",
+    "html-webpack-plugin": "^5.6.0",
+    "loader-utils": "^2.0.0",
+    "webpack": "^5.91.0",
+    "webpack-dev-server": "^5.0.4"
+  },
+  "devDependencies": {
+    "pageby": "^0.1.0"
+  }
+}

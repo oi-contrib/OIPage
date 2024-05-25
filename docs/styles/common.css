@@ -1,0 +1,349 @@
+body {
+    --main-color: #44a2cc;
+    --gray-color: rgba(0, 0, 0, .06);
+    min-width: 700px;
+}
+
+body>.tips {
+    background-color: #ffb731;
+    min-height: 40px;
+    padding: 10px 60px;
+    z-index: 19;
+    text-align: center;
+    color: #333;
+    font-size: 14px;
+}
+
+body>.tips>a {
+    color: var(--main-color);
+    text-decoration: underline;
+}
+
+body>header {
+    position: sticky;
+    top: -64px;
+}
+
+body>header>div {
+    text-align: center;
+    background-color: #f7f7f7;
+    box-shadow: 0 1px 0 0 var(--gray-color);
+    position: relative;
+}
+
+body>header>div.main-navbar {
+    height: 64px;
+    z-index: 2;
+}
+
+body>header>div.main-navbar>.right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 64px;
+    padding-right: 20px;
+    font-weight: 200;
+}
+
+body>header>div.main-navbar>.right>a {
+    color: var(--main-color);
+    font-weight: 400;
+}
+
+body>header>div.main-navbar>.right>a:hover {
+    text-decoration: underline;
+}
+
+body>header>div.main-navbar>.left {
+    position: absolute;
+    height: 64px;
+    font-size: 0;
+}
+
+body>header>div.main-navbar>.left>a {
+    background-image: url("../images/OI.png");
+    display: inline-block;
+    margin-top: 12px;
+    margin-left: 10px;
+    padding-left: 45px;
+    padding-right: 20px;
+    background-position: left center;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    border-right: 1px solid var(--gray-color);
+    cursor: pointer;
+    text-align: left;
+    font-size: 0;
+    vertical-align: top;
+}
+
+body>header>div.main-navbar>.left>a>div {
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 200;
+    color: black;
+}
+
+body>header>div.main-navbar>.left>a>div:first-child {
+    font-weight: 800;
+}
+
+body>header>div.main-navbar>.left>span {
+    display: inline-block;
+    width: 160px;
+    height: 100%;
+    background-image: url("../images/oipage.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+    margin-left: 20px;
+}
+
+body>header>div.main-navbar>nav>a {
+    display: inline-block;
+    line-height: 64px;
+    margin: 0 20px;
+    font-size: 800;
+    color: black;
+}
+
+body>header>div.main-navbar>nav>a:hover {
+    color: var(--main-color);
+}
+
+body>header>div.main-navbar>nav>a[active="yes"] {
+    color: var(--main-color);
+    position: relative;
+}
+
+body>header>div.main-navbar>nav>a[active="yes"]::after {
+    content: " ";
+    width: 50px;
+    height: 2px;
+    background-color: var(--main-color);
+    display: inline-block;
+    position: absolute;
+    left: calc(50% - 25px);
+    bottom: 0;
+}
+
+body>header>div.sub-navbar {
+    height: 80px;
+    z-index: 1;
+}
+
+body>header>div.sub-navbar>nav {
+    padding-top: 20px;
+}
+
+body>header>div.sub-navbar>nav>span {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    min-width: 24px;
+    padding: 0 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    transition: background .3s;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+body>header>div.sub-navbar>nav>a {
+    background-image: url("../images/link.svg");
+    background-position: center right;
+    background-repeat: no-repeat;
+    padding-right: 17px;
+    color: black;
+    margin-left: 10px;
+}
+
+body>header>div.sub-navbar>nav>span:hover,
+body>header>div.sub-navbar>nav>a:hover {
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+body>header>div.sub-navbar>nav>span[active="yes"] {
+    background-color: var(--main-color);
+    color: white;
+}
+
+body>.view {
+    font-size: 0;
+    white-space: nowrap;
+}
+
+body>.view>div {
+    height: calc(100vh - 80px);
+    display: inline-block;
+    vertical-align: top;
+    font-size: 16px;
+    overflow: auto;
+}
+
+body>.view>div.menu {
+    border-right: 1px solid var(--gray-color);
+    width: 319px;
+    padding: 20px 0;
+    user-select: none;
+}
+
+body>.view>div.menu li {
+    line-height: 42px;
+}
+
+body>.view>div.menu span {
+    display: block;
+    border-left: 4px solid transparent;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 15px;
+}
+
+
+body>.view>div.menu>ul>li>span {
+    padding-left: 20px;
+}
+
+body>.view>div.menu>ul>li>ul>li>span {
+    padding-left: 40px;
+    line-height: 1.8em;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+body>.view>div.menu li[active]>span {
+    background-repeat: no-repeat;
+    background-position: 4px center;
+    background-size: 16px auto;
+}
+
+body>.view>div.menu li[active="yes"]>span {
+    background-image: url("../images/open.png");
+}
+
+body>.view>div.menu li[active="no"]>span {
+    background-image: url("../images/close.png");
+}
+
+body>.view>div.menu li[active="no"]>ul {
+    display: none;
+}
+
+body>.view>div.menu span:hover {
+    color: var(--main-color);
+}
+
+body>.view>div.menu span[active='yes'] {
+    border-left-color: var(--main-color);
+    color: var(--main-color);
+}
+
+body>.view>div.content {
+    width: calc(100vw - 320px);
+    padding: 10px 30px;
+}
+
+body>.view>div.content>header {
+    font-size: 28px;
+    padding: 20px 0;
+    font-weight: 800;
+}
+
+body>.view>div.content>h2 {
+    font-size: 20px;
+    line-height: 2em;
+    padding: 20px 0;
+}
+
+body>.view>div.content>h3 {
+    font-size: 16px;
+    line-height: 2em;
+    padding: 15px 0;
+}
+
+body>.view>div.content>h4 {
+    font-size: 12px;
+    padding: 15px 0 5px 0;
+    text-decoration: overline;
+}
+
+body>.view>div.content>p {
+    line-height: 1.6em;
+    text-indent: 2em;
+    color: #3c3939;
+    font-weight: 400;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+body>.view>div.content>.to-editor-btn {
+    margin: 30px 0 40px 0;
+    display: block;
+    width: fit-content;
+    font-size: 16px;
+    color: var(--main-color);
+    border-bottom: 1px solid var(--main-color);
+    padding: 0 5px;
+    font-family: cursive;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+body>.view>div.content>.to-editor-btn:hover {
+    font-weight: 800;
+}
+
+body>.view>div.content .warn {
+    font-size: 14px;
+    color: #000000;
+    font-weight: 800;
+    padding: 0 3px;
+    line-height: 1.6em;
+}
+
+body>.view>div.content>table {
+    max-width: 100%;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+body>.view>div.content>table>tbody>tr>* {
+    border-width: 0 1px 1px 0;
+    border-style: solid;
+    border-color: #c1bcbc;
+}
+
+body>.view>div.content>table td,
+body>.view>div.content>table th {
+    padding: 0.5em 1em;
+}
+
+body>.view>div.content>table>tbody>tr>*:first-child {
+    border-width: 0 1px 1px 1px;
+}
+
+body>.view>div.content>table>tbody>tr:nth-child(2n) {
+    background-color: #F5F5F5;
+}
+
+body>.view>div.content>table>tbody>tr:nth-child(2n+1) {
+    background-color: #fff;
+}
+
+body>.view>div.content>table>thead>tr {
+    border: 1px solid #c1bcbc;
+    color: black;
+    white-space: nowrap;
+}
+
+@media (max-width: 1060px) {
+    body>header>div.main-navbar>.left>span {
+        display: none;
+    }
+
+    body>header>div.main-navbar>.left>a {
+        border-right-color: transparent;
+    }
+}

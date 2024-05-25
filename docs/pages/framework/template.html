@@ -1,0 +1,62 @@
+<header>
+    index.html
+</header>
+<p>
+    这里主要说明一些通用的内容，针对特殊标签的说明，在
+    <span class="warn">
+        组件
+    </span>
+    一节中有具体描述。
+</p>
+<h2>
+    事件（oi-on）
+</h2>
+<p>
+    给一个原生绑定交互事件，比如点击：
+</p>
+<pre tag="html">
+    <button oi-bind:click="doit">点击我</button>
+</pre>
+<p>
+    其中doit就是
+    <span class="warn">
+        index.js
+    </span>
+    文件中定义的方法，而click表示是点击事件。
+</p>
+<h3>
+    事件列表
+</h3>
+<p>
+    下面是具体可以使用的事件列表：
+</p>
+<table>
+    <thead>
+        <tr>
+            <td>
+                事件名称
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                click
+            </td>
+            <td>
+                点击的时候
+            </td>
+        </tr>
+</table>
+<h2>
+    属性（oi-bind）
+</h2>
+<p>
+    给标签绑定一个值：
+</p>
+<pre tag="html">
+    <view oi-bind:active="isActive"></view>
+</pre>

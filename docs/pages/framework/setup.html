@@ -1,0 +1,56 @@
+<header>
+    app.js
+</header>
+<p>
+    主体结构如下：
+</p>
+<pre tag="javascript">
+export default function (createApp) {
+    createApp({
+
+        // 生命周期勾子
+        onLaunch(){}
+    });
+};
+</pre>
+<h2>
+    生命周期勾子
+</h2>
+<table>
+    <thead>
+        <tr>
+            <td>
+                函数名
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                onLaunch
+            </td>
+            <td>
+                监听应用初始化
+            </td>
+        </tr>
+        <tr>
+            <td>
+                onShow
+            </td>
+            <td>
+                监听应用启动或切前台
+            </td>
+        </tr>
+        <tr>
+            <td>
+                onHide
+            </td>
+            <td>
+                监听应用切后台
+            </td>
+        </tr>
+    </tbody>
+</table>

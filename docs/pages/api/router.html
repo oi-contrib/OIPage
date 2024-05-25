@@ -1,0 +1,278 @@
+<header>
+    路由
+</header>
+<h2>
+    oi.navigateTo(option)
+</h2>
+<p>
+    保留当前页面，跳转到应用内的某个页面。
+</p>
+<h3>
+    option参数说明
+</h3>
+<table>
+    <thead>
+        <tr>
+            <td>
+                参数
+            </td>
+            <td>
+                类型
+            </td>
+            <td>
+                必填
+            </td>
+            <td>
+                默认值
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                url
+            </td>
+            <td>
+                String
+            </td>
+            <td>
+                是
+            </td>
+            <td>
+
+            </td>
+            <td>
+                需要跳转的应用内非 tabBar 的页面的路径
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3>
+    返回参数说明
+</h3>
+<p>
+    返回一个Promise。
+</p>
+<h2>
+    oi.redirectTo(option)
+</h2>
+<p>
+    关闭当前页面，跳转到应用内的某个页面。
+</p>
+<h3>
+    option参数说明
+</h3>
+<table>
+    <thead>
+        <tr>
+            <td>
+                参数
+            </td>
+            <td>
+                类型
+            </td>
+            <td>
+                必填
+            </td>
+            <td>
+                默认值
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                url
+            </td>
+            <td>
+                String
+            </td>
+            <td>
+                是
+            </td>
+            <td>
+
+            </td>
+            <td>
+                需要跳转的应用内非 tabBar 的页面的路径
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3>
+    返回参数说明
+</h3>
+<p>
+    返回一个Promise。
+</p>
+<h2>
+    oi.reLaunch(option)
+</h2>
+<p>
+    关闭所有页面，打开到应用内的某个页面。
+</p>
+<h3>
+    option参数说明
+</h3>
+<table>
+    <thead>
+        <tr>
+            <td>
+                参数
+            </td>
+            <td>
+                类型
+            </td>
+            <td>
+                必填
+            </td>
+            <td>
+                默认值
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                url
+            </td>
+            <td>
+                String
+            </td>
+            <td>
+                是
+            </td>
+            <td>
+
+            </td>
+            <td>
+                需要跳转的应用内非 tabBar 的页面的路径
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3>
+    返回参数说明
+</h3>
+<p>
+    返回一个Promise。
+</p>
+<h2>
+    oi.switchTab(option)
+</h2>
+<p>
+    跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面。
+</p>
+<h3>
+    option参数说明
+</h3>
+<table>
+    <thead>
+        <tr>
+            <td>
+                参数
+            </td>
+            <td>
+                类型
+            </td>
+            <td>
+                必填
+            </td>
+            <td>
+                默认值
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                url
+            </td>
+            <td>
+                String
+            </td>
+            <td>
+                是
+            </td>
+            <td>
+
+            </td>
+            <td>
+                需要跳转的应用内非 tabBar 的页面的路径
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3>
+    返回参数说明
+</h3>
+<p>
+    返回一个Promise。
+</p>
+<h2>
+    oi.navigateBack(option)
+</h2>
+<p>
+    关闭当前页面，返回上一页面或多级页面。
+</p>
+<h3>
+    option参数说明
+</h3>
+<table>
+    <thead>
+        <tr>
+            <td>
+                参数
+            </td>
+            <td>
+                类型
+            </td>
+            <td>
+                必填
+            </td>
+            <td>
+                默认值
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                delta
+            </td>
+            <td>
+                Number
+            </td>
+            <td>
+                否
+            </td>
+            <td>
+                1
+            </td>
+            <td>
+                返回的页面数，如果 delta 大于现有页面数，则返回到首页
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3>
+    返回参数说明
+</h3>
+<p>
+    返回一个Promise。
+</p>

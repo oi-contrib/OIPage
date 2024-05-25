@@ -1,0 +1,126 @@
+<header>
+    网络
+</header>
+<h2>
+    oi.request(option)
+</h2>
+<p>
+    发起网络请求。
+</p>
+<h3>
+    option参数说明
+</h3>
+<table>
+    <thead>
+        <tr>
+            <td>
+                参数
+            </td>
+            <td>
+                类型
+            </td>
+            <td>
+                必填
+            </td>
+            <td>
+                默认值
+            </td>
+            <td>
+                说明
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                url
+            </td>
+            <td>
+                String
+            </td>
+            <td>
+                是
+            </td>
+            <td>
+
+            </td>
+            <td>
+                开发者服务器接口地址
+            </td>
+        </tr>
+        <tr>
+            <td>
+                data
+            </td>
+            <td>
+                Object/String/ArrayBuffer
+            </td>
+            <td>
+                否
+            </td>
+            <td>
+
+            </td>
+            <td>
+                请求的参数
+            </td>
+        </tr>
+        <tr>
+            <td>
+                header
+            </td>
+            <td>
+                Object
+            </td>
+            <td>
+                否
+            </td>
+            <td>
+
+            </td>
+            <td>
+                设置请求的 header
+            </td>
+        </tr>
+        <tr>
+            <td>
+                method
+            </td>
+            <td>
+                String
+            </td>
+            <td>
+                否
+            </td>
+            <td>
+                GET
+            </td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                timeout
+            </td>
+            <td>
+                Number
+            </td>
+            <td>
+                否
+            </td>
+            <td>
+                60000
+            </td>
+            <td>
+                超时时间，单位 ms
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3>
+    返回参数说明
+</h3>
+<p>
+    返回一个Promise。
+</p>
