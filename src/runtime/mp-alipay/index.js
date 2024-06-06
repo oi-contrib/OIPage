@@ -1,5 +1,6 @@
 export default function () {
-    Object.prototype.oi = {
+    // Object.prototype.oi = {
+    my.__global__oipage__ = {
         navigateTo(_option) {
             return new Promise(function (resolve, reject) {
                 my.navigateTo({

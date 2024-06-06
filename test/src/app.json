@@ -1,6 +1,8 @@
 {
     "pages": [
         "pages/index/index",
-        "pages/login/index"
+        "pages/core/index",
+        "pages/label/index",
+        "pages/api/index"
     ]
 }

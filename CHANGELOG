@@ -2,3 +2,17 @@ v0.1.0:
     date:
     changes:
       - 初始化版本
+        1、支持的平台
+          * 普通H5
+          * 微信小程序
+          * 支付宝小程序
+          * 抖音小程序
+        2、支持的功能
+          * 指令
+            （oi-on）
+          * 标签
+            （view、button）
+          * oi全局API
+            （navigateTo、redirectTo、reLaunch、switchTab、navigateBack）
+          * 应用配置（mainfest.json）
+            （小程序appid）

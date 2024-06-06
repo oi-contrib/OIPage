@@ -43,7 +43,8 @@ module.exports = function () {
         code += `import "./${filename}.css?type=disk&page=${incomingQuery.page}&lang=style";`;
 
         if (type == 'app') {
-            code += `import runtime from "@oipage/runtime";runtime();startUp(App);`;
+            code += `import runtime from "@oipage/runtime";runtime();`;
+            code += `startUp(App);`;
         } else {
             code += `import "./${filename}.html?type=disk&page=${incomingQuery.page}&lang=template";`;
             code += `startUp(Page);`;

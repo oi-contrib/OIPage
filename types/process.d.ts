@@ -10,7 +10,7 @@ declare global {
             /**
              * OIPage 平台
              */
-            OIPAGE_PLATFORM: "h5" | "mp-weixin" | "mp-alipay"
+            OIPAGE_PLATFORM: "h5" | "mp-weixin" | "mp-alipay" | "my-toutiao"
 
             /**
              * OIPage 项目根目录

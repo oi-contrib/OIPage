@@ -1,8 +1,8 @@
 const path = require("path");
-const writeFileSync= require("../../tool/writeFileSync");
+const writeFileSync = require("../../tool/writeFileSync");
 
 module.exports = function (data) {
-    let filepath = path.join(process.env.OIPAGE_DIST, data.page);
+    let filepath = path.join(process.env.OIPAGE_CACHE, data.page);
 
     if (data.lang == "json") {
         let json, rawJSON = JSON.parse(data.source);
@@ -14,9 +14,12 @@ module.exports = function (data) {
 
             // 项目配置
             let project = {
-
+                "projectname": data.manifest.name,
+                "component2": true,
+                "enableAppxNg": true,
+                "enableNodeModuleBabelTransform": true
             };
-            writeFileSync(path.join(process.env.OIPAGE_DIST, "./mini.project.json"), JSON.stringify(project, null, 2));
+            writeFileSync(path.join(process.env.OIPAGE_CACHE, "./mini.project.json"), JSON.stringify(project, null, 2));
         } else {
             json = {
 

@@ -8,8 +8,8 @@
     <a href="https://www.npmjs.com/package/oipage">
         <img src="https://img.shields.io/npm/v/oipage.svg" alt="Version">
     </a>
-    <a href="https://github.com/zxl20070701/OIPage" target='_blank'>
-        <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/zxl20070701/OIPage?style=social">
+    <a href="https://github.com/oi-contrib/OIPage" target='_blank'>
+        <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/oi-contrib/OIPage?style=social">
     </a>
 </p>
 

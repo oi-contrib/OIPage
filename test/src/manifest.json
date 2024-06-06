@@ -1,0 +1,13 @@
+{
+    "name": "OIPage Test",
+    "mp-weixin": {
+        "appid": ""
+    },
+    "mp-alipay": {
+        
+    },
+    "mp-toutiao": {
+        "appid": "testAppId"
+    },
+    "h5": {}
+}

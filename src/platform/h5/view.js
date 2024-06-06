@@ -19,7 +19,13 @@ export default function (template, option, config, callback) {
                     // 如果是节点
                     if (currentNode.type == 'tag') {
 
-                        let currentEl = document.createElement(currentNode.name);
+                        let nodeName = currentNode.name;
+
+                        if (nodeName == "image") {
+                            nodeName = "img";
+                        }
+
+                        let currentEl = document.createElement(nodeName);
                         for (let attrKey in currentNode.attrs) {
                             let attrValue = currentNode.attrs[attrKey];
 

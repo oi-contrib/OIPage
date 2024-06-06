@@ -1,3 +1,57 @@
 <header>
     app.json
 </header>
+<p>
+    对 OIPage 进行全局配置，决定页面文件的路径、窗口样式、原生的导航栏、底部的原生tabbar 等。
+</p>
+<h2>
+    配置项列表
+</h2>
+<table>
+    <thead>
+        <tr>
+            <td>
+                属性
+            </td>
+            <td>
+                类型
+            </td>
+            <td>
+                必填
+            </td>
+            <td>
+                描述
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                pages
+            </td>
+            <td>
+                Array&lt;String&gt;
+            </td>
+            <td>
+                是
+            </td>
+            <td>
+                设置页面路径
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2>
+    pages
+</h2>
+<p>
+    比如我们有两个页面，那么：
+</p>
+<pre tag="javascript">
+{
+    "pages": [
+        "pages/index/index",
+        "pages/login/index"
+    ]
+}
+</pre>

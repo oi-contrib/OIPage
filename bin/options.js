@@ -18,11 +18,11 @@ module.exports = {
     },
     dev: {
       info: '[3]Development mode running project.',
-      demo: 'oipage --dev h5|mp-weixin'
+      demo: 'oipage --dev h5|mp-weixin|mp-alipay|mp-toutiao'
     },
     build: {
       info: '[4]Package the current project.',
-      demo: 'oipage --build  h5|mp-weixin'
+      demo: 'oipage --build  h5|mp-weixin|mp-alipay|mp-toutiao'
     }
   },
 

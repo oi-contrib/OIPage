@@ -1,17 +1,14 @@
 export default function (createPage) {
     createPage({
         data: {
-            info: "这是登录页面info的默认内容～"
+
         },
 
         // 方法
-        goLogin(event) {
-            console.log(event);
-            console.log(this.data.info);
-            console.log("去登录页面");
-
+        goto(event) {
+            console.log(event)
             oi.navigateTo({
-                url: "/pages/login/index"
+                url: "/pages/" + event.target.dataset.page + "/index"
             });
         },
 

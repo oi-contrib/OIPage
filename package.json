@@ -11,9 +11,11 @@
     "dev:h5": "node bin/run --dev h5 --root ./test",
     "dev:mp-weixin": "node bin/run --dev mp-weixin --root ./test",
     "dev:mp-alipay": "node bin/run --dev mp-alipay --root ./test",
+    "dev:mp-toutiao": "node bin/run --dev mp-toutiao --root ./test",
     "build:h5": "node bin/run --build h5 --root ./test",
     "build:mp-weixin": "node bin/run --build mp-weixin --root ./test",
-    "build:mp-alipay": "node bin/run --build mp-alipay --root ./test"
+    "build:mp-alipay": "node bin/run --build mp-alipay --root ./test",
+    "build:mp-toutiao": "node bin/run --build mp-toutiao --root ./test"
   },
   "bin": {
     "oipage": "bin/run"

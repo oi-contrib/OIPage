@@ -1,0 +1,31 @@
+.title {
+    text-align: center;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+.img {
+    width: 50px;
+    height: 50px;
+    margin: 20px 0;
+}
+
+.list {
+    background-color: rgb(237 237 237);
+    padding: 10px;
+    margin: 20px 10px;
+}
+
+.list>.btn {
+    background-color: aliceblue;
+    font-size: 14px;
+    padding: 0 5px;
+    font-family: cursive;
+    font-weight: 800;
+    font-style: italic;
+    text-align: left;
+}
+
+.list>.btn:not(:first-child) {
+    margin-top: 10px;
+}

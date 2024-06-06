@@ -1,3 +1,19 @@
-<button oi-on:click="goLogin">
-    去登录页面
-</button>
+<view>
+    <view class="title">
+        <!-- <image class="img" src="/static/logo.png" /> -->
+        <view>
+            OIPage（开发一次，多端覆盖）
+        </view>
+    </view>
+    <view class="list">
+        <button class="btn" data-page="core" oi-on:click="goto">
+            主体设计
+        </button>
+        <button class="btn" data-page="label" oi-on:click="goto">
+            简单&单一标签
+        </button>
+        <button class="btn" data-page="api" oi-on:click="goto">
+            全局oi方法
+        </button>
+    </view>
+</view>

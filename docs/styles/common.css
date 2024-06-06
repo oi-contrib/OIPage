@@ -303,6 +303,14 @@ body>.view>div.content .warn {
     line-height: 1.6em;
 }
 
+body>.view>div.content .link {
+    color: var(--main-color);
+}
+
+body>.view>div.content .link:hover {
+    text-decoration: underline;
+}
+
 body>.view>div.content>table {
     max-width: 100%;
     line-height: 20px;

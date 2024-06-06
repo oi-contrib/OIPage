@@ -15,8 +15,7 @@ module.exports = function (data) {
             // 项目配置
             let project = {
                 "projectname": data.manifest.name,
-                "appid": data.manifest["mp-weixin"].appid,
-                "compileType": "miniprogram"
+                "appid": data.manifest["mp-toutiao"].appid
             };
             writeFileSync(path.join(process.env.OIPAGE_CACHE, "./project.config.json"), JSON.stringify(project, null, 2));
         } else {
@@ -26,8 +25,8 @@ module.exports = function (data) {
         }
         writeFileSync(filepath + ".json", JSON.stringify(json, null, 2));
     } else if (data.lang == "style") {
-        writeFileSync(filepath + ".wxss", data.source);
+        writeFileSync(filepath + ".ttss", data.source);
     } else if (data.lang == "template") {
-        writeFileSync(filepath + ".wxml", data.source);
+        writeFileSync(filepath + ".ttml", data.source);
     }
 };
