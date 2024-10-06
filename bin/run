@@ -1,0 +1,208 @@
+#!/usr/bin/env node
+
+'use strict';
+
+process.title = 'OIPage';
+
+const server = require('../nodejs/core/server');
+const { options, help } = require('./options');
+const path = require('path');
+const { log, error } = require('../nodejs/core/log');
+const { deleteSync, copySync, moveSync, listFileSync, fullPathSync } = require("../nodejs/core/file");
+const network = require("../nodejs/core/network");
+const { get, post } = require("../nodejs/core/remote");
+const fs = require("fs");
+const { exec } = require('child_process');
+
+const jsonfile = require("../package.json");
+
+// 组装好缩写和全写的映射
+let shortHands = {};
+for (let key in options) {
+    if (options[key].short) shortHands["-" + options[key].short] = "--" + key;
+}
+
+// 命令行传递的参数
+const parsed = require("../nodejs/core/options")(shortHands, process.argv);
+
+(() => {
+    // 打印版本
+    if (Array.isArray(parsed.version)) {
+        log("\nOIPage@v" + jsonfile.version + "\n");
+    }
+
+    // 基于配置文件运行
+    else if (Array.isArray(parsed.config)) {
+        if (parsed.config.length < 1) parsed.config[0] = './oipage.config.js';
+
+        // 读取配置
+        let configFile = require(path.join(process.cwd(), parsed.config[0]));
+
+        // 如果配置了服务器
+        if ("devServer" in configFile) {
+            server(configFile.devServer);
+        }
+    }
+
+    // 删除
+    else if (Array.isArray(parsed.delete)) {
+
+        // 获取绝对路径
+        let targetPath = fullPathSync(parsed.delete[0]);
+
+        deleteSync(targetPath);
+        log(`> delete ${targetPath.replace(process.cwd(), '.')}`);
+    }
+
+    // 复制
+    else if (Array.isArray(parsed.copy)) {
+
+        // 获取绝对路径
+        let sourcePath = fullPathSync(parsed.copy[0]);
+        let targetPath = fullPathSync(parsed.copy[1]);
+
+        // 如果存在
+        copySync(sourcePath, targetPath);
+        log(`> copy ${sourcePath.replace(process.cwd(), '.')} ➔ ${targetPath.replace(process.cwd(), '.')}`);
+    }
+
+    // 复制文件（一级展开）
+    else if (Array.isArray(parsed.pick)) {
+
+        // 如果目标文件夹不存在，创建
+        if (!fs.existsSync(parsed.pick[1])) {
+            fs.mkdirSync(parsed.pick[1], { recursive: true });
+        }
+
+        listFileSync(parsed.pick[0], fileInfo => {
+
+            // 获取路径
+            let sourcePath = fullPathSync(fileInfo.path);
+            let targetPath = fullPathSync(path.join(parsed.pick[1], fileInfo.name));
+
+            let index = 1;
+            while (fs.existsSync(targetPath)) {
+                targetPath = fullPathSync(path.join(parsed.pick[1], "【" + index + "】" + fileInfo.name));
+                index += 1;
+            }
+
+            log(`> copy ${sourcePath.replace(process.cwd(), '.')} ➔ ${targetPath.replace(process.cwd(), '.')}`);
+            copySync(sourcePath, targetPath);
+        });
+    }
+
+    // 移动
+    else if (Array.isArray(parsed.move)) {
+
+        // 获取绝对路径
+        let sourcePath = fullPathSync(parsed.move[0]);
+        let targetPath = fullPathSync(parsed.move[1]);
+
+        // 如果存在
+        moveSync(sourcePath, targetPath);
+        log(`> move ${sourcePath.replace(process.cwd(), '.')} ➔ ${targetPath.replace(process.cwd(), '.')}`);
+    }
+
+    // 网络信息
+    else if (Array.isArray(parsed.network)) {
+        log(JSON.stringify(network(), null, 4));
+    }
+
+    // GET请求
+    else if (Array.isArray(parsed.get)) {
+        get(parsed.get[0]).then(data => {
+            log(data);
+        }).catch(e => {
+            error(e);
+        });
+    }
+
+    // PSOT请求
+    else if (Array.isArray(parsed.post)) {
+        post(parsed.post[0]).then(data => {
+            log(data);
+        }).catch(e => {
+            error(e);
+        });
+    }
+
+    // 查看文件
+    else if (Array.isArray(parsed.cat)) {
+        try {
+            let filepath = fullPathSync(parsed.cat[0])
+
+            log(fs.readFileSync(filepath, {
+                encoding: "utf8"
+            }));
+        } catch (e) {
+            error(e);
+        }
+    }
+
+    // 运行多命令
+    else if (Array.isArray(parsed.run)) {
+        for (let index = 0; index < parsed.run.length; index++) {
+            const child = exec(parsed.run[index]);
+
+            // 监听子线程的stdout
+            child.stdout.on('data', (data) => {
+                console.log(`[${index + 1}] log:${data}`);
+            });
+
+            // 监听子线程的stderr
+            child.stderr.on('data', (data) => {
+                console.error(`[${index + 1}] error:${data}`);
+            });
+
+            // 子线程结束处理
+            child.on('close', (code) => {
+                console.log(`[${index + 1}] 子线程结束，退出码 ${code}`);
+            });
+
+            // 子线程出错处理
+            child.on('error', (error) => {
+                console.error(`[${index + 1}] 子线程错误: ${error.message}`);
+            });
+        }
+    }
+
+    // 服务器
+    else if (Array.isArray(parsed.server)) {
+        server({
+            port: parsed.server[0],
+            basePath: parsed.server[1]
+        });
+    }
+
+    // 否则就是帮助
+    else {
+        let helpParsed = Array.isArray(parsed.help) ? parsed.help : parsed.__terminal__;
+
+        // 打印具体的配置提示
+        if (helpParsed && helpParsed.length > 0) {
+            let help0 = helpParsed[0];
+
+            // 缩写转全拼
+            if (help0.length == 1) {
+                help0 = shortHands["-" + help0];
+            }
+
+            if (help0) {
+                help0 = help0.replace(/^--/, "");
+
+                // 根据需要帮助的命令获取对应的信息
+                const help0Option = options[help0];
+                if (help0Option) {
+                    log(`
+  ` + help0Option.demo + `         ` + help0Option.info + `
+                      `);
+
+                    return;
+                }
+
+            }
+        }
+
+        log(help);
+    }
+})();

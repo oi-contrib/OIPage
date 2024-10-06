@@ -1,0 +1,38 @@
+v0.1.0:
+    date:2024-09-21
+    changes:
+      - 初始化版本
+        1、命令
+          * --help, -h 获得帮助
+          * --server, -s 启动服务器
+          * --version, -v 查看版本
+          * --config, -c 启动配置文件
+          * --delete 删除文件或文件夹
+          * --copy 复制文件或文件夹
+          * --pick 提取文件夹文件到指定位置
+          * --move 移动文件或文件夹
+          * --network 查看网络信息
+          * --get 发送get请求
+          * --post 发送post请求
+          * --cat 查看文本内容
+          * --run 多进程运行任务
+        2、corejs
+          * animation 动画
+          * throttle 节流函数
+        3、browserjs
+          * getStyle 获取节点样式
+          * onReady 解析完执行
+        4、nodejs
+          * server 服务器
+          * options 命令行参数解析
+          * file 文件相关操作
+          * console 控制台打印
+          * ajax 网络请求
+          * network 网络信息等
+          * data 资源数据
+          * image 图片相关操作
+          * loader 文件解析
+        5、stylecss
+          * 统一浏览器样式 normalize.css
+          * 十二栅格化 rasterize.css
+          * 架屏动画 skeleton.css

@@ -1,0 +1,38 @@
+{
+  "name": "oipage",
+  "version": "0.1.0",
+  "description": "OI页面快速开发辅助库",
+  "main": "./nodejs/index.js",
+  "typings": "./types/index.d.ts",
+  "sideEffects": false,
+  "scripts": {},
+  "bin": {
+    "oipage-cli": "bin/run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oi-contrib/OIPage.git"
+  },
+  "keywords": [
+    "dev",
+    "server",
+    "style",
+    "css",
+    "nodejs",
+    "core",
+    "oipage",
+    "browser"
+  ],
+  "author": {
+    "name": "zxl20070701",
+    "url": "https://github.com/zxl20070701"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oi-contrib/OIPage/issues"
+  },
+  "homepage": "https://github.com/oi-contrib/OIPage",
+  "devDependencies": {
+    "vislite": "^1.2.0"
+  }
+}
