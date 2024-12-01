@@ -1,5 +1,5 @@
 # [OIPage](https://github.com/oi-contrib/OIPage)
-OI页面快速开发辅助库
+OI页面快速开发辅助库，包括核心包、Nodejs、浏览器、样式文件等
 
 <p>
     <a href="https://zxl20070701.github.io/toolbox/#/npm-download?packages=oipage&interval=7">
@@ -100,7 +100,9 @@ module.exports = {
 - [网络信息等](./docs/nodejs/network.md)
 - [资源数据](./docs/nodejs/data.md)
 - [图片相关操作](./docs/nodejs/image.md)
-- [文件解析Loader](./docs/nodejs/loader.md)
+- [文件解析](./docs/nodejs/loader.md)
+- [文件读取](./docs/nodejs/reader.md)
+- [表单录入](./docs/nodejs/form.md)
 
 ### 浏览器
 

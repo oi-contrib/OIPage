@@ -6,12 +6,12 @@ process.title = 'OIPage';
 
 const server = require('../nodejs/core/server');
 const { options, help } = require('./options');
-const path = require('path');
 const { log, error } = require('../nodejs/core/log');
 const { deleteSync, copySync, moveSync, listFileSync, fullPathSync } = require("../nodejs/core/file");
 const network = require("../nodejs/core/network");
 const { get, post } = require("../nodejs/core/remote");
 const fs = require("fs");
+const path = require("path");
 const { exec } = require('child_process');
 
 const jsonfile = require("../package.json");
@@ -26,6 +26,7 @@ for (let key in options) {
 const parsed = require("../nodejs/core/options")(shortHands, process.argv);
 
 (() => {
+
     // 打印版本
     if (Array.isArray(parsed.version)) {
         log("\nOIPage@v" + jsonfile.version + "\n");

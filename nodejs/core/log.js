@@ -32,6 +32,10 @@ const linelog = (function (stream) {
 
     // 返回实际同行打印的方法
     return function (nextStr) {
+        if (arguments.length == 0) {
+            prevLineCount = 0;
+            return;
+        }
         let txt = "";
 
         // 清除屏幕
@@ -62,6 +66,10 @@ exports.linelog = linelog;
  * @param {string} stream 说明文字,可选择
  */
 exports.deeplog = function (percentum, stream) {
+    if (arguments.length == 0) {
+        linelog();
+        return;
+    }
 
     if (arguments.length <= 1) stream = "";
 

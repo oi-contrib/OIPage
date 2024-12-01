@@ -44,12 +44,40 @@ module.exports = function (config = {}) {
             request.on('end', () => {
                 let url = decodeURIComponent(request.url);
 
+                url = url.split("?")[0];
+
+                // 请求的文件路径
+                let filePath = path.join(basePath, url == "/" ? "index.html" : url.replace(/^\//, ""));
+
                 log("[" + index++ + "]" + url);
+
+                let getFileInfo = function (filePath) {
+                    let dotName = /\./.test(filePath) ? filePath.match(/\.([^.]+)$/)[1] : "";
+                    let type = mineTypes[dotName];
+                    if (fs.existsSync(filePath) && !fs.lstatSync(filePath).isDirectory()) {
+                        return {
+                            type,
+                            path: filePath
+                        };
+                    } else {
+                        for (let suffix of suffixs) {
+                            if (fs.existsSync(filePath + suffix) && !fs.lstatSync(filePath + suffix).isDirectory()) {
+                                type = mineTypes[suffix.replace(/^\./, "")];
+                                return {
+                                    type,
+                                    path: filePath + suffix
+                                };
+                            }
+                        }
+                    }
+                };
 
                 // 自定义拦截
                 if (handler.call({
                     data: requestData,
-                    base: basePath
+                    base: basePath,
+                    getFileInfo,
+                    filePath
                 }, request, response)) return;
 
                 // proxy拦截
@@ -101,13 +129,6 @@ module.exports = function (config = {}) {
                     }
                 }
 
-                url = url.split("?")[0];
-
-                // 请求的文件路径
-                let filePath = path.join(basePath, url == "/" ? "index.html" : url.replace(/^\//, ""));
-
-                let dotName = /\./.test(filePath) ? filePath.match(/\.([^.]+)$/)[1] : "";
-
                 let is404 = true;
                 let doResponse = function (type, filePath) {
                     response.writeHead(200, {
@@ -119,17 +140,9 @@ module.exports = function (config = {}) {
                     is404 = false;
                 };
 
-                // 文件类型
-                type = mineTypes[dotName];
-                if (fs.existsSync(filePath) && !fs.lstatSync(filePath).isDirectory()) {
-                    doResponse(type, filePath);
-                } else {
-                    for (let suffix of suffixs) {
-                        if (fs.existsSync(filePath + suffix) && !fs.lstatSync(filePath + suffix).isDirectory()) {
-                            type = mineTypes[suffix.replace(/^\./, "")];
-                            doResponse(type, filePath + suffix);
-                        }
-                    }
+                let fileInfo = getFileInfo(filePath);
+                if (fileInfo) { // 如果文件存在
+                    doResponse(fileInfo.type, fileInfo.path);
                 }
 
                 if (is404) {

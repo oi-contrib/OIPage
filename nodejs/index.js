@@ -10,6 +10,10 @@ const { toBase64 } = require('./core/image');
 const simpleScss = require('./loader/simpleScss');
 const xhtml = require('./loader/xhtml');
 
+const plain = require('./reader/plain');
+
+const form = require('./form/index');
+
 module.exports = {
 
     // 命令行相关
@@ -43,6 +47,12 @@ module.exports = {
     // 服务器
     server,
 
-    // 文件解析Loader
-    simpleScss, xhtml
+    // 文件解析
+    simpleScss, xhtml,
+
+    // 文件读取
+    plain,
+
+    // 表单录入
+    form
 };
