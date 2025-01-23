@@ -40,4 +40,17 @@ v0.2.0:
             （包括：input输入框、select列表选择）
           * server hander方法补充api
             （包括：getFileInfo()、filePath）
-        
+v0.3.0:
+    date:2025-01-23
+    changes:
+      - 修复bug
+        1、nodejs
+          * 修复目标位置可能不存在导致的报错
+            （包括：copySync、moveSync）
+      - 优化改造
+        1、nodejs
+          * 优化服务器启动日志，添加访问地址提示
+      - 新增功能
+        1、nodejs
+           * “file 文件相关操作”新增若干方法
+            （包括：listFolderSync）

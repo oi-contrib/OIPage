@@ -5,6 +5,7 @@ const mineTypes = require('../data/mime.types.js');
 const { log, warn, error } = require('./log.js');
 const responseFileList = require('./responseFileList.js');
 const path = require('path');
+const network = require('./network.js');
 
 const jsonfile = JSON.parse(fs.readFileSync(path.join(__dirname, '../../package.json')));
 
@@ -172,5 +173,18 @@ module.exports = function (config = {}) {
     });
 
     Server.listen(port);
-    log('server running on port:' + port);
+
+    // 打印启动成功信息
+
+    log('\n<i> [OIPage-server] Project is running at:');
+    log('<i> [OIPage-server] Loopback: http://localhost:' + port + '/');
+
+    let networkInfo = network();
+
+    // 打印IPv4地址
+    for (let ipv4 of networkInfo.IPv4) {
+        log('<i> [OIPage-server] On Your Network (IPv4): http://' + ipv4.address + ':' + port + '/');
+    }
+
+    log('\nOIPage Server compiled successfully\n');
 };

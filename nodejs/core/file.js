@@ -34,6 +34,8 @@ function copySync(source, target) {
 
   // 如果是文件，直接复制即可
   if (!fs.lstatSync(source).isDirectory()) {
+    if (!fs.existsSync(path.join(target, "../"))) fs.mkdirSync(path.join(target, "../"), { recursive: true });
+
     fs.copyFileSync(source, target);
   } else {
 
@@ -58,6 +60,8 @@ function moveSync(source, target) {
 
   // 如果是文件，直接剪切即可
   if (!fs.lstatSync(source).isDirectory()) {
+    if (!fs.existsSync(path.join(target, "../"))) fs.mkdirSync(path.join(target, "../"), { recursive: true });
+
     fs.copyFileSync(source, target);
     fs.unlinkSync(source);
   } else {
@@ -80,15 +84,15 @@ function moveSync(source, target) {
   }
 }
 
-// 遍历当前文件或文件夹中所有文件
+// 遍历文件或文件夹中所有文件
 function listFileSync(source, callback) {
   // 文件夹 
   if (fs.lstatSync(source).isDirectory()) {
 
-    // 读取子文件
-    const subFiles = fs.readdirSync(source);
-    subFiles.forEach(function (file) {
-      listFileSync(path.join(source, "./" + file), callback);
+    // 读取子内容
+    const subItems = fs.readdirSync(source);
+    subItems.forEach(function (item) {
+      listFileSync(path.join(source, "./" + item), callback);
     });
   }
 
@@ -101,6 +105,36 @@ function listFileSync(source, callback) {
       "path": source,
       "folder": folder
     });
+  }
+}
+
+// 遍历文件夹中所有文件夹
+function listFolderSync(source, callback) {
+  if (fs.lstatSync(source).isDirectory()) {
+    (function doIt(source) {
+
+      // 读取子内容
+      const subItems = fs.readdirSync(source);
+      subItems.forEach(function (item) {
+        let itemPath = path.join(source, "./" + item);
+
+        // 如果是文件夹
+        if (fs.lstatSync(itemPath).isDirectory()) {
+
+          let notDeep = callback({
+            "name": item,
+            "path": itemPath
+          });
+
+          // 深入
+          if (!notDeep) {
+            doIt(itemPath);
+          }
+
+        }
+      });
+
+    })(source);
   }
 }
 
@@ -125,4 +159,5 @@ exports.deleteSync = deleteSync;
 exports.copySync = copySync;
 exports.moveSync = moveSync;
 exports.listFileSync = listFileSync;
+exports.listFolderSync = listFolderSync;
 exports.fullPathSync = fullPathSync;

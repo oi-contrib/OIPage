@@ -1,4 +1,4 @@
-const { deleteSync, copySync, moveSync, listFileSync, fullPathSync } = require('./core/file');
+const { deleteSync, copySync, moveSync, listFileSync, listFolderSync, fullPathSync } = require('./core/file');
 const { log, warn, error, linelog, deeplog } = require('./core/log');
 const options = require('./core/options');
 const { get, post } = require('./core/remote');
@@ -20,7 +20,7 @@ module.exports = {
     options,
 
     // 文件操作相关
-    deleteSync, copySync, moveSync, listFileSync, fullPathSync,
+    deleteSync, copySync, moveSync, listFileSync, listFolderSync, fullPathSync,
 
     // 图片相关
     toBase64,
