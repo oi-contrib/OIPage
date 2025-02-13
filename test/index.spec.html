@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <script type="module">
+
+        import { animation } from "../web/animation/index.js";
+        import { setStyle, getStyle } from "../web/style/index.js";
+        import { throttle } from "../web/throttle/index.js";
+        import { onReady } from "../web/onReady/index.js";
+
+        /* 测试一：引入 */
+
+        let apis = {
+            animation, setStyle, getStyle, throttle, onReady
+        };
+
+        for (let apiName in apis) {
+            console.log("【" + apiName + "】", apis[apiName]);
+        }
+
+        /* 测试二：单元测试 */
+
+
+    </script>
+</body>
+
+</html>

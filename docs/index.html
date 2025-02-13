@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./images/logo.png">
+    <title>Welcome to OIPage</title>
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <link rel="stylesheet" href="./styles/index.css">
+    <script src="./scripts/index.js"></script>
+    <script>
+        // 控制是否需要缓存
+        var host = window.location.host;
+        window.needCache = !(/^127\.0\.0\.1/.test(host) || /^localhost/.test(host) || host == "");
+    </script>
+</head>
+
+<body>
+
+    <nav>
+        <a href="https://zxl20070701.github.io/index.html" target="_blank">Guide</a>
+        <a href="https://zxl20070701.github.io/notebook/home.html" target="_blank">Home</a>
+        <a href="https://github.com/zxl20070701" target="_blank">Author</a>
+        <a href="https://oi-contrib.github.io/OIPage" class="active">OIPage</a>
+        <a href="https://github.com/oi-contrib/OIPage/issues" target="_blank">Issue</a>
+    </nav>
+
+    <header>
+        <img class="install-img" src="./images/landing-downloads.png" alt="OIPage install">
+
+        <h1>
+            Welcome to OIPage
+        </h1>
+        <nav>
+            <a href="https://github.com/oi-contrib/OIPage" target="_blank">Source</a>
+            <a href="https://oi-contrib.github.io/OIPage" class="active">Documentation</a>
+        </nav>
+
+        <div class="install">
+            <h2>
+                Install the latest version by NPM
+            </h2>
+            <h3>
+                全局安装
+            </h3>
+            <div class="code">
+                npm install -g oipage
+            </div>
+            <h3>
+                项目安装
+            </h3>
+            <div class="code">
+                npm install oipage --save
+            </div>
+            <a href="https://www.npmjs.com/package/oipage?activeTab=versions" target="_blank">
+                View all versions
+            </a>
+        </div>
+
+    </header>
+
+    <div class="api-content">
+        <div class="item">
+            <h2>
+                API of Node.js
+            </h2>
+            <div class="tips">
+                在Node.js环境下使用的常用接口API。
+            </div>
+            <div class="blank stylecss-skeleton" id="nodejs-table"></div>
+        </div>
+        <div class="item">
+            <h2>
+                API of Browser
+            </h2>
+            <div class="tips">
+                在浏览器环境下使用，包括：实用API、DOM操作等。
+            </div>
+            <div class="blank stylecss-skeleton" id="web-table"></div>
+        </div>
+    </div>
+
+    <footer>
+        Copyright © 2007-2025
+        <a href="https://github.com/zxl20070701" target="_blank">zxl20070701 走一步，再走一步。</a>
+        All rights reserved.
+        <br>
+        本网站由“z Z ...”设计、开发和维护
+    </footer>
+
+    <div class="api-view" id="api-view"> </div>
+
+    <script>
+        setTimeout(function () {
+            initApiTable();
+        }, 1000);
+    </script>
+
+</body>
+
+</html>

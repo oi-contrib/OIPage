@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .bar {
+            width: 0;
+            height: 30px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bar" id="bar-id"></div>
+
+    <button onClick="stopAnimation()">停止</button>
+
+    <script type="module">
+        import { animation } from "../../web/animation/index.js";
+
+        let barEl = document.getElementById("bar-id");
+        let { stop } = animation((deep) => {
+            barEl.style.width = (500 * deep) + "px";
+        }, 5000, (deep) => {
+            console.log("结束：deep=" + deep);
+        });
+
+        window.stopAnimation = function () {
+            stop();
+        }
+
+    </script>
+
+</body>
+
+</html>

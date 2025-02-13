@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div class="demo" id="demo-id"></div>
+
+    <script type="module">
+        import { getStyle, setStyle } from "../../web/style/index.js";
+
+        let demoEl = document.getElementById("demo-id");
+
+        setStyle(demoEl, {
+            color: "blue",
+            backgroundColor: "pink"
+        });
+
+        console.log(getStyle(demoEl));
+        console.log(getStyle(demoEl, "color"));
+        console.log(getStyle(demoEl, "background-color"));
+
+    </script>
+
+</body>
+
+</html>

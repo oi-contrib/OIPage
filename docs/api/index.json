@@ -1,0 +1,64 @@
+{
+    "nodejs": [
+        {
+            "name": "cmdlog",
+            "label": "命令行打印",
+            "version": "1.0.0",
+            "import": [
+                "deeplog",
+                "linelog"
+            ]
+        },
+        {
+            "name": "animation",
+            "label": "动画",
+            "version": "1.0.0",
+            "import": [
+                "animation"
+            ]
+        },
+        {
+            "name": "throttle",
+            "label": "节流函数",
+            "version": "1.0.0",
+            "import": [
+                "throttle"
+            ]
+        }
+    ],
+    "web": [
+        {
+            "name": "onReady",
+            "label": "加载完毕执行",
+            "version": "1.0.0",
+            "import": [
+                "onReady"
+            ]
+        },
+        {
+            "name": "animation",
+            "label": "动画",
+            "version": "1.0.0",
+            "import": [
+                "animation"
+            ]
+        },
+        {
+            "name": "style",
+            "label": "节点样式相关操作",
+            "version": "1.0.0",
+            "import": [
+                "getStyle",
+                "setStyle"
+            ]
+        },
+        {
+            "name": "throttle",
+            "label": "节流函数",
+            "version": "1.0.0",
+            "import": [
+                "throttle"
+            ]
+        }
+    ]
+}

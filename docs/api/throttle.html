@@ -1,0 +1,78 @@
+<h3>
+    throttle
+</h3>
+<p>
+    生成一个节流函数：
+</p>
+<pre>
+let newFunction = throttle(function(){
+    // todo
+}, option);
+</pre>
+<p>
+    返回一个节流函数，具体的行为受第二个参数option控制，option是一个json，可选，其属性如下：
+</p>
+<table>
+    <thead>
+        <tr>
+            <th>属性名</th>
+            <th>类型</th>
+            <th>默认值</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>
+                time
+            </th>
+            <th>
+                number
+            </th>
+            <th>
+                200
+            </th>
+            <th>
+                节流时长，单位毫秒
+            </th>
+        </tr>
+        <tr>
+            <th>
+                keep
+            </th>
+            <th>
+                boolean
+            </th>
+            <th>
+                false
+            </th>
+            <th>
+                是否持续节流，如果设置true，那个在一个持续时间内函数只会最后执行一次
+            </th>
+        </tr>
+        <tr>
+            <th>
+                opportunity
+            </th>
+            <th>
+                string
+            </th>
+            <th>
+                "end"
+            </th>
+            <th>
+                执行时机，可选值为：begin（开始触发）、end（结束触发）、wide（第一次开始触发，其余结束触发）
+            </th>
+        </tr>
+    </tbody>
+</table>
+<p>
+    比如在浏览器端使用的时候，可以这样：
+</p>
+<pre>
+window.addEventListener("resize",throttle(function(){
+    console.log("页面大小改变了～");
+},{
+    keep: true
+}));
+</pre>

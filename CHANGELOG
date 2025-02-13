@@ -1,43 +1,19 @@
-v0.1.0:
-    date:2024-09-21
+v1.0.0:
+    date:2025-02-13
     changes:
-      - 初始化版本
-        1、命令
-          （包括：help、server、version、config、delete、copy、pick、move、network、get、post、cat、run）
-        2、corejs
+      - 原v0.x的功能将独立一个分支继续维护：https://github.com/oi-contrib/OIPage/blob/v0.x/CHANGELOG
+        (v0.x保持对零碎方法这种形式的支持和维护，此版本开始将作为一个框架或一个系统的工具箱以提供更高效的使用方式，这是一次彻底的非兼容改造)
+      - 初始化版本（v1.x）
+        1、API功能(浏览器)
           * animation 动画
-          * throttle 节流函数
-        3、browserjs
           * getStyle 获取节点样式
-          * onReady 解析完执行
-        4、nodejs
-          * server 服务器
-          * options 命令行参数解析
-          * file 文件相关操作
-          * console 控制台打印
-            （包括：log、warn、error、linelog、deeplog）
-          * ajax 网络请求
-          * network 网络信息等
-          * data 资源数据
-          * image 图片相关操作
-          * loader 文件解析
-            （simpleScss、xhtml）
-        5、stylecss
-          * 统一浏览器样式 normalize.css
-          * 十二栅格化 rasterize.css
-          * 架屏动画 skeleton.css
-v0.2.0:
-    date:2024-12-01
-    changes:
-      - 优化改造
-        1、nodejs
-          * linelog新增清除行记录重置功能
-          * deeplog新增清除行记录重置功能
-      - 新增功能
-        1、nodejs
-          * plain 读取文本内容
-          * form 表单录入
-            （包括：input输入框、select列表选择）
-          * server hander方法补充api
-            （包括：getFileInfo()、filePath）
-        
+          * setStyle 设置节点样式
+          * onReady 加载完毕执行
+          * throttle 节流函数
+        2、API功能(Node.js)
+          * animation 动画
+          * deeplog 进度打印
+          * linglog 单行打印
+          * throttle 节流函数
+        3、命令（oipage-cli）
+          * serve 开发服务器

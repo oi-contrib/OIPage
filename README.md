@@ -1,5 +1,6 @@
-# [OIPage](https://github.com/oi-contrib/OIPage)
-OI页面快速开发辅助库，包括核心包、Nodejs、浏览器、样式文件等
+-   💘 开源不易，去 <i>[Github给个Star](https://github.com/oi-contrib/OIPage) </i>吧！
+
+<img src='https://oi-contrib.github.io/OIPage/images/logo.png' height='100px'/>
 
 <p>
     <a href="https://zxl20070701.github.io/toolbox/#/npm-download?packages=oipage&interval=7">
@@ -8,14 +9,26 @@ OI页面快速开发辅助库，包括核心包、Nodejs、浏览器、样式文
     <a href="https://www.npmjs.com/package/oipage">
         <img src="https://img.shields.io/npm/v/oipage.svg" alt="npm">
     </a>
+     <a href="https://github.com/oi-contrib/OIPage/issues">
+        <img src="https://img.shields.io/github/issues/oi-contrib/OIPage" alt="issue">
+    </a>
     <a href="https://github.com/oi-contrib/OIPage" target='_blank'>
         <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/oi-contrib/OIPage?style=social">
+    </a>
+     <a href="https://gitee.com/oi-contrib/OIPage" target='_blank'>
+        <img alt="Gitee repo stars" src="https://gitee.com/oi-contrib/OIPage/badge/star.svg">
+    </a>
+    <a href="https://gitee.com/oi-contrib/OIPage">
+        <img src="https://gitee.com/oi-contrib/OIPage/badge/fork.svg" alt="forks">
     </a>
 </p>
 
 <img src="https://nodei.co/npm/oipage.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="NPM">
 
-## 使用方式
+# [OIPage](https://github.com/oi-contrib/OIPage)
+前端网页或应用快速开发助手，包括开发服务器、辅助命令、实用API等。官网地址：[https://oi-contrib.github.io/OIPage](https://oi-contrib.github.io/OIPage)
+
+## 如何使用？
 
 你可以作为一个命令行使用，那么你需要全局安装：
 
@@ -32,89 +45,31 @@ npm install oipage --save
 全局安装后，就可以直接作为命令行使用了。你可以打印帮助查看：
 
 ```shell
-oipage-cli -h
+oipage-cli
 ```
 
 比如会出现下列内容：
 
 ```
-Usage: oipage-cli <command>
+OIPage@v1.0.0
 
-    where <command> is one of:
-        --help, -h, --server, -s, --version, -v, --config, -c, --delete, --copy, --pick, --move, --network, --get, --post, --cat, --run
-    
-    oipage-cli --help|-h <term>       search for help on <term>
-    oipage-cli --help|-h              involved overview
+可以使用的命令如下：
+
+【1】oipage-cli serve 开发服务器
+    --port|-p 端口号
+    --baseUrl 服务器根目录（相对命令行）
+......
 ```
 
-比如--server或-s命令如何查看具体使用说明？只需要：
+根据提示我们知道，比如第一个命令，其提供了一个快速访问本地资源服务器的功能，比如执行：
 
 ```shell
-oipage-cli -h s
+oipage-cli serve -p 8080
 ```
 
-然后看见打印提示：
+启动成功后，直接访问： http://localhost:8080/ 即可。
 
-```
-oipage-cli --server|-s [port|20000]         [2]render source server.
-```
-
-根据提示我们知道，这是一个快速启动一个本地资源服务器的命令，使用的时候可以设置服务器端口号，端口号缺省是20000。
-
-比如我们启动端口为8080的服务器：
-
-```shell
-oipage-cli -s 8080
-```
-
-对于更复杂的业务，我们推荐使用配置文件的方式。比如我们准备了配置文件 oipage.config.js ，那么就可以：
-
-```shell
-oipage-cli -c ./oipage.config.js
-```
-
-配置文件的内容如下：
-
-```js
-module.exports = {
-    devServer: {
-        // 可配置参数和“服务器”一致
-    }
-};
-```
-
-如果你需要在项目中更灵活的使用，我们也提供了一些有用的API，具体如下：
-
-### 核心包
-
-- [animation 动画](./docs/corejs/animation.md)
-- [throttle 节流函数](./docs/corejs/throttle.md)
-
-### Nodejs
-
-- [服务器](./docs/nodejs/server.md)
-- [命令行参数解析](./docs/nodejs/options.md)
-- [文件相关操作](./docs/nodejs/file.md)
-- [控制台打印](./docs/nodejs/console.md)
-- [网络请求（ajax）](./docs/nodejs/ajax.md)
-- [网络信息等](./docs/nodejs/network.md)
-- [资源数据](./docs/nodejs/data.md)
-- [图片相关操作](./docs/nodejs/image.md)
-- [文件解析](./docs/nodejs/loader.md)
-- [文件读取](./docs/nodejs/reader.md)
-- [表单录入](./docs/nodejs/form.md)
-
-### 浏览器
-
-- [getStyle 获取节点样式](./docs/browserjs/getStyle.md)
-- [onReady 解析完执行](./docs/browserjs/onReady.md)
-
-### 样式文件
-
-> 统一浏览器样式 `normalize.css` 直接： `import 'oipage/stylecss/normalize.css'` 即可！
-
-- [rasterize 十二栅格化](./docs/stylecss/rasterize.md)
-- [skeleton 骨架屏动画](./docs/stylecss/skeleton.md)
+如果你需要在项目中使用，我们也提供了一些有用的API，具体可以访问[ 在线文档 ](https://oi-contrib.github.io/OIPage)进行了解。
 
 ## 版权
 

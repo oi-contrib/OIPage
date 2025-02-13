@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>404 Not Found</title>
+    <style>
+        body {
+            margin: 0px;
+            background-color: #ffffff;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 100px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #284259;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .fork {
+            width: 160px;
+            line-height: 30px;
+            position: fixed;
+            background-color: #607D8B;
+            text-align: center;
+            color: white;
+            outline: 2px dashed #607D8B;
+            width: 200px;
+            transform: rotate(45deg);
+            right: -45px;
+            top: 45px;
+            z-index: 1;
+        }
+
+        .current {
+            box-sizing: border-box;
+            position: fixed;
+            left: 0;
+            top: 0;
+            line-height: 50px;
+            padding-left: 20px;
+            font-size: 14px;
+            color: #000000;
+            font-style: italic;
+        }
+
+        .filelist {
+            box-sizing: border-box;
+            position: fixed;
+            left: 20px;
+            top: 50px;
+            outline: 1px solid #9E9E9E;
+            width: calc(100vw - 40px);
+            height: calc(100vh - 70px);
+            overflow: auto;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #fcfcfc;
+        }
+
+        .filelist>table {
+            width: 100%;
+            text-align: left;
+        }
+
+        .filelist>table tr>th {
+            white-space: nowrap;
+            padding: 0 10px;
+        }
+
+        .filelist>table>thead>tr>th {
+            color: #284259;
+            font-size: 13px;
+            line-height: 40px;
+        }
+
+        .filelist>table>tbody>tr {
+            border: 1px solid #cdcdcd00;
+        }
+
+        .filelist>table>tbody>tr>th {
+            text-decoration: none;
+            font-size: 12px;
+            color: #3c3c3c;
+            word-break: break-all;
+            font-weight: 400;
+            line-height: 30px;
+        }
+
+        .filelist>table>tbody>tr>th>.btn {
+            color: white;
+            background-color: #2196F3;
+            padding: 2px 5px;
+            border-radius: 5px;
+        }
+
+        .filelist>table>tbody>tr>th.name {
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-size: auto 90%;
+            padding-left: 30px;
+            color: #000000;
+        }
+
+        .filelist>table>tbody>tr>th.name>span {
+            white-space: nowrap;
+        }
+
+        .filelist>table>tbody>tr.file>th.name {
+            background-image: url('${img_file}');
+        }
+
+        .filelist>table>tbody>tr.folder>th.name {
+            background-image: url('${img_folder}');
+        }
+    </style>
+</head>
+
+<body>
+    <a href="https://github.com/oi-contrib/OIPage" target="_blank" class="fork">
+        Fork me on Github
+    </a>
+    <div class="current">
+        当前位置：${current}
+    </div>
+    <div class="filelist">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        名称
+                    </th>
+                    <th>
+                        修改日期
+                    </th>
+                    <th>
+                        类型
+                    </th>
+                    <th>
+                        大小
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="folder">
+                    <th class="name"><a href='../'>..</a></th>
+                    <th>-</th>
+                    <th>
+                        文件夹
+                    </th>
+                    <th>-</th>
+                    <th>
+                        <a href='../' class="btn">打开</a>
+                    </th>
+                </tr>
+                ${template}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

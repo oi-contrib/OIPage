@@ -1,0 +1,16 @@
+<h3>
+    animation
+</h3>
+<p>
+    辅助开发动画控制：
+</p>
+<pre>
+let { stop } = animation(deep => {
+    // 轮询调用，必输
+}, duration = 400, deep => {
+    // 结束调用，可选
+});
+</pre>
+<p>
+    返回的对象有一个属性stop是函数，调用该函数，可以提前结束动画。
+</p>
