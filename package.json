@@ -1,6 +1,6 @@
 {
   "name": "oipage",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "前端网页或应用快速开发助手，包括开发服务器、辅助命令、实用API等",
   "sideEffects": false,
   "scripts": {
@@ -27,7 +27,7 @@
   ],
   "author": {
     "name": "zxl20070701",
-    "url": "https://github.com/zxl20070701"
+    "url": "https://zxl20070701.github.io/notebook/home.html"
   },
   "license": "MIT",
   "bugs": {

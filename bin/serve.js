@@ -1,5 +1,5 @@
 const { join } = require("path");
-const { existsSync, lstatSync, readFileSync } = require("fs");
+const { existsSync, lstatSync, readFileSync, statSync, createReadStream } = require("fs");
 const { createServer } = require('http');
 const packageValue = require("../package.json");
 const network = require("./network");
@@ -11,7 +11,7 @@ module.exports = function (config) {
     let startTime = new Date().valueOf();
 
     const port = config.port; // 端口号
-    const basePath = join(process.cwd(), config.baseUrl); // 服务器根路径
+    const basePath = (/^\./.test(config.baseUrl)) ? join(process.cwd(), config.baseUrl) : config.baseUrl; // 服务器根路径
 
     let Server = createServer(function (request, response) {
 
@@ -26,16 +26,31 @@ module.exports = function (config) {
 
             let dotName = /\./.test(filePath) ? filePath.match(/\.([^.]+)$/)[1] : "";
             let fileType = mineTypes[dotName]; // 文件类型
+            let fileInfo = statSync(filePath);
 
             response.writeHead('200', {
                 'Content-type': (fileType || "text/plain") + ";charset=utf-8",
                 'Access-Control-Allow-Origin': '*',
+                'Content-Length': fileInfo.size,
                 'Server': 'Powered by OIPage-dev-server@' + packageValue.version
             });
-            response.write(readFileSync(filePath));
-            response.end();
 
-            console.log("<i> \x1b[1m\x1b[32m[OIPage-dev-server] Read File: " + url + '\x1b[0m ' + new Date().toLocaleString());
+            let sendType = "";
+
+            // 如果文件小于10M，认为不大，直接读取
+            if (fileInfo.size < 10 * 1024 * 1024) {
+                sendType = "Read";
+                response.write(readFileSync(filePath));
+                response.end();
+            }
+
+            // 对于大文件，使用流读取
+            else {
+                sendType = "Stream";
+                createReadStream(filePath).pipe(response);
+            }
+
+            console.log("<i> \x1b[1m\x1b[32m[OIPage-dev-server] " + sendType + " File: " + url + '\x1b[0m ' + new Date().toLocaleString());
         }
 
         // 否则就是404

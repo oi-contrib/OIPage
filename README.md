@@ -9,11 +9,14 @@
     <a href="https://www.npmjs.com/package/oipage">
         <img src="https://img.shields.io/npm/v/oipage.svg" alt="npm">
     </a>
-     <a href="https://github.com/oi-contrib/OIPage/issues">
+    <a href="https://github.com/oi-contrib/OIPage/issues">
         <img src="https://img.shields.io/github/issues/oi-contrib/OIPage" alt="issue">
     </a>
     <a href="https://github.com/oi-contrib/OIPage" target='_blank'>
         <img alt="GitHub repo stars" src="https://img.shields.io/github/stars/oi-contrib/OIPage?style=social">
+    </a>
+    <a href="https://github.com/oi-contrib/OIPage">
+        <img src="https://img.shields.io/github/forks/oi-contrib/OIPage" alt="forks">
     </a>
      <a href="https://gitee.com/oi-contrib/OIPage" target='_blank'>
         <img alt="Gitee repo stars" src="https://gitee.com/oi-contrib/OIPage/badge/star.svg">
@@ -51,13 +54,13 @@ oipage-cli
 比如会出现下列内容：
 
 ```
-OIPage@v1.0.0
+OIPage@v1.1.0
 
 可以使用的命令如下：
 
 【1】oipage-cli serve 开发服务器
     --port|-p 端口号
-    --baseUrl 服务器根目录（相对命令行）
+    --baseUrl 服务器根目录
 ......
 ```
 

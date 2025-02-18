@@ -2,7 +2,7 @@ function setStyle(el, styles) {
     for (var key in styles) {
         el.style[key] = styles[key];
     }
-};
+}
 
 function getStyle(el, name) {
 
@@ -16,4 +16,4 @@ function getStyle(el, name) {
         allStyle.getPropertyValue(name) :
         allStyle;
 
-};
+}

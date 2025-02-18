@@ -47,4 +47,4 @@ function throttle(callback, _option) {
         }
 
     };
-};
+}

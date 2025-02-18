@@ -24,6 +24,23 @@
             "import": [
                 "throttle"
             ]
+        },
+        {
+            "name": "logform",
+            "label": "表单输入",
+            "version": "1.1.0",
+            "import": [
+                "logform"
+            ]
+        },
+        {
+            "name": "disk",
+            "label": "磁盘操作",
+            "version": "1.1.0",
+            "import": [
+                "deleteDisk",
+                "copyDisk"
+            ]
         }
     ],
     "web": [

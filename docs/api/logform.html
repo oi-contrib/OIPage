@@ -1,0 +1,33 @@
+<h3>
+    logform
+</h3>
+<p>
+    实现在命令行中录入表单：
+</p>
+<pre>
+logform(config).then(result=>{
+    // result 是一个数组，记录着录入结果
+});
+</pre>
+<p>
+    其中config用于定义表单，是一个数组，可选录入方式如下：
+</p>
+<h4>
+    输入框
+</h4>
+<pre>
+config = [{
+    type: "input",
+    label: "请输入名称："
+}];
+</pre>
+<h4>
+    列表选择
+</h4>
+<pre>
+config = [{
+    type: "select",
+    label: "请选择水果类型：",
+    value: ["苹果", "西瓜", "草莓", "火龙果", "榴莲", "西红柿"]
+}];
+</pre>

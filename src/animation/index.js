@@ -101,4 +101,4 @@ function animation(doback, duration, callback) {
         }
     };
 
-};
+}

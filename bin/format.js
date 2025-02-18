@@ -1,5 +1,8 @@
-
-// 把字节转换成更可读的内容
+/**
+ * 把字节转换成更可读的内容
+ * @param {*} value 
+ * @returns 
+ */
 exports.formatByte = function (value) {
     if (value < 1024) return value + "Byte";
 
@@ -13,7 +16,11 @@ exports.formatByte = function (value) {
     return gb.toFixed(1) + "GB";
 };
 
-// 把时间变成更可读的格式
+/**
+ * 把时间变成更可读的格式
+ * @param {*} value 
+ * @returns 
+ */
 exports.formatTime = function (value) {
     let year = value.getFullYear();
     let month = value.getMonth() + 1;
@@ -30,22 +37,40 @@ exports.formatTime = function (value) {
     }
 };
 
-exports.formatArgv = function (argvs, shorts) {
-    let result = {};
+/**
+ * 命令行参数解析
+ * @param {*} argvs 
+ * @param {*} shorts 
+ * @param {*} isArray 是否按序号记录
+ * @returns 
+ */
+exports.formatArgv = function (argvs, shorts, isArray) {
+    let result = {}, keyName = "args", value = [];
+    if (isArray) result["value"] = [];
 
-    let keyName = "args", value = [];
+    let pushValue = function () {
+        if (isArray && keyName !== "args") {
+            result["value"].push({
+                name: keyName,
+                value
+            });
+        } else {
+            result[keyName] = value;
+        }
+    };
+
     for (let index = 3; index < argvs.length; index++) {
         let argv = argvs[index];
 
         if (/^\-/.test(argv)) {
-            result[keyName] = value;
+            pushValue();
             keyName = shorts[argv] || argv;
             value = [];
         } else {
             value.push(argv);
         }
     }
-    result[keyName] = value;
+    pushValue();
 
     return result;
 };

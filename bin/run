@@ -4,24 +4,67 @@
 
 process.title = 'OIPage';
 
+const { exec } = require('child_process');
 const { formatArgv } = require("./format");
-const doServe = require("./serve");
-const doHelp = require("./help");
 
 // 开发服务器
-if (process.argv[2] == "serve") {
+if (process.argv[2] === "serve") {
 
     let argvObj = formatArgv(process.argv, {
         "-p": "--port"
     });
 
-    doServe({
+    require("./serve")({
         port: (argvObj["--port"] || [])[0] || 8080,
         baseUrl: (argvObj["--baseUrl"] || [])[0] || "./",
     });
 }
 
+// 磁盘操作
+else if (process.argv[2] === "disk") {
+
+    let argvObj = formatArgv(process.argv, {
+        "-f": "--force",
+        "-d": "--delete",
+        "-m": "--move",
+        "-c": "--copy"
+    }, true);
+
+    require("./disk")(argvObj);
+}
+
+// 运行多命令
+else if (process.argv[2] === "run") {
+
+    let argvObj = formatArgv(process.argv, {});
+
+    for (let index = 0; index < argvObj.args.length; index++) {
+        const child = exec(argvObj.args[index]);
+
+        // 监听子线程的stdout
+        child.stdout.on('data', (data) => {
+            console.log(`[${index + 1}] log:${data}`);
+        });
+
+        // 监听子线程的stderr
+        child.stderr.on('data', (data) => {
+            console.error(`[${index + 1}] error:${data}`);
+        });
+
+        // 子线程结束处理
+        child.on('close', (code) => {
+            console.log(`[${index + 1}] 子线程结束，退出码 ${code}`);
+        });
+
+        // 子线程出错处理
+        child.on('error', (error) => {
+            console.error(`[${index + 1}] 子线程错误: ${error.message}`);
+        });
+    }
+
+}
+
 // 默认，帮助
 else {
-    doHelp();
+    require("./help")();
 }

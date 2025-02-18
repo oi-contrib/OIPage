@@ -5,4 +5,4 @@ function onReady(callback) {
     } else {
         window.addEventListener("DOMContentLoaded", callback);
     }
-};
+}

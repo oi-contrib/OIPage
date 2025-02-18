@@ -1,0 +1,13 @@
+{
+    "type": [
+        "nodejs"
+    ],
+    "import": {
+        "cmdlog": [
+            "linelog"
+        ]
+    },
+    "export": [
+        "logform"
+    ]
+}

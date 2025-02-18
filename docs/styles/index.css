@@ -149,7 +149,7 @@ body>header>nav>a.active::before {
 body>header>.install-img {
     position: absolute;
     top: 221px;
-    right: calc(50vw - 500px);
+    left: max(calc(50vw - 70px), 430px);
     z-index: 1;
 }
 
@@ -403,6 +403,22 @@ body>.api-view pre {
 body>.api-view h3 {
     font-size: 16px;
     line-height: 2em;
+}
+
+body>.api-view h4 {
+    font-size: 14px;
+    line-height: 2em;
+}
+
+body>.api-view h4::before {
+    content: " ";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent rgb(0, 0, 0);
+    margin-left: 10px;
 }
 
 body>.api-view p {

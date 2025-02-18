@@ -27,6 +27,14 @@ function fetchData(url) {
     });
 }
 
+var getImportCode = function (importValue) {
+    if (importValue.length <= 4) {
+        return importValue.join(", ");
+    } else {
+        var preTxt = "\n    ";
+        return preTxt + importValue.join(", " + preTxt) + "\n";
+    }
+};
 function initApiTable() {
     var apiViewEl = document.getElementById("api-view");
     fetchData("./api/index.json").then(function (res) {
@@ -50,7 +58,7 @@ function initApiTable() {
 
                 var trEl = document.createElement("tr");
                 tbodyEl.appendChild(trEl);
-                trEl.innerHTML = "<th>" + bundleItem.name + "/index.js<th><th>" + bundleItem.label + "<th><th>v" + bundleItem.version + "</td><th>" + bundleItem.import.join(" ") + "</td>";
+                trEl.innerHTML = "<th>" + bundleItem.name + "/index.js<th><th>" + bundleItem.label + "<th><th>v" + bundleItem.version + "</td><th>" + (bundleItem.import.length > 2 ? ([bundleItem.import[0], bundleItem.import[1]].join(" ") + " 等...") : bundleItem.import.join(" ")) + "</td>";
 
                 (function (typeName, bundleItem) {
                     trEl.addEventListener("click", function () {
@@ -75,10 +83,12 @@ function initApiTable() {
                         var preEl = document.createElement("pre");
                         apiViewEl.appendChild(preEl);
 
+
+
                         if (typeName == 'web') {
-                            preEl.innerHTML = 'import { ' + bundleItem.import.join(", ") + ' } from "oipage/web/' + bundleItem.name + '/index";';
+                            preEl.innerHTML = 'import { ' + getImportCode(bundleItem.import) + ' } from "oipage/web/' + bundleItem.name + '/index";';
                         } else {
-                            preEl.innerHTML = 'const { ' + bundleItem.import.join(", ") + ' } = require("oipage/nodejs/' + bundleItem.name + '/index.js");';
+                            preEl.innerHTML = 'const { ' + getImportCode(bundleItem.import) + ' } = require("oipage/nodejs/' + bundleItem.name + '/index.js");';
                         }
 
                         // 使用

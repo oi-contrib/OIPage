@@ -2,18 +2,34 @@ v1.0.0:
     date:2025-02-13
     changes:
       - 原v0.x的功能将独立一个分支继续维护：https://github.com/oi-contrib/OIPage/blob/v0.x/CHANGELOG
-        (v0.x保持对零碎方法这种形式的支持和维护，此版本开始将作为一个框架或一个系统的工具箱以提供更高效的使用方式，这是一次彻底的非兼容改造)
+        （v0.x保持对零碎方法这种形式的支持和维护，此版本开始将作为一个框架或一个系统的工具箱以提供更高效的使用方式，这是一次彻底的非兼容改造）
       - 初始化版本（v1.x）
-        1、API功能(浏览器)
+        1、API功能（浏览器）
           * animation 动画
           * getStyle 获取节点样式
           * setStyle 设置节点样式
           * onReady 加载完毕执行
           * throttle 节流函数
-        2、API功能(Node.js)
+        2、API功能（Node.js）
           * animation 动画
           * deeplog 进度打印
           * linglog 单行打印
           * throttle 节流函数
         3、命令（oipage-cli）
           * serve 开发服务器
+v1.1.0:
+    date:2025-02-18
+    changes:
+      - 修复bug
+        1、通过路径类型判断以修复开发服务器无法设置绝对路径问题
+      - 优化改造
+        1、使用流读取以使开发服务器支持大文件下载
+          （同时添加下载进度可查）
+      - 新增功能
+        1、API功能（Node.js）
+          * disk 磁盘相关操作
+            （包括：deleteDisk、copyDisk）
+          * logform 表单输入
+        2、命令（oipage-cli）
+          * dist 磁盘操作
+          * run 运行多命令

@@ -72,4 +72,4 @@ function deeplog (percentum, stream) {
     }
 
     linelog(percentum.toFixed(2) + "%[" + txt + "]" + stream);
-};
+}
