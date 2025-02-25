@@ -211,6 +211,29 @@ body>header>.install>a:hover {
     text-decoration: underline;
 }
 
+body>.more-view {
+    width: 900px;
+    margin: auto;
+    padding-top: 50px;
+}
+
+body>.oipage-cli {
+    width: 900px;
+    margin: auto;
+    padding-top: 50px;
+}
+
+body>.oipage-cli>h2 {
+    font-weight: 400;
+    color: #444444;
+}
+
+body>.oipage-cli>.tips {
+    line-height: 30px;
+    font-size: 14px;
+    color: #3776ab;
+}
+
 body>.api-content {
     width: 1000px;
     margin: auto;
@@ -304,7 +327,7 @@ footer a:hover {
     font-weight: 800;
 }
 
-body>.api-view {
+#api-view {
     position: fixed;
     left: 0;
     top: 0;
@@ -317,19 +340,19 @@ body>.api-view {
     overflow: auto;
 }
 
-body>.api-view>header {
+.note-view>header {
     font-size: 28px;
     padding: 20px 0;
     font-weight: 800;
 }
 
-body>.api-view>h2 {
+.note-view>h2 {
     font-size: 20px;
     line-height: 2em;
     padding: 20px 0;
 }
 
-body>.api-view>.close-btn {
+.note-view>.close-btn {
     cursor: pointer;
     position: fixed;
     right: 20px;
@@ -343,12 +366,12 @@ body>.api-view>.close-btn {
     font-size: 0;
 }
 
-body>.api-view>.close-btn:hover {
+.note-view>.close-btn:hover {
     background-size: 95% auto;
 }
 
-body>.api-view .version,
-body>.api-view .warn {
+.note-view .version,
+.note-view .warn {
     padding: 12px 24px 12px 30px;
     margin: 2em 0;
     border-left-width: 4px;
@@ -359,8 +382,8 @@ body>.api-view .warn {
     border-top-right-radius: 2px;
 }
 
-body>.api-view .version::before,
-body>.api-view .warn::before {
+.note-view .version::before,
+.note-view .warn::before {
     position: absolute;
     top: 14px;
     left: -12px;
@@ -375,42 +398,42 @@ body>.api-view .warn::before {
     font-size: 14px;
 }
 
-body>.api-view .version {
+.note-view .version {
     border-left-color: var(--version-color);
 }
 
-body>.api-view .warn {
+.note-view .warn {
     border-left-color: var(--warn-color);
 }
 
-body>.api-view .version::before {
+.note-view .version::before {
     content: "V";
     background-color: var(--version-color);
 }
 
-body>.api-view .warn::before {
+.note-view .warn::before {
     content: "!";
     background-color: var(--warn-color);
 }
 
-body>.api-view pre {
+.note-view pre {
     padding: 10px;
     outline: 1px solid #9E9E9E;
     border-radius: 5px;
     line-height: 1.4em;
 }
 
-body>.api-view h3 {
+.note-view h3 {
     font-size: 16px;
     line-height: 2em;
 }
 
-body>.api-view h4 {
+.note-view h4 {
     font-size: 14px;
     line-height: 2em;
 }
 
-body>.api-view h4::before {
+.note-view h4::before {
     content: " ";
     display: inline-block;
     width: 0;
@@ -421,7 +444,18 @@ body>.api-view h4::before {
     margin-left: 10px;
 }
 
-body>.api-view p {
+.note-view .btn {
+    font-weight: 800;
+    text-decoration: underline;
+    cursor: pointer;
+    color: black;
+}
+
+.note-view .btn:hover {
+    color: #555555;
+}
+
+.note-view p {
     line-height: 1.6em;
     color: #3c3939;
     font-weight: 400;
@@ -431,14 +465,14 @@ body>.api-view p {
     text-indent: 2em;
 }
 
-body>.api-view table>tbody>tr>* {
+.note-view table>tbody>tr>* {
     border-width: 0 1px 1px 0;
     border-style: solid;
     border-color: #c1bcbc;
 }
 
-body>.api-view table>*>tr>td,
-body>.api-view table>*>tr>th {
+.note-view table>*>tr>td,
+.note-view table>*>tr>th {
     padding: 0 5px;
     color: #3c3939;
     font-weight: 400;
@@ -446,19 +480,19 @@ body>.api-view table>*>tr>th {
     line-height: 2em;
 }
 
-body>.api-view table>tbody>tr>*:first-child {
+.note-view table>tbody>tr>*:first-child {
     border-width: 0 1px 1px 1px;
 }
 
-body>.api-view table>tbody>tr:nth-child(2n) {
+.note-view table>tbody>tr:nth-child(2n) {
     background-color: #F5F5F5;
 }
 
-body>.api-view table>tbody>tr:nth-child(2n+1) {
+.note-view table>tbody>tr:nth-child(2n+1) {
     background-color: #fff;
 }
 
-body>.api-view table>thead>tr {
+.note-view table>thead>tr {
     background-color: #c1bcbc;
     border: 1px solid #c1bcbc;
     color: #fff;

@@ -9,6 +9,7 @@ OIPage@v${packageValue.version}
 【1】oipage-cli serve 开发服务器
     --port|-p 端口号
     --baseUrl 服务器根目录
+    --config|-c 设置配置文件
 
 【2】oipage-cli disk 磁盘操作
     --force|-f 强制执行

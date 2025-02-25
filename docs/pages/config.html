@@ -1,0 +1,74 @@
+<header>
+    oipage.config.js
+</header>
+<div class="version">
+    始于 v1.2.0
+</div>
+<h2>
+    格式
+</h2>
+<pre>module.exports = {
+    devServer: {
+        port: 20000,
+        baseUrl: "./"
+    },
+    module: {
+        rules: [{ // 配置对文件的自定义处理
+            test: /\.html$/, // 匹配文件，如果多个匹配到，只会选用第一个
+            use(source) { return source }
+        }]
+    }
+}</pre>
+<div class="warn">
+    温馨提示：上述一级配置项（devServer、module等）皆可选，按需配置即可。
+</div>
+<h2>
+    devServer
+</h2>
+<h3>
+    port
+</h3>
+<p>
+    端口，默认8080。此外，可以在执行的时候，通过命令参数覆盖（下同）：
+</p>
+<pre>oipage-cli serve --config ./oipage.config.js -p 20000</pre>
+<h3>
+    baseUrl
+</h3>
+<p>
+    服务器根目录，默认当前命令行目录。可以是绝对路径，如果为相对路径，则是相对当前命令行目录。
+</p>
+<h2>
+    module
+</h2>
+<h3>
+    rules
+</h3>
+<p>
+    用于处理特殊文件，其中use的参数source为原始内容，此函数返回处理后的内容。此外，此函数的this包含若干有用属性或方法，具体如下：
+</p>
+<h4>
+    root
+</h4>
+<p>
+    字符串，服务器更路径。
+</p>
+<h4>
+    setFileType
+</h4>
+<p>
+    函数，用于设置文件类型。比如如果希望设置为js文件：
+</p>
+<pre>this.setFileType("application/javascript")</pre>
+<h4>
+    path
+</h4>
+<p>
+    字符串，文件相对路径。
+</p>
+<h4>
+    entry
+</h4>
+<p>
+    布尔值，是否是浏览器地址栏直接访问。
+</p>

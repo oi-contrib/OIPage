@@ -1,6 +1,6 @@
 const { watch, mkdirSync, readdirSync, writeFileSync, readFileSync, copyFileSync } = require("fs");
 const { join } = require("path");
-const { deleteSync } = require("oipage");
+const { deleteSync } = require("./tool");
 const { nodejsContent, webContent } = require("./content");
 
 let index = 0;

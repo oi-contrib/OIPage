@@ -45,16 +45,16 @@ npm install -g oipage
 npm install oipage --save
 ```
 
-全局安装后，就可以直接作为命令行使用了。你可以打印帮助查看：
+安装后，就可以直接作为命令行使用了。你可以打印帮助查看：
 
 ```shell
 oipage-cli
 ```
 
-比如会出现下列内容：
+比如会出现类似下列内容：
 
 ```
-OIPage@v1.1.0
+OIPage@v1.2.0
 
 可以使用的命令如下：
 

@@ -60,6 +60,51 @@
 
     </header>
 
+    <div class="oipage-cli">
+        <h2>
+            命令（oipage-cli）
+        </h2>
+        <div class="tips">
+            帮助你快速搭建前端开发环境，简单、高效、易用。
+        </div>
+        <div class="note-view">
+            <p>
+                安装后，就可以直接作为命令行使用了。你可以打印帮助查看：
+            </p>
+            <pre>oipage-cli</pre>
+            <p>
+                比如会出现下列内容：
+            </p>
+            <pre>OIPage@v1.2.0
+
+可以使用的命令如下：
+
+【1】oipage-cli serve 开发服务器
+    --port|-p 端口号
+    --baseUrl 服务器根目录
+......</pre>
+            <p>
+                根据提示我们知道，比如第一个命令，其提供了一个快速访问本地资源服务器的功能，比如执行：
+            </p>
+            <pre>oipage-cli serve -p 8080</pre>
+            <p>
+                启动成功后，直接访问： http://localhost:8080/ 即可。
+            </p>
+            <h3>
+                oipage.config.js
+            </h3>
+            <p>
+                通过配置文件 oipage.config.js 可以对服务器进行更精细化的配置：
+            </p>
+            <pre>oipage-cli serve --config ./oipage.config.js</pre>
+            <p>
+                其中 oipage.config.js 的具体说明你可以
+                <span class="btn" onClick="openFullDialog('config')">点击此处</span>
+                进行查看！
+            </p>
+        </div>
+    </div>
+
     <div class="api-content">
         <div class="item">
             <h2>
@@ -81,6 +126,25 @@
         </div>
     </div>
 
+    <div class="more-view">
+        <div class="note-view">
+            <p>
+                我们的目标是维护一个开源、高效、易用的前端开发辅助工具，非常希望获得你宝贵的建议和批评，无论任何想法（最好包含具体的改进方案或大致想法），都可以给我们
+                <a class="btn" href="https://github.com/oi-contrib/OIPage/issues" target="_blank">留言</a>
+                告诉我们。
+            </p>
+            <p>
+                你所提的任何建议我们都会在最长一周内进行反馈说明。
+            </p>
+            <p>
+                此外，你可以访问
+                <a class="btn" href="https://github.com/oi-contrib/OIPage/blob/master/CHANGELOG"
+                    target="_blank">正式版更新日志</a>
+                ，我们会在每次发布完正式版本后更新其内容。
+            </p>
+        </div>
+    </div>
+
     <footer>
         Copyright © 2007-2025
         <a href="https://github.com/zxl20070701" target="_blank">zxl20070701 走一步，再走一步。</a>
@@ -89,7 +153,7 @@
         本网站由“z Z ...”设计、开发和维护
     </footer>
 
-    <div class="api-view" id="api-view"> </div>
+    <div class="note-view" id="api-view"> </div>
 
     <script>
         setTimeout(function () {

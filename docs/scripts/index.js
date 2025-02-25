@@ -27,6 +27,28 @@ function fetchData(url) {
     });
 }
 
+var openFullDialog =function (dialogName) {
+    var fullDialogViewEl = document.getElementById("api-view");
+    fetchData("./pages/" + dialogName + ".html").then(function (res) {
+        fullDialogViewEl.innerHTML = res;
+
+        // 关闭
+        var closeEl = document.createElement("div");
+        fullDialogViewEl.appendChild(closeEl);
+        closeEl.innerText = "返回";
+        closeEl.setAttribute("class", "close-btn");
+
+        closeEl.addEventListener("click", function () {
+            fullDialogViewEl.style.display = "";
+            document.body.style.overflow = "";
+        });
+
+        fullDialogViewEl.style.display = "block";
+        document.body.style.overflow = "hidden";
+
+    });
+}
+
 var getImportCode = function (importValue) {
     if (importValue.length <= 4) {
         return importValue.join(", ");
@@ -82,8 +104,6 @@ function initApiTable() {
 
                         var preEl = document.createElement("pre");
                         apiViewEl.appendChild(preEl);
-
-
 
                         if (typeName == 'web') {
                             preEl.innerHTML = 'import { ' + getImportCode(bundleItem.import) + ' } from "oipage/web/' + bundleItem.name + '/index";';

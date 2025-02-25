@@ -1,7 +1,7 @@
 const { readdirSync, lstatSync, readFileSync, statSync } = require("fs");
 const { join } = require("path");
 const { formatByte, formatTime } = require("./format");
-const mineTypes = require("./mineTypes.json");
+const mineTypes = require("../data/mineTypes.json");
 
 const img_folder = "data:image/png;base64," + readFileSync(join(__dirname, "../images/folder.png")).toString('base64');
 const img_file = "data:image/png;base64," + readFileSync(join(__dirname, "../images/file.png")).toString('base64');
@@ -72,7 +72,7 @@ module.exports = function (filePath, url) {
         </th>
             <th>
                 <a href='./${subItems[i]}' class="btn">访问</a>
-                <a href='./${subItems[i]}' class="btn" download='${subItems[i]}'>下载</a>
+                <a href='./${subItems[i]}?download' class="btn" download='${subItems[i]}'>下载</a>
             </th>
         </tr>`;
         }

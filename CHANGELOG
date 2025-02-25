@@ -33,3 +33,13 @@ v1.1.0:
         2、命令（oipage-cli）
           * dist 磁盘操作
           * run 运行多命令
+v1.2.0:
+    date:2025-02-25
+    changes:
+      - 优化改造
+        1、优化npm包目录结构等
+      - 新增功能
+        1、开发服务器
+          * 添加配置文件
+            （oipage-cli serve --config ./oipage.config.js）
+          * 新增对node_modules包引入支持

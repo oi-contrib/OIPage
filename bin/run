@@ -5,19 +5,45 @@
 process.title = 'OIPage';
 
 const { exec } = require('child_process');
-const { formatArgv } = require("./format");
+const { join } = require("path");
+const { existsSync, lstatSync } = require("fs");
+const { mergeOption } = require("vislite");
+const { formatArgv } = require("./tools/format.js");
 
 // 开发服务器
 if (process.argv[2] === "serve") {
 
     let argvObj = formatArgv(process.argv, {
-        "-p": "--port"
+        "-p": "--port",
+        "-c": "--config"
     });
 
-    require("./serve")({
-        port: (argvObj["--port"] || [])[0] || 8080,
-        baseUrl: (argvObj["--baseUrl"] || [])[0] || "./",
-    });
+    let config = {
+        devServer: {
+            port: 8080,
+            baseUrl: "./",
+        },
+        module: {
+            rules: []
+        }
+    };
+
+    // 如果设置了配置文件
+    if (argvObj["--config"]) {
+        let configPath = join(process.cwd(), argvObj["--config"][0] || "./oipage.config.js");
+        if (existsSync(configPath) && !lstatSync(configPath).isDirectory()) {
+            let configValue = require(configPath);
+            mergeOption(config, configValue);
+        } else {
+            console.log("\x1b[0m\x1b[31m" + configPath + "\x1b[0m");
+            throw new Error("OIPage: The configuration file does not exist or is not a file.");
+        }
+    }
+
+    if ((argvObj["--port"] || [])[0]) config.devServer.port = (argvObj["--port"] || [])[0];
+    if ((argvObj["--baseUrl"] || [])[0]) config.devServer.baseUrl = (argvObj["--baseUrl"] || [])[0];
+
+    require("./serve.js")(config);
 }
 
 // 磁盘操作
@@ -30,7 +56,7 @@ else if (process.argv[2] === "disk") {
         "-c": "--copy"
     }, true);
 
-    require("./disk")(argvObj);
+    require("./disk.js")(argvObj);
 }
 
 // 运行多命令
@@ -66,5 +92,5 @@ else if (process.argv[2] === "run") {
 
 // 默认，帮助
 else {
-    require("./help")();
+    require("./help.js")();
 }

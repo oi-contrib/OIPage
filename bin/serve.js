@@ -1,22 +1,26 @@
 const { join } = require("path");
-const { existsSync, lstatSync, readFileSync, statSync, createReadStream } = require("fs");
+const { existsSync, lstatSync, statSync, createReadStream } = require("fs");
 const { createServer } = require('http');
 const packageValue = require("../package.json");
-const network = require("./network");
-const mineTypes = require("./mineTypes.json");
-const resolve404 = require("./resolve404.js");
+const network = require("./tools/network.js");
+const mineTypes = require("./data/mineTypes.json");
+const resolve404 = require("./tools/resolve404.js");
+const resolveImportFactory = require("./tools/resolveImport.js");
+const { formatRawHeaders } = require("./tools/format.js");
 
 // 开发服务器
 module.exports = function (config) {
     let startTime = new Date().valueOf();
 
-    const port = config.port; // 端口号
-    const basePath = (/^\./.test(config.baseUrl)) ? join(process.cwd(), config.baseUrl) : config.baseUrl; // 服务器根路径
+    const port = config.devServer.port; // 端口号
+    const basePath = (/^\./.test(config.devServer.baseUrl)) ? join(process.cwd(), config.devServer.baseUrl) : config.devServer.baseUrl; // 服务器根路径
 
     let Server = createServer(function (request, response) {
-
+        let headers = formatRawHeaders(request.rawHeaders);
         let url = decodeURIComponent(request.url);
-        url = url.split("?")[0];
+
+        let urlArray = url.split("?");
+        url = urlArray[0];
 
         // 请求的文件路径
         let filePath = join(basePath, url == "/" ? "index.html" : url.replace(/^\//, ""));
@@ -28,25 +32,49 @@ module.exports = function (config) {
             let fileType = mineTypes[dotName]; // 文件类型
             let fileInfo = statSync(filePath);
 
-            response.writeHead('200', {
+            let responseHeader = {
                 'Content-type': (fileType || "text/plain") + ";charset=utf-8",
                 'Access-Control-Allow-Origin': '*',
-                'Content-Length': fileInfo.size,
                 'Server': 'Powered by OIPage-dev-server@' + packageValue.version
-            });
+            };
 
             let sendType = "";
+            let entry = headers.Accept !== "*/*";
 
             // 如果文件小于10M，认为不大，直接读取
             if (fileInfo.size < 10 * 1024 * 1024) {
+                let { source, resolveImport } = resolveImportFactory(basePath, filePath, entry, urlArray[1] === "download")
+
+                // 只处理非下载文件
+                // 过大的也不进行处理
+                if (urlArray[1] !== "download") {
+                    for (let i = 0; i < config.module.rules.length; i++) {
+                        if (config.module.rules[i].test.test(filePath)) {
+                            source = config.module.rules[i].use.call({
+                                root: basePath, // 服务器根路径
+                                path: filePath.replace(basePath, ""), // 文件相对路径
+                                entry, // 是否是浏览器地址栏直接访问
+                                setFileType(_fileType) { // 设置文件类型
+                                    fileType = _fileType;
+                                    responseHeader['Content-type'] = _fileType + ";charset=utf-8";
+                                }
+                            }, source);
+                            break;
+                        }
+                    }
+                }
+
                 sendType = "Read";
-                response.write(readFileSync(filePath));
+                response.writeHead('200', responseHeader);
+                response.write(resolveImport(source, fileType !== "application/javascript"));
                 response.end();
             }
 
             // 对于大文件，使用流读取
             else {
                 sendType = "Stream";
+                responseHeader["Content-Length"] = fileInfo.size;
+                response.writeHead('200', responseHeader);
                 createReadStream(filePath).pipe(response);
             }
 
