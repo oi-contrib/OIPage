@@ -22,8 +22,10 @@ module.exports = function (filePath, url) {
     } catch (e) {
         console.log("<i> \x1b[1m\x1b[32m[OIPage-dev-server] Read " + (/\/$/.test(url) ? "Folder" : "File") + ": \x1b[35m" + url + ' 404 Not Found\x1b[0m ' + new Date().toLocaleString());
         try {
-            filePath = join(filePath, "../");
-            subItems = readdirSync(filePath);
+            if (!/\/$/.test(url) || url === "/") {
+                filePath = join(filePath, "../");
+                subItems = readdirSync(filePath);
+            }
         } catch (e) { }
     }
 

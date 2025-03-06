@@ -43,3 +43,9 @@ v1.2.0:
           * 添加配置文件
             （oipage-cli serve --config ./oipage.config.js）
           * 新增对node_modules包引入支持
+v1.2.1:
+    date:2025-03-06
+    changes:
+      - 修复bug
+        1、开发服务器
+          * 修复路径不存在时未正确同步修改浏览器地址问题
