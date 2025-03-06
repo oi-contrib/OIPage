@@ -54,7 +54,7 @@ v0.3.0:
         1、nodejs
            * “file 文件相关操作”新增若干方法
             （包括：listFolderSync）
-v0.3.1:
+v0.3.2:
     date:2025-03-06
     changes:
       - 优化改造
