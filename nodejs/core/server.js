@@ -130,14 +130,23 @@ module.exports = function (config = {}) {
                     }
                 }
 
-                let is404 = true;
+                let is404 = true, needEnd = true;
                 let doResponse = function (type, filePath) {
+
+                    let fileInfo = fs.statSync(filePath);
+
                     response.writeHead(200, {
                         'Content-type': (type || "text/plain") + ";charset=utf-8",
                         'Access-Control-Allow-Origin': '*',
+                        'Content-Length': fileInfo.size,
                         'Server': "Powered by OIPage@" + jsonfile.version
                     });
-                    response.write(fs.readFileSync(filePath));
+                    if (fileInfo.size < 10 * 1024 * 1024) {
+                        response.write(fs.readFileSync(filePath));
+                    } else {
+                        fs.createReadStream(filePath).pipe(response);
+                        needEnd = false;
+                    }
                     is404 = false;
                 };
 
@@ -155,7 +164,7 @@ module.exports = function (config = {}) {
                     response.write(responseFileList(filePath));
                 }
 
-                response.end();
+                if (needEnd) response.end();
             });
         } catch (e) {
             error(e);

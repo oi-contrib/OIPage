@@ -1,6 +1,6 @@
 {
   "name": "oipage",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "OI页面快速开发辅助库，包括核心包、Nodejs、浏览器、样式文件等",
   "main": "./nodejs/index.js",
   "typings": "./types/index.d.ts",
