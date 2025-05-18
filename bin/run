@@ -22,6 +22,7 @@ if (process.argv[2] === "serve") {
         devServer: {
             port: 8080,
             baseUrl: "./",
+            intercept: []
         },
         module: {
             rules: []

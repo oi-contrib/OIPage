@@ -49,3 +49,21 @@ v1.2.1:
       - 修复bug
         1、开发服务器
           * 修复路径不存在时未正确同步修改浏览器地址问题
+v1.3.0:
+    date:2025-05-18
+    changes:
+      - 修复bug
+        1、开发服务器
+          * 修复服务器根路径判断错误导致node_modules包查找错误问题
+        2、修复animation动画types类型定义错误问题
+      - 新增功能
+        1、API功能（浏览器）
+          * reader 文本分析读取器
+          * performChunk 空闲执行分片函数
+          * strToJson JSON字符串解析
+        2、API功能（Node.js）
+          * reader 文本分析读取器
+          * strToJson JSON字符串解析
+        3、开发服务器
+          * 新增 devServer.intercept 请求拦截
+          * 新增对 if-modified-since和last-modified 之304协商缓存的支持

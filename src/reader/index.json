@@ -1,0 +1,10 @@
+{
+    "type": [
+        "web",
+        "nodejs"
+    ],
+    "import": {},
+    "export": [
+        "reader"
+    ]
+}

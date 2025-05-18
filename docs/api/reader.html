@@ -1,0 +1,39 @@
+<h3>
+    reader
+</h3>
+<p>
+    文本分析读取器：
+</p>
+<pre>
+let handler = reader(plain);
+</pre>
+<h4>
+    index
+</h4>
+<p>
+    属性，当前字符位置。
+</p>
+<h4>
+    value
+</h4>
+<p>
+    属性，当前字符内容。
+</p>
+<h4>
+    readNext
+</h4>
+<p>
+    读取下一个字符：
+</p>
+<pre>
+let str = handler.readNext();
+</pre>
+<h4>
+    getNextN
+</h4>
+<p>
+    获取往后count个值：
+</p>
+<pre>
+let str = handler.getNextN(count);
+</pre>

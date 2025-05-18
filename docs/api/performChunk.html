@@ -1,0 +1,39 @@
+<h3>
+    performChunk
+</h3>
+<p>
+    利用浏览器空闲时间执行复杂函数：
+</p>
+<pre>
+performChunk(() => {
+    // 执行这个复杂任务的一片
+    // 如果当前是最后一片，返回false，否则返回true
+});
+</pre>
+<p>
+    例如，我们希望往页面添加很多个小球，正常我们是：
+</p>
+<pre>
+let targetEl = document.getElementById("div-id");
+for (let i = 0; i &lt; 30000; i++) {
+    targetEl.appendChild(document.createElement("span"));
+}
+</pre>
+<p>
+    你会发现，任务完成前，浏览器是卡顿的，非常不友好。怎么办？借助这里的函数，改造一下即可：
+</p>
+<pre>
+let i = 0;
+performChunk(function () {
+    if (i &lt; 30000) {
+        targetEl.appendChild(document.createElement("span"));
+        i += 1;
+        return true;
+    } else {
+        return false;
+    }
+});
+</pre>
+<p>
+    此时，浏览器就会在每一帧任务完成后，如果有空闲时间，利用空闲时间来执行这个任务，页面看上去非常丝滑。
+</p>

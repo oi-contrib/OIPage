@@ -6,7 +6,7 @@ const network = require("./tools/network.js");
 const mineTypes = require("./data/mineTypes.json");
 const resolve404 = require("./tools/resolve404.js");
 const resolveImportFactory = require("./tools/resolveImport.js");
-const { formatRawHeaders } = require("./tools/format.js");
+const { doIntercept } = require("./intercept.js");
 
 // 开发服务器
 module.exports = function (config) {
@@ -16,7 +16,7 @@ module.exports = function (config) {
     const basePath = (/^\./.test(config.devServer.baseUrl)) ? join(process.cwd(), config.devServer.baseUrl) : config.devServer.baseUrl; // 服务器根路径
 
     let Server = createServer(function (request, response) {
-        let headers = formatRawHeaders(request.rawHeaders);
+        let headers = request.headers;
         let url = decodeURIComponent(request.url);
 
         let urlArray = url.split("?");
@@ -25,25 +25,45 @@ module.exports = function (config) {
         // 请求的文件路径
         let filePath = join(basePath, url == "/" ? "index.html" : url.replace(/^\//, ""));
 
+        // 请求拦截
+        if (doIntercept(url.replace(/^\/@modules\//, ""), config.devServer.intercept, request, response)) {
+            console.log("<i> \x1b[1m\x1b[32m[OIPage-dev-server] intercept: " + url + '\x1b[0m ' + new Date().toLocaleString());
+        }
+
         // 如果存在且是文件
-        if (existsSync(filePath) && !lstatSync(filePath).isDirectory()) {
+        else if (existsSync(filePath) && !lstatSync(filePath).isDirectory()) {
 
             let dotName = /\./.test(filePath) ? filePath.match(/\.([^.]+)$/)[1] : "";
             let fileType = mineTypes[dotName]; // 文件类型
             let fileInfo = statSync(filePath);
 
+            let fileModifiedTime = new Date(fileInfo.mtime).toString();
+
             let responseHeader = {
                 'Content-type': (fileType || "text/plain") + ";charset=utf-8",
                 'Access-Control-Allow-Origin': '*',
-                'Server': 'Powered by OIPage-dev-server@' + packageValue.version
+                'Server': 'Powered by OIPage-dev-server@' + packageValue.version,
+                'Cache-Control': 'no-cache',
+                'Last-Modified': fileModifiedTime
             };
+
+            if (headers["if-modified-since"]) {
+                let ifModifiedSince = new Date(headers["if-modified-since"]).valueOf()
+                let lastModified = new Date(fileModifiedTime).valueOf()
+                if (lastModified <= ifModifiedSince) {
+                    response.writeHead('304', responseHeader);
+                    response.end();
+                    console.log("<i> \x1b[1m\x1b[32m[OIPage-dev-server] Cache File: " + url + "\x1b[0m " + new Date().toLocaleString() + "\x1b[33m\x1b[1m 304\x1b[0m");
+                    return;
+                }
+            }
 
             let sendType = "";
             let entry = headers.Accept !== "*/*";
 
             // 如果文件小于10M，认为不大，直接读取
             if (fileInfo.size < 10 * 1024 * 1024) {
-                let { source, resolveImport } = resolveImportFactory(basePath, filePath, entry, urlArray[1] === "download")
+                let { source, resolveImport } = resolveImportFactory(basePath, filePath, entry, config.devServer.intercept, urlArray[1] === "download")
 
                 // 只处理非下载文件
                 // 过大的也不进行处理

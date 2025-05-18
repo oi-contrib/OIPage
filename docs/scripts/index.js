@@ -27,7 +27,8 @@ function fetchData(url) {
     });
 }
 
-var openFullDialog =function (dialogName) {
+var openFullDialog = function (dialogName) {
+    window.location.href = "./index.html#/" + dialogName;
     var fullDialogViewEl = document.getElementById("api-view");
     fetchData("./pages/" + dialogName + ".html").then(function (res) {
         fullDialogViewEl.innerHTML = res;
@@ -41,6 +42,7 @@ var openFullDialog =function (dialogName) {
         closeEl.addEventListener("click", function () {
             fullDialogViewEl.style.display = "";
             document.body.style.overflow = "";
+            window.location.href = "./index.html#/";
         });
 
         fullDialogViewEl.style.display = "block";
@@ -83,6 +85,7 @@ function initApiTable() {
                 trEl.innerHTML = "<th>" + bundleItem.name + "/index.js<th><th>" + bundleItem.label + "<th><th>v" + bundleItem.version + "</td><th>" + (bundleItem.import.length > 2 ? ([bundleItem.import[0], bundleItem.import[1]].join(" ") + " 等...") : bundleItem.import.join(" ")) + "</td>";
 
                 (function (typeName, bundleItem) {
+                    trEl.setAttribute("id", "/api/" + typeName + "/" + bundleItem.name);
                     trEl.addEventListener("click", function () {
                         apiViewEl.innerHTML = "";
 
@@ -120,7 +123,9 @@ function initApiTable() {
                         apiViewEl.appendChild(contentEl);
                         contentEl.setAttribute("class", "content");
 
+                        contentEl.innerHTML = "<div style='height:300px;margin-bottom:50px;' class='stylecss-skeleton'></div>";
                         fetchData("./api/" + bundleItem.name + ".html").then(function (res) {
+                            window.location.href = "./index.html#/api/" + typeName + "/" + bundleItem.name;
                             contentEl.innerHTML = res;
                         });
 
@@ -131,6 +136,7 @@ function initApiTable() {
                         closeEl.setAttribute("class", "close-btn");
 
                         closeEl.addEventListener("click", function () {
+                            window.location.href = "./index.html#/";
                             apiViewEl.style.display = "";
                             document.body.style.overflow = "";
                         });
@@ -142,6 +148,10 @@ function initApiTable() {
             }
 
         }
+
+
+        var btnEl = document.getElementById(window.location.hash.split("#")[1]);
+        if (btnEl) btnEl.click();
 
     });
 }

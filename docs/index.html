@@ -99,7 +99,7 @@
             <pre>oipage-cli serve --config ./oipage.config.js</pre>
             <p>
                 其中 oipage.config.js 的具体说明你可以
-                <span class="btn" onClick="openFullDialog('config')">点击此处</span>
+                <span id="/config" class="btn" onClick="openFullDialog('config')">点击此处</span>
                 进行查看！
             </p>
         </div>
@@ -153,12 +153,10 @@
         本网站由“z Z ...”设计、开发和维护
     </footer>
 
-    <div class="note-view" id="api-view"> </div>
+    <div class="note-view" id="api-view"></div>
 
     <script>
-        setTimeout(function () {
-            initApiTable();
-        }, 1000);
+        initApiTable();
     </script>
 
 </body>

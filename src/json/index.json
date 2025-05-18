@@ -1,0 +1,14 @@
+{
+    "type": [
+        "web",
+        "nodejs"
+    ],
+    "import": {
+        "reader": [
+            "reader"
+        ]
+    },
+    "export": [
+        "strToJson"
+    ]
+}

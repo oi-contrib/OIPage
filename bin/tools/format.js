@@ -74,16 +74,3 @@ exports.formatArgv = function (argvs, shorts, isArray) {
 
     return result;
 };
-
-/**
- * 请求头解析
- * @param {*} rawHeaders 
- * @returns 
- */
-exports.formatRawHeaders = function (rawHeaders) {
-    let headers = {};
-    for (let i = 0; i < rawHeaders.length - 1; i += 2) {
-        headers[rawHeaders[i]] = rawHeaders[i + 1];
-    }
-    return headers;
-};

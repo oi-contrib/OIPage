@@ -1,7 +1,10 @@
 const { readFileSync, existsSync, lstatSync } = require("fs");
 const { join } = require("path");
+const { testIntercept } = require("../intercept.js");
 
-module.exports = function (basePath, filePath, entry, isDownload) {
+module.exports = function (basePath, filePath, entry, intercept, isDownload) {
+    basePath = join(basePath, "./");
+
     let source = readFileSync(filePath);
     let resolveImport = content => content;
 
@@ -12,43 +15,49 @@ module.exports = function (basePath, filePath, entry, isDownload) {
             } else {
                 return _importCode.replace(_importUrl, _importUrl.replace(/([^/])+/s, function (npmName) {
 
-                    let node_modulesRootPath = join(filePath, "../");
-                    let prePath = "";
-                    while (true) {
-                        let npmBundlePath = join(node_modulesRootPath, "./node_modules/", npmName);
+                    if (testIntercept(npmName, intercept)) {
+                        return "/@modules/" + npmName;
+                    } else {
 
-                        // 如果存在
-                        if (existsSync(npmBundlePath) && lstatSync(npmBundlePath).isDirectory()) {
-                            let npmNameValue = npmName;
+                        let node_modulesRootPath = join(filePath, "../");
+                        let prePath = "";
+                        while (true) {
+                            let npmBundlePath = join(node_modulesRootPath, "./node_modules/", npmName);
 
-                            // 对于类似 import VISLite from "vislite"
-                            // 需要把包名解析成具体的文件
-                            if (!/\//.test(_importUrl)) {
-                                let bundlePackage = require(join(npmBundlePath, "./package.json"));
-                                npmNameValue = npmName + "/" + bundlePackage.main;
-                            }
+                            // 如果存在
+                            if (existsSync(npmBundlePath) && lstatSync(npmBundlePath).isDirectory()) {
+                                let npmNameValue = npmName;
 
-                            return (prePath ? prePath : "./") + "node_modules/" + npmNameValue;
-                        }
-
-                        if (node_modulesRootPath === basePath) {
-
-                            // 如果命令行根目录是一个项目
-                            let packagePath = join(basePath, "./package.json");
-                            if (existsSync(packagePath) && !lstatSync(packagePath).isDirectory()) {
-                                let bundlePackage = require(packagePath);
+                                // 对于类似 import VISLite from "vislite"
+                                // 需要把包名解析成具体的文件
                                 if (!/\//.test(_importUrl)) {
-                                    return "/" + bundlePackage.main;
-                                } else {
-                                    return "/"
+                                    let bundlePackage = require(join(npmBundlePath, "./package.json"));
+                                    npmNameValue = npmName + "/" + bundlePackage.main;
                                 }
+
+                                return (prePath ? prePath : "./") + "node_modules/" + npmNameValue;
                             }
 
-                            return npmName;
-                        } else {
-                            node_modulesRootPath = join(node_modulesRootPath, "../");
-                            prePath = "../" + prePath;
+                            if (node_modulesRootPath === basePath) {
+
+                                // 如果命令行根目录是一个项目
+                                let packagePath = join(basePath, "./package.json");
+                                if (existsSync(packagePath) && !lstatSync(packagePath).isDirectory()) {
+                                    let bundlePackage = require(packagePath);
+                                    if (!/\//.test(_importUrl)) {
+                                        return "/" + bundlePackage.main;
+                                    } else {
+                                        return "/"
+                                    }
+                                }
+
+                                return npmName;
+                            } else {
+                                node_modulesRootPath = join(node_modulesRootPath, "../");
+                                prePath = "../" + prePath;
+                            }
                         }
+
                     }
                 }));
             }

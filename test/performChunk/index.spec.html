@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div class="demo" id="demo1-id"></div>
+    <div class="demo" id="demo2-id"></div>
+
+    <button onclick="addBox1()">添加很多小球（无优化）</button>
+    <button onclick="addBox2()">添加很多小球（优化了）</button>
+
+    <script type="module">
+        import { performChunk } from "../../web/performChunk/index.js";
+
+        let count = 30000;
+        let createItem = function () {
+            let itemEl = document.createElement("span");
+            itemEl.style.width = "20px";
+            itemEl.style.height = "20px";
+            itemEl.style.display = "inline-block";
+            itemEl.style.backgroundColor = "red";
+            itemEl.style.marginRight = "10px";
+            itemEl.style.borderRadius = "50%";
+            return itemEl;
+        };
+
+        window.addBox1 = function () {
+            let targetEl = document.getElementById("demo1-id");
+            targetEl.innerHTML = "";
+            for (let i = 0; i < count; i++) {
+                // console.log(i);
+                targetEl.appendChild(createItem());
+            }
+
+            console.log("完成");
+        };
+
+        window.addBox2 = function () {
+            let targetEl = document.getElementById("demo2-id");
+            targetEl.innerHTML = "";
+
+            let i = 0;
+            performChunk(function () {
+                // console.log(i)
+                if (i < count) {
+                    // console.log(i);
+                    targetEl.appendChild(createItem());
+                    i += 1;
+                    return true;
+                } else {
+                    console.log("完成");
+                    return false;
+                }
+            });
+        };
+
+    </script>
+
+</body>
+
+</html>

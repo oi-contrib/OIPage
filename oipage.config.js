@@ -1,7 +1,19 @@
 module.exports = {
     devServer: {
         port: 20000,
-        baseUrl: "./"
+        baseUrl: "./",
+        intercept: [{
+            test: /\.do$/,
+            handler(request, response) {
+                response.writeHead(200, {
+                    'Content-type': "text/html;charset=utf-8",
+                    'Access-Control-Allow-Origin': '*',
+                    'Server': 'Powered by OIPage-dev-server\'s intercept'
+                });
+                response.write("<div>自定义的 ok</div>");
+                response.end();
+            }
+        }]
     },
     module: {
         rules: [{ // 配置对文件的自定义处理
