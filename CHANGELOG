@@ -49,7 +49,7 @@ v1.2.1:
       - 修复bug
         1、开发服务器
           * 修复路径不存在时未正确同步修改浏览器地址问题
-v1.3.0:
+v1.3.0:（废弃，请用1.3.1代替）
     date:2025-05-18
     changes:
       - 修复bug
@@ -67,3 +67,10 @@ v1.3.0:
         3、开发服务器
           * 新增 devServer.intercept 请求拦截
           * 新增对 if-modified-since和last-modified 之304协商缓存的支持
+v1.3.1:
+    date:2025-05-23
+    changes:
+      - 修复bug
+        1、开发服务器
+          * 由于是否入口判断导致import语句未正确解析
+          * 修复 Last-Modified 格式不规范导致的运行报错

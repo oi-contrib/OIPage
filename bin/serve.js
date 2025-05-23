@@ -37,7 +37,7 @@ module.exports = function (config) {
             let fileType = mineTypes[dotName]; // 文件类型
             let fileInfo = statSync(filePath);
 
-            let fileModifiedTime = new Date(fileInfo.mtime).toString();
+            let fileModifiedTime = new Date(fileInfo.mtime).toGMTString();
 
             let responseHeader = {
                 'Content-type': (fileType || "text/plain") + ";charset=utf-8",
@@ -59,7 +59,7 @@ module.exports = function (config) {
             }
 
             let sendType = "";
-            let entry = headers.Accept !== "*/*";
+            let entry = headers.accept !== "*/*";
 
             // 如果文件小于10M，认为不大，直接读取
             if (fileInfo.size < 10 * 1024 * 1024) {
