@@ -2,7 +2,7 @@ let getTitle = function (title) {
     return "➤ " + title;
 };
 
-let closeForm = function () {
+let closeForm = function (rl) {
     process.removeAllListeners("keypress");
     rl.close();
 };
@@ -33,7 +33,7 @@ function logform(config) {
 
         let getResult = (index) => {
             if (index >= config.length) {
-                closeForm();
+                closeForm(rl);
                 resolve(result);
             } else {
                 let item = config[index];

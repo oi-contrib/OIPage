@@ -10,6 +10,7 @@ OIPage@v${packageValue.version}
     --port|-p 端口号
     --baseUrl 服务器根目录
     --config|-c 设置配置文件
+    --cache 是否启用304（默认true表示开启）
 
 【2】oipage-cli disk 磁盘操作
     --force|-f 强制执行

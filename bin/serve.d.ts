@@ -1,0 +1,56 @@
+
+interface DevServerType {
+
+    /**
+     * 服务器端口号
+     */
+    port: number
+
+    /**
+     * 服务器根路径
+     */
+    baseUrl: string
+
+    /**
+     * 是否开启304缓存，默认开启
+     */
+    cache: boolean
+}
+
+interface InterceptType {
+    test: RegExp
+    handler(request: any, response: any): void
+}
+
+interface LoaderType {
+    (source: string): string
+}
+
+interface ConfigType {
+
+    /**
+     * 服务器名称
+     */
+    name?: string
+
+    /**
+     * 服务器版本
+     */
+    version?: string
+
+    /**
+     * 服务器运行配置
+     */
+    devServer: DevServerType
+
+    intercept?: Array<InterceptType>
+
+    module?: {
+        rules: Array<{
+            test: RegExp
+            use: LoaderType
+        }>
+    }
+}
+
+export default function (config?: ConfigType): void

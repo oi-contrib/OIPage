@@ -2,7 +2,7 @@ const { readFileSync, existsSync, lstatSync } = require("fs");
 const { join } = require("path");
 const { testIntercept } = require("../intercept.js");
 
-module.exports = function (basePath, filePath, entry, intercept, isDownload) {
+module.exports = function (basePath, filePath, entry, intercept, isDownload, isWebsite) {
     basePath = join(basePath, "./");
 
     let source = readFileSync(filePath);
@@ -16,7 +16,7 @@ module.exports = function (basePath, filePath, entry, intercept, isDownload) {
                 return _importCode.replace(_importUrl, _importUrl.replace(/([^/])+/s, function (npmName) {
 
                     if (testIntercept(npmName, intercept)) {
-                        return "/@modules/" + npmName;
+                        return (isWebsite ? "/_oipage_website_/@modules/" : "/@modules/") + npmName;
                     } else {
 
                         let node_modulesRootPath = join(filePath, "../");

@@ -1,0 +1,11 @@
+{
+    "type": [
+        "web",
+        "nodejs"
+    ],
+    "import": {},
+    "export": [
+        "dateFormat",
+        "numberFormat"
+    ]
+}

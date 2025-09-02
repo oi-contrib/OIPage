@@ -1,0 +1,43 @@
+#dialog-root {
+    width: 0;
+    height: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 101;
+
+    .mask {
+        width: 100vw;
+        height: 100vh;
+        background-color: #0000004f;
+
+        &:last-child {
+            display: none;
+        }
+    }
+
+    .content {
+        display: none;
+        position: absolute;
+        left: 50vw;
+        top: 50vh;
+        transform: translateX(-50%) translateY(-50%);
+
+        &:last-child {
+            display: block;
+        }
+    }
+}
+
+.fork {
+    line-height: 30px;
+    position: fixed;
+    background-color: #9E9E9E;
+    text-align: center;
+    color: white;
+    outline: 2px dashed #9E9E9E;
+    width: 200px;
+    transform: rotate(-45deg);
+    right: -40px;
+    bottom: 44px;
+}

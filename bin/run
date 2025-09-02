@@ -22,6 +22,7 @@ if (process.argv[2] === "serve") {
         devServer: {
             port: 8080,
             baseUrl: "./",
+            cache: true,
             intercept: []
         },
         module: {
@@ -43,6 +44,7 @@ if (process.argv[2] === "serve") {
 
     if ((argvObj["--port"] || [])[0]) config.devServer.port = (argvObj["--port"] || [])[0];
     if ((argvObj["--baseUrl"] || [])[0]) config.devServer.baseUrl = (argvObj["--baseUrl"] || [])[0];
+    if ((argvObj["--cache"] || [])[0]) config.devServer.cache = (argvObj["--cache"] || [])[0] === "true";
 
     require("./serve.js")(config);
 }

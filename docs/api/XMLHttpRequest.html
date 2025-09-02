@@ -1,0 +1,17 @@
+<h3>
+    XHRIntercept
+</h3>
+<p>
+    XHR拦截：
+</p>
+<pre>
+XHRIntercept(function () {
+    // 新的请求
+    return function (type, params) {
+        // 信息更新
+    };
+});
+</pre>
+<p>
+    每次有新请求的时候，都会触发回调，而如果该请求有信息更新，就会触发返回函数。
+</p>

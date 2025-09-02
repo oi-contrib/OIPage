@@ -1,0 +1,27 @@
+header {
+    height: 50px;
+    line-height: 50px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+    background-image: url("./logo.png");
+    background-size: auto 90%;
+    background-repeat: no-repeat;
+    background-position-x: 5px;
+    padding-left: 50px;
+    font-size: 20px;
+    font-weight: 800;
+
+    .fork {
+        line-height: 30px;
+        position: fixed;
+        background-color: #9E9E9E;
+        text-align: center;
+        color: white;
+        outline: 2px dashed #9E9E9E;
+        width: 200px;
+        transform: rotate(-45deg);
+        right: -40px;
+        bottom: 44px;
+        font-weight: 400;
+    }
+}

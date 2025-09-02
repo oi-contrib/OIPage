@@ -2,6 +2,7 @@ module.exports = {
     devServer: {
         port: 20000,
         baseUrl: "./",
+        cache: true,
         intercept: [{
             test: /\.do$/,
             handler(request, response) {

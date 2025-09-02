@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function doSend(methodName, url) {
+            //创建xhr对象
+            var xhr;
+            // if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+            // } else {
+            //   xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            // }
+
+            xhr.onreadystatechange = function () {
+                // console.log("network:", xhr);
+            };
+
+            //发送请求
+            xhr.open(methodName, url, false);
+            xhr.send({
+                "key": "value"
+            });
+
+        }
+    </script>
+</head>
+
+<body>
+
+    <ul>
+        <li onclick='doSend("get","package.json")'>[地址存在]点击发送get请求</li>
+        <li onclick='doSend("get","package2.json")'>[地址不存在]点击发送get请求</li>
+        <li onclick='doSend("post","package.json")'>点击发送post请求</li>
+        <li onclick='doSend("get","https:\/\/github.com/zxl20070701")'>[网络的]点击发送get请求</li>
+    </ul>
+
+    <script type="module">
+        import { XHRIntercept } from "../../web/XMLHttpRequest/index.js";
+
+        XHRIntercept(function () {
+
+            let time = new Date().valueOf();
+
+            return function (type, params) {
+                console.log(time, type, params)
+            };
+        });
+
+    </script>
+
+</body>
+
+</html>

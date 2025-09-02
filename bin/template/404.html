@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>404 Not Found</title>
+    <link rel="shortcut icon" href="/_oipage_website_/logo.png">
     <style>
         body {
             margin: 0px;
@@ -58,7 +59,7 @@
             top: 50px;
             outline: 1px solid #9E9E9E;
             width: calc(100vw - 40px);
-            height: calc(100vh - 70px);
+            height: calc(100vh - 100px);
             overflow: auto;
             padding: 20px;
             border-radius: 5px;
@@ -68,6 +69,7 @@
         .filelist>table {
             width: 100%;
             text-align: left;
+            border-collapse: collapse;
         }
 
         .filelist>table tr>th {
@@ -81,10 +83,6 @@
             line-height: 40px;
         }
 
-        .filelist>table>tbody>tr {
-            border: 1px solid #cdcdcd00;
-        }
-
         .filelist>table>tbody>tr>th {
             text-decoration: none;
             font-size: 12px;
@@ -92,6 +90,7 @@
             word-break: break-all;
             font-weight: 400;
             line-height: 30px;
+            border-top: 1px solid #e4e4e4;
         }
 
         .filelist>table>tbody>tr>th>.btn {
@@ -119,6 +118,16 @@
 
         .filelist>table>tbody>tr.folder>th.name {
             background-image: url('${img_folder}');
+        }
+
+        .website-link {
+            position: fixed;
+            bottom: 10px;
+            line-height: 30px;
+            left: 16px;
+            font-size: 14px;
+            text-decoration: underline;
+            font-weight: 800;
         }
     </style>
 </head>
@@ -167,6 +176,9 @@
             </tbody>
         </table>
     </div>
+    <a class="website-link" href="/_oipage_website_/index.html">
+        打开应用市场
+    </a>
 </body>
 
 </html>

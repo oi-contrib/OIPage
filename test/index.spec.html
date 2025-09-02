@@ -20,13 +20,14 @@
         import { throttle } from "../web/throttle/index.js";
         import { onReady } from "../web/onReady/index.js";
         import { reader } from "../web/reader/index.js";
-        import { performChunk } from "../../web/performChunk/index.js";
-        import { strToJson } from "../../web/json/index.js";
+        import { performChunk } from "../web/performChunk/index.js";
+        import { strToJson } from "../web/json/index.js";
+        import { XHRIntercept } from "../web/XMLHttpRequest/index.js";
 
         /* 测试一：引入 */
 
         let apis = {
-            animation, setStyle, getStyle, throttle, onReady, reader, performChunk, strToJson
+            animation, setStyle, getStyle, throttle, onReady, reader, performChunk, strToJson, XHRIntercept
         };
 
         for (let apiName in apis) {

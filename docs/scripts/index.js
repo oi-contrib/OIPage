@@ -82,7 +82,7 @@ function initApiTable() {
 
                 var trEl = document.createElement("tr");
                 tbodyEl.appendChild(trEl);
-                trEl.innerHTML = "<th>" + bundleItem.name + "/index.js<th><th>" + bundleItem.label + "<th><th>v" + bundleItem.version + "</td><th>" + (bundleItem.import.length > 2 ? ([bundleItem.import[0], bundleItem.import[1]].join(" ") + " 等...") : bundleItem.import.join(" ")) + "</td>";
+                trEl.innerHTML = "<th>" + bundleItem.name + "<th><th>" + bundleItem.label + "<th><th>v" + bundleItem.version + "</td><th>" + (bundleItem.import.length > 2 ? ([bundleItem.import[0], bundleItem.import[1]].join(" ") + " 等...") : bundleItem.import.join(" ")) + "</td>";
 
                 (function (typeName, bundleItem) {
                     trEl.setAttribute("id", "/api/" + typeName + "/" + bundleItem.name);

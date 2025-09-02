@@ -57,6 +57,15 @@
             "import": [
                 "strToJson"
             ]
+        },
+        {
+            "name": "format",
+            "label": "格式化函数",
+            "version": "1.4.0",
+            "import": [
+                "numberFormat",
+                "dateFormat"
+            ]
         }
     ],
     "web": [
@@ -115,6 +124,23 @@
             "version": "1.3.0",
             "import": [
                 "strToJson"
+            ]
+        },
+        {
+            "name": "format",
+            "label": "格式化函数",
+            "version": "1.4.0",
+            "import": [
+                "numberFormat",
+                "dateFormat"
+            ]
+        },
+        {
+            "name": "XMLHttpRequest",
+            "label": "XHR扩展",
+            "version": "1.4.0",
+            "import": [
+                "XHRIntercept"
             ]
         }
     ]

@@ -8,12 +8,19 @@ const resolve404 = require("./tools/resolve404.js");
 const resolveImportFactory = require("./tools/resolveImport.js");
 const { doIntercept } = require("./intercept.js");
 
+const webisteIntercept = require("./website-plugins/intercept/index.js");
+const webisteLoader = require("./website-plugins/loader/index.js");
+
 // 开发服务器
 module.exports = function (config) {
     let startTime = new Date().valueOf();
 
+    const cache = "cache" in config.devServer ? config.devServer.cache : true;
     const port = config.devServer.port; // 端口号
     const basePath = (/^\./.test(config.devServer.baseUrl)) ? join(process.cwd(), config.devServer.baseUrl) : config.devServer.baseUrl; // 服务器根路径
+
+    const name = (config.name || "OIPage") + "-http-server";
+    const version = config.version || packageValue.version;
 
     let Server = createServer(function (request, response) {
         let headers = request.headers;
@@ -23,11 +30,18 @@ module.exports = function (config) {
         url = urlArray[0];
 
         // 请求的文件路径
-        let filePath = join(basePath, url == "/" ? "index.html" : url.replace(/^\//, ""));
+        let filePath;
+
+        let isWebsite = /^\/_oipage_website_\//.test(url);
+        if (isWebsite) {
+            filePath = join(__dirname, "./website-htmls/", url.replace(/^\/_oipage_website_\//, ""));
+        } else {
+            filePath = join(basePath, url == "/" ? "index.html" : url.replace(/^\//, ""));
+        }
 
         // 请求拦截
-        if (doIntercept(url.replace(/^\/@modules\//, ""), config.devServer.intercept, request, response)) {
-            console.log("<i> \x1b[1m\x1b[32m[OIPage-dev-server] intercept: " + url + '\x1b[0m ' + new Date().toLocaleString());
+        if (doIntercept(url.replace(/^\/_oipage_website_/, "").replace(/^\/@modules\//, ""), isWebsite ? webisteIntercept : config.devServer.intercept, request, response)) {
+            console.log("<i> \x1b[1m\x1b[32m[" + name + "] intercept: " + url + '\x1b[0m ' + new Date().toLocaleString());
         }
 
         // 如果存在且是文件
@@ -42,18 +56,19 @@ module.exports = function (config) {
             let responseHeader = {
                 'Content-type': (fileType || "text/plain") + ";charset=utf-8",
                 'Access-Control-Allow-Origin': '*',
-                'Server': 'Powered by OIPage-dev-server@' + packageValue.version,
+                'Server': 'Powered by ' + name + '@' + version,
                 'Cache-Control': 'no-cache',
+                // 'Content-Length': fileInfo.size, // 会导致拦截修改的文本内容不对
                 'Last-Modified': fileModifiedTime
             };
 
-            if (headers["if-modified-since"]) {
+            if (cache && headers["if-modified-since"]) {
                 let ifModifiedSince = new Date(headers["if-modified-since"]).valueOf()
                 let lastModified = new Date(fileModifiedTime).valueOf()
                 if (lastModified <= ifModifiedSince) {
                     response.writeHead('304', responseHeader);
                     response.end();
-                    console.log("<i> \x1b[1m\x1b[32m[OIPage-dev-server] Cache File: " + url + "\x1b[0m " + new Date().toLocaleString() + "\x1b[33m\x1b[1m 304\x1b[0m");
+                    console.log("<i> \x1b[1m\x1b[32m[" + name + "] Cache File: " + url + "\x1b[0m " + new Date().toLocaleString() + "\x1b[33m\x1b[1m 304\x1b[0m");
                     return;
                 }
             }
@@ -63,14 +78,17 @@ module.exports = function (config) {
 
             // 如果文件小于10M，认为不大，直接读取
             if (fileInfo.size < 10 * 1024 * 1024) {
-                let { source, resolveImport } = resolveImportFactory(basePath, filePath, entry, config.devServer.intercept, urlArray[1] === "download")
+                let { source, resolveImport } = resolveImportFactory(basePath, filePath, entry, isWebsite ? webisteIntercept : config.devServer.intercept, urlArray[1] === "download", isWebsite)
 
                 // 只处理非下载文件
                 // 过大的也不进行处理
+                // （对webiste无效）
                 if (urlArray[1] !== "download") {
-                    for (let i = 0; i < config.module.rules.length; i++) {
-                        if (config.module.rules[i].test.test(filePath)) {
-                            source = config.module.rules[i].use.call({
+                    let loaders = isWebsite ? webisteLoader : config.module;
+
+                    for (let i = 0; i < loaders.rules.length; i++) {
+                        if (loaders.rules[i].test.test(filePath)) {
+                            source = loaders.rules[i].use.call({
                                 root: basePath, // 服务器根路径
                                 path: filePath.replace(basePath, ""), // 文件相对路径
                                 entry, // 是否是浏览器地址栏直接访问
@@ -82,6 +100,7 @@ module.exports = function (config) {
                             break;
                         }
                     }
+
                 }
 
                 sendType = "Read";
@@ -93,12 +112,11 @@ module.exports = function (config) {
             // 对于大文件，使用流读取
             else {
                 sendType = "Stream";
-                responseHeader["Content-Length"] = fileInfo.size;
                 response.writeHead('200', responseHeader);
                 createReadStream(filePath).pipe(response);
             }
 
-            console.log("<i> \x1b[1m\x1b[32m[OIPage-dev-server] " + sendType + " File: " + url + '\x1b[0m ' + new Date().toLocaleString());
+            console.log("<i> \x1b[1m\x1b[32m[" + name + "] " + sendType + " File: " + url + '\x1b[0m ' + new Date().toLocaleString());
         }
 
         // 否则就是404
@@ -106,7 +124,7 @@ module.exports = function (config) {
             response.writeHead(404, {
                 'Content-type': "text/html;charset=utf-8",
                 'Access-Control-Allow-Origin': '*',
-                'Server': 'Powered by OIPage-dev-server@' + packageValue.version
+                'Server': 'Powered by ' + name + '@' + version
             });
             response.write(resolve404(filePath, url));
             response.end();
@@ -120,10 +138,11 @@ module.exports = function (config) {
     let networkValue = network();
 
     // 打印成功提示
-    console.log('<i> \x1b[1m\x1b[32m[OIPage-dev-server] Project is running at:\x1b[0m');
-    console.log('<i> \x1b[1m\x1b[32m[OIPage-dev-server] Loopback: \x1b[36mhttp://localhost:' + port + '/\x1b[0m');
-    for (let ipv4Item of networkValue.IPv4) console.log('<i> \x1b[1m\x1b[32m[OIPage-dev-server] On Your Network (IPv4):\x1b[36m http://' + ipv4Item.address + ':' + port + '/\x1b[0m');
-    for (let ipv6Item of networkValue.IPv6) console.log('<i> \x1b[1m\x1b[32m[OIPage-dev-server] On Your Network (IPv6): \x1b[36mhttp://[' + ipv6Item.address + ']:' + port + '/\x1b[0m');
-    console.log('<i> \x1b[1m\x1b[32m[OIPage-dev-server] Content not from OIPage is served from \x1b[36m"' + basePath + '" \x1b[0mdirectory');
-    console.log('\nOIPage ' + packageValue.version + ' compiled \x1b[1m\x1b[32msuccessfully\x1b[0m in ' + (new Date().valueOf() - startTime) + ' ms\n')
+    console.log('<i> \x1b[1m\x1b[32m[' + name + '] Project is running at:\x1b[0m');
+    console.log('<i> \x1b[1m\x1b[32m[' + name + '] Loopback: \x1b[36mhttp://localhost:' + port + '/\x1b[0m');
+    for (let ipv4Item of networkValue.IPv4) console.log('<i> \x1b[1m\x1b[32m[' + name + '] On Your Network (IPv4):\x1b[36m http://' + ipv4Item.address + ':' + port + '/\x1b[0m');
+    for (let ipv6Item of networkValue.IPv6) console.log('<i> \x1b[1m\x1b[32m[' + name + '] On Your Network (IPv6): \x1b[36mhttp://[' + ipv6Item.address + ']:' + port + '/\x1b[0m');
+    console.log('<i> \x1b[1m\x1b[32m[' + name + '] Content not from ' + (config.name || "OIPage") + ' is served from \x1b[36m"' + basePath + '" \x1b[0mdirectory');
+    if (!cache) console.log('<i> \x1b[1m\x1b[32m[' + name + '] Cancel 304 Cache!\x1b[0m');
+    console.log('\n' + (config.name || "OIPage") + ' ' + version + ' compiled \x1b[1m\x1b[32msuccessfully\x1b[0m in ' + (new Date().valueOf() - startTime) + ' ms\n')
 };
