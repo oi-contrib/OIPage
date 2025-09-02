@@ -112,6 +112,9 @@ module.exports = function (config) {
             // 对于大文件，使用流读取
             else {
                 sendType = "Stream";
+
+                responseHeader['Content-Length'] = fileInfo.size
+
                 response.writeHead('200', responseHeader);
                 createReadStream(filePath).pipe(response);
             }
