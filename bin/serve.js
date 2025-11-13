@@ -8,19 +8,23 @@ const resolve404 = require("./tools/resolve404.js");
 const resolveImportFactory = require("./tools/resolveImport.js");
 const { doIntercept } = require("./intercept.js");
 
-const webisteIntercept = require("./website-plugins/intercept/index.js");
-const webisteLoader = require("./website-plugins/loader/index.js");
+const websiteIntercept = require("./website-plugins/intercept/index.js");
+const websiteLoader = require("./website-plugins/loader/index.js");
+
+const WebSocketClass = require("./WebSocket/index.js");
 
 // 开发服务器
 module.exports = function (config) {
     let startTime = new Date().valueOf();
 
     const cache = "cache" in config.devServer ? config.devServer.cache : true;
-    const port = config.devServer.port; // 端口号
+    const port = +config.devServer.port; // 端口号
     const basePath = (/^\./.test(config.devServer.baseUrl)) ? join(process.cwd(), config.devServer.baseUrl) : config.devServer.baseUrl; // 服务器根路径
 
     const name = (config.name || "OIPage") + "-http-server";
     const version = config.version || packageValue.version;
+
+    const wsHandler = WebSocketClass(port + 1, (config.name || "OIPage") + "-ws-server", version);
 
     let Server = createServer(function (request, response) {
         let headers = request.headers;
@@ -40,7 +44,7 @@ module.exports = function (config) {
         }
 
         // 请求拦截
-        if (doIntercept(url.replace(/^\/_oipage_website_/, "").replace(/^\/@modules\//, ""), isWebsite ? webisteIntercept : config.devServer.intercept, request, response)) {
+        if (doIntercept(url.replace(/^\/_oipage_website_/, "").replace(/^\/@modules\//, ""), isWebsite ? websiteIntercept : config.devServer.intercept, request, response, wsHandler)) {
             console.log("<i> \x1b[1m\x1b[32m[" + name + "] intercept: " + url + '\x1b[0m ' + new Date().toLocaleString());
         }
 
@@ -54,7 +58,7 @@ module.exports = function (config) {
             let fileModifiedTime = new Date(fileInfo.mtime).toGMTString();
 
             let responseHeader = {
-                'Content-type': (fileType || "text/plain") + ";charset=utf-8",
+                'Content-Type': (fileType || "text/plain") + ";charset=utf-8",
                 'Access-Control-Allow-Origin': '*',
                 'Server': 'Powered by ' + name + '@' + version,
                 'Cache-Control': 'no-cache',
@@ -78,13 +82,13 @@ module.exports = function (config) {
 
             // 如果文件小于10M，认为不大，直接读取
             if (fileInfo.size < 10 * 1024 * 1024) {
-                let { source, resolveImport } = resolveImportFactory(basePath, filePath, entry, isWebsite ? webisteIntercept : config.devServer.intercept, urlArray[1] === "download", isWebsite)
+                let { source, resolveImport } = resolveImportFactory(basePath, filePath, entry, isWebsite ? websiteIntercept : config.devServer.intercept, urlArray[1] === "download", isWebsite)
 
                 // 只处理非下载文件
                 // 过大的也不进行处理
-                // （对webiste无效）
+                // （对website无效）
                 if (urlArray[1] !== "download") {
-                    let loaders = isWebsite ? webisteLoader : config.module;
+                    let loaders = isWebsite ? websiteLoader : config.module;
 
                     for (let i = 0; i < loaders.rules.length; i++) {
                         if (loaders.rules[i].test.test(filePath)) {
@@ -94,7 +98,7 @@ module.exports = function (config) {
                                 entry, // 是否是浏览器地址栏直接访问
                                 setFileType(_fileType) { // 设置文件类型
                                     fileType = _fileType;
-                                    responseHeader['Content-type'] = _fileType + ";charset=utf-8";
+                                    responseHeader['Content-Type'] = _fileType + ";charset=utf-8";
                                 }
                             }, source);
                             break;
@@ -125,7 +129,7 @@ module.exports = function (config) {
         // 否则就是404
         else {
             response.writeHead(404, {
-                'Content-type': "text/html;charset=utf-8",
+                'Content-Type': "text/html;charset=utf-8",
                 'Access-Control-Allow-Origin': '*',
                 'Server': 'Powered by ' + name + '@' + version
             });

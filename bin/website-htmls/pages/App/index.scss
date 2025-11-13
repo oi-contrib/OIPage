@@ -32,12 +32,13 @@
 .fork {
     line-height: 30px;
     position: fixed;
-    background-color: #9E9E9E;
+    background-color: #607D8B;
     text-align: center;
     color: white;
-    outline: 2px dashed #9E9E9E;
+    outline: 2px dashed #607D8B;
     width: 200px;
-    transform: rotate(-45deg);
-    right: -40px;
-    bottom: 44px;
+    transform: rotate(45deg);
+    right: -45px;
+    top: 45px;
+    z-index: 1;
 }

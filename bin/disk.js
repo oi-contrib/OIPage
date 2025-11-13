@@ -1,4 +1,4 @@
-const { deleteDisk, copyDisk } = require("../nodejs/disk");
+const { deleteDisk, copyDisk, moveDisk } = require("../nodejs/disk");
 
 module.exports = function (config) {
     let isForce = false;
@@ -20,8 +20,7 @@ module.exports = function (config) {
 
         // 移动文件或文件夹
         else if (config.value[i].name === "--move") {
-            copyDisk(config.value[i].value[0], config.value[i].value[1], isForce);
-            deleteDisk(config.value[i].value[0]);
+            moveDisk(config.value[i].value[0], config.value[i].value[1], isForce);
         }
 
         // 复制文件或文件夹

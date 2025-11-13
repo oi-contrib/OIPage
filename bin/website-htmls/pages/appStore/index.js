@@ -10,7 +10,9 @@ export default defineElement({
         }
     },
     methods: {
-
+        goto(event, target) {
+            this.$goto("/" + target.getAttribute("tag"))
+        }
     },
     style: {
         content: style

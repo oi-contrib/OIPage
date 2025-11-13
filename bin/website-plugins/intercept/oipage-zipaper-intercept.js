@@ -8,13 +8,13 @@ const head = headFactory();
 module.exports = {
     test: /^zipaper$/,
     handler(request, response) {
-        head["Content-type"] = "application/javascript;charset=utf-8";
+        head["Content-Type"] = "application/javascript;charset=utf-8";
         head["ETag"] = "Zipaper@v" + require("zipaper/package.json").version;
 
         if (request.headers["if-none-match"] === head["ETag"]) {
             response.writeHead('304', head);
             response.end();
-            console.log("<i> \x1b[1m\x1b[32m[OIPage-dev-server] Cache File: Zipaper\x1b[0m " + new Date().toLocaleString() + "\x1b[33m\x1b[1m 304\x1b[0m");;
+            console.log("<i> \x1b[1m\x1b[32m[OIPage-http-server] Cache File: Zipaper\x1b[0m " + new Date().toLocaleString() + "\x1b[33m\x1b[1m 304\x1b[0m");;
             return;
         }
 
@@ -24,7 +24,7 @@ module.exports = {
             encoding: "utf8"
         });
 
-        response.write(`let module = { exports: {}};
+        response.write(`let module = { exports: {} };
 let exports = module.exports;
 ${source}
 export let createApp = exports.createApp;

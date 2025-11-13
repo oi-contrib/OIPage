@@ -72,22 +72,22 @@ else if (process.argv[2] === "run") {
 
         // 监听子线程的stdout
         child.stdout.on('data', (data) => {
-            console.log(`[${index + 1}] log:${data}`);
+            process.stdout.write(`${data}`);
         });
 
         // 监听子线程的stderr
         child.stderr.on('data', (data) => {
-            console.error(`[${index + 1}] error:${data}`);
+            process.stdout.write(`${data}`);
         });
 
         // 子线程结束处理
         child.on('close', (code) => {
-            console.log(`[${index + 1}] 子线程结束，退出码 ${code}`);
+            console.log(`子线程${index + 1}结束，退出码 ${code}`);
         });
 
         // 子线程出错处理
         child.on('error', (error) => {
-            console.error(`[${index + 1}] 子线程错误: ${error.message}`);
+            console.error(`子线程${index + 1}错误: ${error.message}`);
         });
     }
 

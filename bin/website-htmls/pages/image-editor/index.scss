@@ -1,0 +1,46 @@
+.image-editor-view {
+    &>.menu {
+        position: fixed;
+        left: 50%;
+        top: 5px;
+        transform: translateX(-50%);
+        white-space: nowrap;
+
+        &>li {
+            display: inline-block;
+            background-color: #FF5722;
+            color: white;
+            margin: 0 5px;
+            border-radius: 5px;
+
+            &>label {
+                line-height: 30px;
+                padding: 0 5px;
+                display: inline-block;
+                cursor: pointer;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &>.content {
+        text-align: center;
+        margin-top: 100px;
+
+        #drawId {
+            display: inline-block;
+
+            &>canvas {
+                background-image: url("./images/mosaic.png");
+                outline: 2px solid #CDDC39;
+            }
+        }
+    }
+
+    &>.no-view {
+        display: none;
+    }
+}

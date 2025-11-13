@@ -1,15 +1,15 @@
 module.exports = {
     devServer: {
-        port: 20000,
+        // port: 20000,
         baseUrl: "./",
         cache: true,
         intercept: [{
             test: /\.do$/,
             handler(request, response) {
                 response.writeHead(200, {
-                    'Content-type': "text/html;charset=utf-8",
+                    'Content-Type': "text/html;charset=utf-8",
                     'Access-Control-Allow-Origin': '*',
-                    'Server': 'Powered by OIPage-dev-server\'s intercept'
+                    'Server': 'Powered by OIPage-http-server\'s intercept'
                 });
                 response.write("<div>自定义的 ok</div>");
                 response.end();

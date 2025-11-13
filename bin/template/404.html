@@ -26,7 +26,6 @@
         }
 
         .fork {
-            width: 160px;
             line-height: 30px;
             position: fixed;
             background-color: #607D8B;
@@ -59,7 +58,11 @@
             top: 50px;
             outline: 1px solid #9E9E9E;
             width: calc(100vw - 40px);
-            height: calc(100vh - 100px);
+
+            /* 2025年9月17日 于南京 */
+            /* 100vh改成100%是为了解决手机端显示问题 */
+            height: calc(100% - 100px);
+
             overflow: auto;
             padding: 20px;
             border-radius: 5px;

@@ -1,0 +1,45 @@
+.ui-select-file-view{
+    &>.title {
+    text-align: center;
+    font-weight: 700;
+    color: rgb(26, 26, 26);
+    font-size: 36px;
+    line-height: 48px;
+    padding-top: 30px;
+  }
+
+  &>.tips {
+    text-align: center;
+    line-height: 30px;
+    font-size: 22px;
+    color: rgb(26, 26, 26);
+    font-weight: 300;
+  }
+
+  &>.file {
+    text-align: center;
+    margin-top: 30px;
+
+    input {
+      display: none;
+    }
+
+    label {
+      line-height: 50px;
+      display: inline-block;
+      border: 1px solid gray;
+      background-image: url("./images/addFile.svg");
+      background-repeat: no-repeat;
+      background-position: 5px center;
+      background-size: auto 70%;
+      padding-left: 40px;
+      padding-right: 10px;
+      border-radius: 5px;
+
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+}

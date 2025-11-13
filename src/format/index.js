@@ -21,12 +21,12 @@ function numberFormat(input) {
             integerArray.unshift(integerValue.substring(index > 2 ? index - 3 : 0, index));
         }
 
-        return integerArray.join(",") + decimalValue;
+        return integerArray.join(",").replace(/^\-,/, "-") + decimalValue;
     }
 }
 
 function dateFormat(input, option) {
-    option = option || option;
+    option = option || {};
     var dateObj;
 
     // 如果无值，就用当前日期

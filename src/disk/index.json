@@ -5,6 +5,8 @@
     "import": {},
     "export": [
         "deleteDisk",
-        "copyDisk"
+        "copyDisk",
+        "moveDisk",
+        "listDisk"
     ]
 }

@@ -97,3 +97,21 @@ v1.4.1:
     changes:
         - 修复bug
           1、修复开发服务器大文件丢失文件大小问题
+v1.5.0:
+    date:2025-11-13
+    changes:
+        - 修复bug
+          1、修复404网站在手机浏览器显示高问题
+          2、服务器响应类型由 Content-type 改为 Content-Type
+          3、修复dateFormat第二个参数无法缺省报错
+          4、修复numberFormat不支持负数问题
+        - 优化改造
+          1、优化run命令日志打印
+        - 新增功能
+          1、开发服务器 / 应用市场
+            * 聊天工具
+            * 图片编辑器
+            * 图片转PDF
+          2、API功能（Node.js）
+            * disk 磁盘相关操作
+            （包括：moveDisk、listDisk）

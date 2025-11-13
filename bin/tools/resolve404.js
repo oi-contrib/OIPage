@@ -18,9 +18,9 @@ module.exports = function (filePath, url) {
 
     try {
         subItems = readdirSync(filePath);
-        console.log("<i> \x1b[1m\x1b[32m[OIPage-dev-server] Read Folder: " + url + '\x1b[0m ' + new Date().toLocaleString());
+        console.log("<i> \x1b[1m\x1b[32m[OIPage-http-server] Read Folder: " + url + '\x1b[0m ' + new Date().toLocaleString());
     } catch (e) {
-        console.log("<i> \x1b[1m\x1b[32m[OIPage-dev-server] Read " + (/\/$/.test(url) ? "Folder" : "File") + ": \x1b[35m" + url + ' 404 Not Found\x1b[0m ' + new Date().toLocaleString());
+        console.log("<i> \x1b[1m\x1b[32m[OIPage-http-server] Read " + (/\/$/.test(url) ? "Folder" : "File") + ": \x1b[35m" + url + ' 404 Not Found\x1b[0m ' + new Date().toLocaleString());
         try {
             if (!/\/$/.test(url) || url === "/") {
                 filePath = join(filePath, "../");

@@ -1,7 +1,7 @@
-exports.doIntercept = function (url, intercept, request, response) {
+exports.doIntercept = function (url, intercept, request, response, wsHandler) {
     for (let item of intercept) {
         if (item.test.test(url)) {
-            item.handler(request, response);
+            item.handler(request, response, wsHandler);
             return true;
         }
     }

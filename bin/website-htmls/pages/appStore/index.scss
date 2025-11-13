@@ -1,27 +1,42 @@
-header {
-    height: 50px;
-    line-height: 50px;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
-    background-image: url("./logo.png");
-    background-size: auto 90%;
-    background-repeat: no-repeat;
-    background-position-x: 5px;
-    padding-left: 50px;
-    font-size: 20px;
-    font-weight: 800;
+.appstore-view {
 
-    .fork {
-        line-height: 30px;
-        position: fixed;
-        background-color: #9E9E9E;
-        text-align: center;
-        color: white;
-        outline: 2px dashed #9E9E9E;
-        width: 200px;
-        transform: rotate(-45deg);
-        right: -40px;
-        bottom: 44px;
-        font-weight: 400;
+    header {
+        height: 50px;
+        line-height: 50px;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+        background-image: url("./images/logo.png");
+        background-size: auto 90%;
+        background-repeat: no-repeat;
+        background-position-x: 5px;
+        padding-left: 50px;
+        font-size: 18px;
+        font-weight: 800;
     }
+
+    ul {
+        text-align: center;
+        padding: 50px 0;
+
+        &>li {
+            display: inline-block;
+            margin: 0 10px;
+
+            &:hover {
+                text-decoration: underline;
+                cursor: pointer;
+            }
+
+            &>img {
+                border-radius: 10px;
+                width: 70px;
+            }
+
+            &>h2 {
+                font-size: 14px;
+                line-height: 2em;
+            }
+        }
+    }
+
 }

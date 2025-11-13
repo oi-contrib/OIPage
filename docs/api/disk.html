@@ -19,3 +19,35 @@ copyDisk(sourcePath, targetPath, isForce = false);
 <p>
     如果目标路径targetPath已经存在，会报错，如果希望成功，可以设置isForce会true。
 </p>
+<h3>
+    moveDisk
+</h3>
+<div class="version">
+    始于 v1.5.0
+</div>
+<p>
+    移动文件或文件夹：
+</p>
+<pre>
+moveDisk(sourcePath, targetPath, isForce = false);
+</pre>
+<p>
+    如果目标路径targetPath已经存在，会报错，如果希望成功，可以设置isForce会true。
+</p>
+<h3>
+    listDisk
+</h3>
+<div class="version">
+    始于 v1.5.0
+</div>
+<p>
+    遍历当前文件或文件夹中所有文件：
+</p>
+<pre>
+moveDisk(sourcePath, function(fileInfo){
+    // fileInfo有三个属性：name、path、folder
+});
+</pre>
+<p>
+    其中callback是一个函数，所有的文件都会对其进行回调。
+</p

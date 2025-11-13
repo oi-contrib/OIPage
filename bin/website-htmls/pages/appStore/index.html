@@ -1,6 +1,25 @@
-<header>
-    应用市场
-    <a class="fork" href="https://github.com/oi-contrib/OIPage" target="_blank">
-        Fork me on Github
-    </a>
-</header>
+<div class="appstore-view">
+    <header>
+        应用市场
+    </header>
+    <ul>
+        <li z-on:click.prevent="goto" tag="chart">
+            <img src="./images/chart.png" />
+            <h2>
+                群聊贴
+            </h2>
+        </li>
+        <li z-on:click="goto" tag="image-editor">
+            <img src="./images/image-editor.png" />
+            <h2>
+                图片编辑器
+            </h2>
+        </li>
+        <li z-on:click="goto" tag="img-to-pdf">
+            <img src="./images/img-to-pdf.svg" />
+            <h2>
+                图片转PDF
+            </h2>
+        </li>
+    </ul>
+</div>

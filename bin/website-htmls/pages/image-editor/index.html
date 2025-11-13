@@ -1,0 +1,28 @@
+<div class="image-editor-view">
+    <ul class="menu">
+        <li>
+            <label for="openImage">打开</label>
+        </li>
+        <li>
+            <label z-on:click="changeSize">画布大小</label>
+        </li>
+        <li>
+            <label z-on:click="changeSize">图像大小</label>
+        </li>
+        <li>
+            <label z-on:click="download" type="jpeg">下载JPEG</label>
+        </li>
+        <li>
+            <label z-on:click="download" type="png">下载PNG</label>
+        </li>
+    </ul>
+    <div class="content">
+        <div id="drawId"></div>
+    </div>
+    <div class="no-view">
+
+        <!-- 选择图片 -->
+        <input type="file" id="openImage" z-on:change="openImage" accept="image/*" />
+
+    </div>
+</div>

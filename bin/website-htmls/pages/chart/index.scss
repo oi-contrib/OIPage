@@ -1,0 +1,73 @@
+.chart-view {
+    &>.content {
+        position: fixed;
+        width: 350px;
+        height: calc(100% - 130px);
+        border: 2px solid #000000;
+        left: 50%;
+        top: 50px;
+        transform: translateX(-50%);
+        padding: 5px;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+
+        &>.item {
+            display: flex;
+            padding: 5px;
+
+            &[tag="sender"] {
+                flex-direction: row-reverse;
+                padding-left: 50px;
+            }
+
+            &[tag="receiver"] {
+                flex-direction: row;
+                padding-right: 50px;
+            }
+
+            &>.text {
+                background-color: #dfdbdb;
+                padding: 5px;
+                width: fit-content;
+                border-radius: 5px;
+                font-size: 12px;
+            }
+        }
+    }
+
+    &>.input {
+        position: fixed;
+        width: 350px;
+        height: 30px;
+        left: 50%;
+        bottom: 50px;
+        transform: translateX(-50%);
+        display: flex;
+
+        &>input {
+            flex-grow: 1;
+            resize: none;
+            outline: none;
+            border: 2px solid #000000;
+            border-top-width: 0;
+            border-radius: 0;
+        }
+
+        &>button {
+            width: 70px;
+            cursor: pointer;
+            background-color: #000000;
+            color: white;
+            outline: none;
+            border: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
