@@ -51,6 +51,10 @@ module.exports = function (config) {
         // 如果存在且是文件
         else if (existsSync(filePath) && !lstatSync(filePath).isDirectory()) {
 
+            // 判断是否是请求而无需进一步解析
+            // 2025年12月5日 于南京
+            let isXHR = headers["sec-fetch-dest"] === "empty";
+
             let dotName = /\./.test(filePath) ? filePath.match(/\.([^.]+)$/)[1] : "";
             let fileType = mineTypes[dotName]; // 文件类型
             let fileInfo = statSync(filePath);
@@ -72,7 +76,7 @@ module.exports = function (config) {
                 if (lastModified <= ifModifiedSince) {
                     response.writeHead('304', responseHeader);
                     response.end();
-                    console.log("<i> \x1b[1m\x1b[32m[" + name + "] Cache File: " + url + "\x1b[0m " + new Date().toLocaleString() + "\x1b[33m\x1b[1m 304\x1b[0m");
+                    console.log("<i> \x1b[1m\x1b[32m[" + name + "] Cache File: " + url + "\x1b[0m " + new Date().toLocaleString() + "\x1b[33m\x1b[1m 304" + (isXHR ? " 请求" : "") + "\x1b[0m");
                     return;
                 }
             }
@@ -109,7 +113,7 @@ module.exports = function (config) {
 
                 sendType = "Read";
                 response.writeHead('200', responseHeader);
-                response.write(resolveImport(source, fileType !== "application/javascript"));
+                response.write(isXHR ? source : resolveImport(source, fileType !== "application/javascript"));
                 response.end();
             }
 
@@ -123,7 +127,7 @@ module.exports = function (config) {
                 createReadStream(filePath).pipe(response);
             }
 
-            console.log("<i> \x1b[1m\x1b[32m[" + name + "] " + sendType + " File: " + url + '\x1b[0m ' + new Date().toLocaleString());
+            console.log("<i> \x1b[1m\x1b[32m[" + name + "] " + sendType + " File: " + url + '\x1b[0m ' + new Date().toLocaleString() + "\x1b[33m\x1b[1m" + (isXHR ? " 请求" : "") + "\x1b[0m");
         }
 
         // 否则就是404

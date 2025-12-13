@@ -7,6 +7,7 @@
         "deleteDisk",
         "copyDisk",
         "moveDisk",
-        "listDisk"
+        "listDisk",
+        "linkDisk"
     ]
 }

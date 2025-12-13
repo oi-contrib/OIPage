@@ -7,20 +7,38 @@ OIPage@v${packageValue.version}
 可以使用的命令如下：
 
 【1】oipage-cli serve 开发服务器
-    --port|-p 端口号
-    --baseUrl 服务器根目录
-    --config|-c 设置配置文件
-    --cache 是否启用304（默认true表示开启）
+    --port|-p [端口号]
+        默认8080
+    --baseUrl [文件夹地址]
+        服务器根目录
+    --config|-c [配置文件地址]
+        设置配置文件，相对地址是相对当前命令行
+    --cache [true|false]
+        是否启用304（默认true表示开启）
+    （eg: oipage-cli serve -p 20000 ）
 
 【2】oipage-cli disk 磁盘操作
-    --force|-f 强制执行
-    --delete|-d 删除文件或文件夹
-    --move|m 移动文件或文件夹
-    --copy|-c 复制文件或文件夹
+    --force|-f 
+        强制执行，如果目标地址已有内容，会直接强制删除已有内容
+    --delete|-d [文件或文件夹地址]
+        删除文件或文件夹
+    --delempty [文件夹地址]
+        删除空文件夹
+    --move|-m [源地址] [软链接地址]
+        移动文件或文件夹
+    --copy|-c [源地址] [目标地址]
+        复制文件或文件夹
+    --link|-l [源地址] [软链接地址]
+        创建磁盘链接
+    （eg: oipage-cli disk -m ./test.js ~/test.js -f ）
 
 【3】oipage-cli run "任务一" "任务二" ... 运行多命令
+    ( 如果希望动态给任务传递参数，可以查看： https://github.com/oi-contrib/OIPage/issues/5 )
 
-Powered by https://github.com/zxl20070701
+【4】oipage-cli network 网络相关
+    --log 
+        打印网络信息
+    （eg: oipage-cli network --log ）
 \x1b[0m`);
 
 };

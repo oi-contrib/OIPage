@@ -4,7 +4,7 @@
 
 process.title = 'OIPage';
 
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 const { join } = require("path");
 const { existsSync, lstatSync } = require("fs");
 const { mergeOption } = require("vislite");
@@ -56,7 +56,8 @@ else if (process.argv[2] === "disk") {
         "-f": "--force",
         "-d": "--delete",
         "-m": "--move",
-        "-c": "--copy"
+        "-c": "--copy",
+        "-l": "--link"
     }, true);
 
     require("./disk.js")(argvObj);
@@ -67,30 +68,46 @@ else if (process.argv[2] === "run") {
 
     let argvObj = formatArgv(process.argv, {});
 
+    let tasks = [], runArgs = [];
     for (let index = 0; index < argvObj.args.length; index++) {
-        const child = exec(argvObj.args[index]);
 
-        // 监听子线程的stdout
-        child.stdout.on('data', (data) => {
-            process.stdout.write(`${data}`);
-        });
+        // 参数
+        if (/^:/.test(argvObj.args[index])) {
+            runArgs.push(argvObj.args[index].replace(/^:/, ""));
+        }
 
-        // 监听子线程的stderr
-        child.stderr.on('data', (data) => {
-            process.stdout.write(`${data}`);
-        });
+        // 任务
+        else {
+            tasks.push(argvObj.args[index]);
+        }
+    }
 
-        // 子线程结束处理
-        child.on('close', (code) => {
-            console.log(`子线程${index + 1}结束，退出码 ${code}`);
-        });
+    for (let index = 0; index < tasks.length; index++) {
 
-        // 子线程出错处理
-        child.on('error', (error) => {
-            console.error(`子线程${index + 1}错误: ${error.message}`);
+        // 补充动态参数的支持
+        // npm run bug:issue5 ":-p 9090"
+        // 2025年12月1日 于南京
+        let task = (tasks[index] + (runArgs[index] ? (" " + runArgs[index]) : "")).split(" ");
+        let command = task.shift();
+
+        // 修复exec无法正常使用logform问题
+        // npm run bug:issue4
+        // 2025年12月2日 于南京
+        spawn(command, task, {
+
+            // https://nodejs.org/api/child_process.html#child_process_options_stdio
+            stdio: 'inherit'
         });
     }
 
+}
+
+// 网络相关
+else if (process.argv[2] === "network") {
+
+    let argvObj = formatArgv(process.argv, {}, true);
+
+    require("./network.js")(argvObj);
 }
 
 // 默认，帮助

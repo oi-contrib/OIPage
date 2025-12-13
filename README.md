@@ -78,7 +78,7 @@ oipage-cli serve -p 8080
 
 为了方便日常使用，内置了一个应用市场网站，比如有如下功能：
 
-### 群聊贴
+### 群聊天
 
 <img src="./snipping/chart.png" />
 
@@ -86,7 +86,7 @@ oipage-cli serve -p 8080
 
 <img src="./snipping/image-editor.png" />
 
-已有功能或更多功能我们将根据实际情况逐步完善和维护，当然，你可以通过 [issue](https://github.com/oi-contrib/VISLite/issues) 给我们留言，告诉我们你的改进意见。
+已有功能或更多功能我们将根据实际情况逐步完善和维护，当然，你可以通过 [issue](https://github.com/oi-contrib/OIPage/issues) 给我们留言，告诉我们你的改进意见。
 
 ## 版权
 

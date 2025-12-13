@@ -109,9 +109,29 @@ v1.5.0:
           1、优化run命令日志打印
         - 新增功能
           1、开发服务器 / 应用市场
-            * 聊天工具
+            * 群聊天
             * 图片编辑器
             * 图片转PDF
           2、API功能（Node.js）
             * disk 磁盘相关操作
             （包括：moveDisk、listDisk）
+v1.6.0:
+    date:2025-12-14
+    changes:
+        - 修复bug
+          1、修复logform在run下无法正常使用问题
+            （关联issue： https://github.com/oi-contrib/OIPage/issues/4 ）
+          2、修复服务器错误修改XHR等请求数据问题
+        - 优化改造
+          1、命令行帮助打印更可读
+        - 新增功能
+          1、命令（oipage-cli）
+            * disk 
+                --link 创建磁盘链接
+                --delempty 删除空文件夹 
+            * network 网络相关
+            * run 支持动态参数
+              （关联issue： https://github.com/oi-contrib/OIPage/issues/5 ）
+          2、API功能（Node.js）
+            * disk 磁盘相关操作
+            （包括：linkDisk）

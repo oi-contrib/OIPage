@@ -37,3 +37,12 @@ export interface listDiskType {
 }
 
 export let listDisk: listDiskType
+
+/**
+ * 创建文件或文件夹的链接
+ */
+export interface linkDiskType {
+    (sourcePath: string, targetPath: string): void
+}
+
+export let linkDisk: linkDiskType

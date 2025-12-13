@@ -1,4 +1,6 @@
-const { deleteDisk, copyDisk, moveDisk } = require("../nodejs/disk");
+const { join } = require("path");
+const { deleteDisk, copyDisk, moveDisk, linkDisk } = require("../nodejs/disk");
+const deleteEmptyFolder = require("./tools/deleteEmptyFolder");
 
 module.exports = function (config) {
     let isForce = false;
@@ -26,6 +28,16 @@ module.exports = function (config) {
         // 复制文件或文件夹
         else if (config.value[i].name === "--copy") {
             copyDisk(config.value[i].value[0], config.value[i].value[1], isForce);
+        }
+
+        // 创建磁盘链接
+        else if (config.value[i].name === "--link") {
+            linkDisk(config.value[i].value[0], config.value[i].value[1], isForce);
+        }
+
+        // 删除空文件夹
+        else if (config.value[i].name === "--delempty") {
+            deleteEmptyFolder(join(process.cwd(), config.value[i].value[0]));
         }
     }
 };
