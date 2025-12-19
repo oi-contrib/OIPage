@@ -1,4 +1,4 @@
-const { watch, mkdirSync, readdirSync, writeFileSync, readFileSync, copyFileSync } = require("fs");
+const { watch, mkdirSync, readdirSync, writeFileSync, readFileSync, copyFileSync, appendFileSync } = require("fs");
 const { join } = require("path");
 const { deleteSync } = require("./tool");
 const { nodejsContent, webContent } = require("./content");
@@ -23,11 +23,20 @@ function forEachItem(callback) {
     });
 }
 
+function createModule(type, name) {
+    appendFileSync(join("./types/index.d.ts"), `import "../${type}/${name}/index";
+declare module "oipage/${type}/${name}/index.js" {}
+`);
+}
+
 function doBuild(notWatch) {
     index += 1;
 
     let startTime = new Date().valueOf();
     console.log("");
+
+    writeFileSync(join("./types/index.d.ts"), `// OIPage 模块定义 （程序自动生成，请勿修改）
+`);
 
     logInfo("Build is running:", notWatch);
 
@@ -41,6 +50,8 @@ function doBuild(notWatch) {
             mkdirSync(join("./nodejs", itemName));
             copyFileSync(join("./src", itemName, "index.d.ts"), join("./nodejs", itemName, "index.d.ts"));
             writeFileSync(join("./nodejs", itemName, "index.js"), nodejsContent(itemName, content, config));
+
+            createModule("nodejs", itemName);
         }
     });
     logInfo("Current Bundle On Node.js: \x1b[0m\x1b[36m" + nodejsItems.join(" "), notWatch);
@@ -55,6 +66,8 @@ function doBuild(notWatch) {
             mkdirSync(join("./web", itemName));
             copyFileSync(join("./src", itemName, "index.d.ts"), join("./web", itemName, "index.d.ts"));
             writeFileSync(join("./web", itemName, "index.js"), webContent(itemName, content, config));
+
+            createModule("web", itemName);
         }
     });
     logInfo("Current Bundle On Web: \x1b[0m\x1b[36m" + webItems.join(" "), notWatch);

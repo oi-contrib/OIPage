@@ -8,3 +8,5 @@ docs
 build
 test
 oipage.config.js
+*.tgz
+.gitkeep
