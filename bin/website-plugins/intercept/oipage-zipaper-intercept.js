@@ -1,6 +1,5 @@
-const { readFileSync } = require("fs");
-const { join } = require("path");
 const headFactory = require("./head.js");
+const getPackage = require("./getPackage.js");
 
 const head = headFactory();
 
@@ -20,9 +19,7 @@ module.exports = {
 
         response.writeHead(200, head);
 
-        let source = readFileSync(join(__dirname, "../../../node_modules/zipaper/dist/Zipaper.min.js"), {
-            encoding: "utf8"
-        });
+        let source = getPackage("zipaper/dist/Zipaper.min.js");
 
         response.write(`let module = { exports: {} };
 let exports = module.exports;
