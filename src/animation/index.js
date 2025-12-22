@@ -11,7 +11,7 @@ var $timerId;
  * @param {number} duration 动画时长，可选
  * @param {function} callback 动画结束回调，可选，有一个形参deep，0-1，表示执行进度
  *
- * @returns {function} 返回一个函数，调用该函数，可以提前结束动画
+ * @returns {object} 返回一个对象，包含一个stop方法，用于在动画结束前结束动画
  */
 function animation(doback, duration, callback) {
     if (arguments.length < 2) duration = 400;
@@ -38,7 +38,14 @@ function animation(doback, duration, callback) {
         //开启唯一的定时器timerId
         "start": function () {
             if (!$timerId) {
-                $timerId = setInterval(clock.tick, $interval);
+                if (!globalThis.requestAnimationFrame) {
+                    $timerId = setInterval(clock.tick, $interval);
+                } else {
+                    $timerId = requestAnimationFrame(function step() {
+                        clock.tick();
+                        if ($timerId) $timerId = requestAnimationFrame(step);
+                    });
+                }
             }
         },
 
@@ -76,7 +83,8 @@ function animation(doback, duration, callback) {
         //停止定时器，重置timerId=null
         "stop": function () {
             if ($timerId) {
-                clearInterval($timerId);
+                if (!globalThis.requestAnimationFrame) clearInterval($timerId);
+                else cancelAnimationFrame($timerId);
                 $timerId = null;
             }
         }
