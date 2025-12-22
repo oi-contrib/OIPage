@@ -1,0 +1,10 @@
+{
+    "type": [
+        "nodejs"
+    ],
+    "import": {},
+    "export": [
+        "get",
+        "post"
+    ]
+}

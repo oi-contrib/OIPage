@@ -140,5 +140,10 @@ v1.7.0:
     changes:
         - 优化改造
           1、types定义模块，方便使用时代码提示
+          2、使用requestAnimationFrame改造animation
         - 修复bug
           1、修复特殊情况下 “应用市场” 依赖查找错误问题
+        - 新增功能
+          1、API功能（Node.js）
+            * remote HTTP请求
+            （包括：get、post）
