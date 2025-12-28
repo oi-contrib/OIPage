@@ -96,7 +96,12 @@ else if (process.argv[2] === "run") {
         spawn(command, task, {
 
             // https://nodejs.org/api/child_process.html#child_process_options_stdio
-            stdio: 'inherit'
+            stdio: 'inherit',
+
+            // 修复https://github.com/oi-contrib/OIPage/issues/8
+            // 在Unix系统中使用`/bin/sh`，在Windows系统中使用`process.env.ComSpec`
+            // 2025年12月28日 于南京
+            shell: true
         });
     }
 
