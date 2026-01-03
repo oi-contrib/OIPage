@@ -67,13 +67,24 @@ module.exports = function (config) {
                 'Server': 'Powered by ' + name + '@' + version,
                 'Cache-Control': 'no-cache',
                 // 'Content-Length': fileInfo.size, // 会导致拦截修改的文本内容不对
-                'Last-Modified': fileModifiedTime
+
+                // 与if-modified-since配合使用，做缓存验证
+                'Last-Modified': fileModifiedTime,
+
+                // 与if-none-match配合使用，做缓存验证
+                // 'ETag': basePath + "-" + new Date(fileInfo.mtime).toString()
             };
 
             if (cache && headers["if-modified-since"]) {
                 let ifModifiedSince = new Date(headers["if-modified-since"]).valueOf()
                 let lastModified = new Date(fileModifiedTime).valueOf()
-                if (lastModified <= ifModifiedSince) {
+
+                // 注意这里不能使用<=，否则
+                // 1、会出现时区问题
+                // 2、作为开发服务器，可能同一个url地址对应的文件不同，被误判为未修改
+                // 2025年12月29日 于南京
+                // if (lastModified <= ifModifiedSince) {}
+                if (lastModified === ifModifiedSince) {
                     response.writeHead('304', responseHeader);
                     response.end();
                     console.log("<i> \x1b[1m\x1b[32m[" + name + "] Cache File: " + url + "\x1b[0m " + new Date().toLocaleString() + "\x1b[33m\x1b[1m 304" + (isXHR ? " 请求" : "") + "\x1b[0m");

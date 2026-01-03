@@ -41,9 +41,9 @@ function animation(doback, duration, callback) {
                 if (!globalThis.requestAnimationFrame) {
                     $timerId = setInterval(clock.tick, $interval);
                 } else {
-                    $timerId = requestAnimationFrame(function step() {
+                    $timerId = globalThis.requestAnimationFrame(function step() {
                         clock.tick();
-                        if ($timerId) $timerId = requestAnimationFrame(step);
+                        if ($timerId) $timerId = globalThis.requestAnimationFrame(step);
                     });
                 }
             }
@@ -84,7 +84,7 @@ function animation(doback, duration, callback) {
         "stop": function () {
             if ($timerId) {
                 if (!globalThis.requestAnimationFrame) clearInterval($timerId);
-                else cancelAnimationFrame($timerId);
+                else globalThis.cancelAnimationFrame($timerId);
                 $timerId = null;
             }
         }

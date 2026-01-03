@@ -116,6 +116,7 @@ v1.5.0:
             * disk 磁盘相关操作
             （包括：moveDisk、listDisk）
 v1.6.0:
+（此版本已废弃，请用v1.6.1+代替）
     date:2025-12-14
     changes:
         - 修复bug
@@ -134,7 +135,13 @@ v1.6.0:
               （关联issue： https://github.com/oi-contrib/OIPage/issues/5 ）
           2、API功能（Node.js）
             * disk 磁盘相关操作
-            （包括：linkDisk）
+            （包括：linkDisk） 
+v1.6.1:
+    date:2025-12-29
+    changes:
+        - 修复bug
+          1、修复run命令在Windows中运行错误
+            （关联issue： https://github.com/oi-contrib/OIPage/issues/8 ）
 v1.7.0:
     date:
     changes:
@@ -143,6 +150,7 @@ v1.7.0:
           2、使用requestAnimationFrame改造animation
         - 修复bug
           1、修复特殊情况下 “应用市场” 依赖查找错误问题
+          2、修复开发服务器错误缓存问题
         - 新增功能
           1、API功能（Node.js）
             * remote HTTP请求
