@@ -151,7 +151,4 @@ v1.7.0:
         - 修复bug
           1、修复特殊情况下 “应用市场” 依赖查找错误问题
           2、修复开发服务器错误缓存问题
-        - 新增功能
-          1、API功能（Node.js）
-            * remote HTTP请求
-            （包括：get、post）
+          3、修改types错误定义（intercept）

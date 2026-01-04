@@ -15,6 +15,8 @@ interface DevServerType {
      * 是否开启304缓存，默认开启
      */
     cache: boolean
+
+    intercept?: Array<InterceptType>
 }
 
 interface InterceptType {
@@ -42,8 +44,6 @@ interface ConfigType {
      * 服务器运行配置
      */
     devServer: DevServerType
-
-    intercept?: Array<InterceptType>
 
     module?: {
         rules: Array<{

@@ -68,15 +68,6 @@
                 "numberFormat",
                 "dateFormat"
             ]
-        },
-        {
-            "name": "remote",
-            "label": "HTTP请求",
-            "version": "1.7.0",
-            "import": [
-                "get",
-                "post"
-            ]
         }
     ],
     "web": [

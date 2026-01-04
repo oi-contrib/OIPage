@@ -5,12 +5,11 @@ const { logform } = require("../nodejs/logform/index.js");
 const { deleteDisk, copyDisk, moveDisk, listDisk } = require("../nodejs/disk/index.js");
 const { reader } = require("../nodejs/reader/index.js");
 const { strToJson } = require('../nodejs/json/index.js');
-const { get, post } = require("../nodejs/remote/index.js");
 
 /* 测试一：引入 */
 
 let apis = {
-    animation, deeplog, linelog, throttle, logform, deleteDisk, copyDisk, moveDisk, listDisk, reader, strToJson, get, post
+    animation, deeplog, linelog, throttle, logform, deleteDisk, copyDisk, moveDisk, listDisk, reader, strToJson
 };
 
 for (let apiName in apis) {
