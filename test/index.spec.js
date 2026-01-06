@@ -9,7 +9,7 @@ const { strToJson } = require('../nodejs/json/index.js');
 /* 测试一：引入 */
 
 let apis = {
-    animation, deeplog, linelog, throttle, logform, deleteDisk, copyDisk, moveDisk, listDisk, reader, strToJson
+    animation, deeplog, linelog, throttle, logform, deleteDisk, copyDisk, moveDisk, listDisk, reader, strToJson,
 };
 
 for (let apiName in apis) {

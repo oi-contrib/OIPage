@@ -143,7 +143,7 @@ v1.6.1:
           1、修复run命令在Windows中运行错误
             （关联issue： https://github.com/oi-contrib/OIPage/issues/8 ）
 v1.7.0:
-    date:
+    date:2026-01-06
     changes:
         - 优化改造
           1、types定义模块，方便使用时代码提示
@@ -152,3 +152,6 @@ v1.7.0:
           1、修复特殊情况下 “应用市场” 依赖查找错误问题
           2、修复开发服务器错误缓存问题
           3、修改types错误定义（intercept）
+        - 新增功能
+          1、开发服务器
+            * 转发功能 proxy

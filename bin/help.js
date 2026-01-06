@@ -16,6 +16,8 @@ OIPage@v${packageValue.version}
     --cache [true|false]
         是否启用304（默认true表示开启）
     （eg: oipage-cli serve -p 20000 ）
+    --proxy [转发前缀] [转发地址]
+    （注意：转发前缀会被替换为空，相当于设置了 pathRewrite: { '^/demo': '' }）
 
 【2】oipage-cli disk 磁盘操作
     --force|-f 

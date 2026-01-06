@@ -17,6 +17,15 @@ interface DevServerType {
     cache: boolean
 
     intercept?: Array<InterceptType>
+
+    proxy?: {
+        [key: string]: {
+            target: string
+            pathRewrite?: {
+                [key: string]: string
+            }
+        }
+    }
 }
 
 interface InterceptType {

@@ -3,6 +3,12 @@ module.exports = {
         // port: 20000,
         baseUrl: "./",
         cache: true,
+        // proxy: {
+        //     "/apidemo": {
+        //         target: "http://127.0.0.1:8080",
+        //         pathRewrite: { '^/apidemo': '' }
+        //     }
+        // },
         intercept: [{
             test: /\.do$/,
             handler(request, response) {

@@ -45,6 +45,23 @@
     服务器根目录，默认当前命令行目录。可以是绝对路径，如果为相对路径，则是相对当前命令行目录。
 </p>
 <h3>
+    proxy
+</h3>
+<div class="version">
+    始于 v1.7.0
+</div>
+<p>
+    转发功能
+</p>
+<pre>
+proxy: {
+    "/apidemo": {
+        target: "https://oi-contrib.github.io/OIPage",
+        pathRewrite: { '^/apidemo': '' }, // 地址重写，可选
+    }
+}
+</pre>
+<h3>
     intercept
 </h3>
 <div class="version">

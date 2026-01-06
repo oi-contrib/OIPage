@@ -498,3 +498,18 @@ footer a:hover {
     color: #fff;
     white-space: nowrap;
 }
+
+.note-view ul,
+.note-view ol {
+    font-size: 13px;
+    line-height: 2.4em;
+    margin-left: 2.5em;
+}
+
+.note-view ol>li {
+    list-style-type: decimal;
+}
+
+.note-view ul>li {
+    list-style-type: disc;
+}

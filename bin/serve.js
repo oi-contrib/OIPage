@@ -7,6 +7,7 @@ const mineTypes = require("./data/mineTypes.json");
 const resolve404 = require("./tools/resolve404.js");
 const resolveImportFactory = require("./tools/resolveImport.js");
 const { doIntercept } = require("./intercept.js");
+const proxy = require("./proxy.js");
 
 const websiteIntercept = require("./website-plugins/intercept/index.js");
 const websiteLoader = require("./website-plugins/loader/index.js");
@@ -41,6 +42,15 @@ module.exports = function (config) {
             filePath = join(__dirname, "./website-htmls/", url.replace(/^\/_oipage_website_\//, ""));
         } else {
             filePath = join(basePath, url == "/" ? "index.html" : url.replace(/^\//, ""));
+        }
+
+        let proxyIntercept = proxy({
+            name,
+            version
+        }, config.devServer.proxy || {});
+        delete config.devServer.proxy;
+        for (let i = 0; i < proxyIntercept.length; i++) {
+            config.devServer.intercept.push(proxyIntercept[i]);
         }
 
         // 请求拦截

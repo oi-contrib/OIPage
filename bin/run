@@ -23,12 +23,20 @@ if (process.argv[2] === "serve") {
             port: 8080,
             baseUrl: "./",
             cache: true,
+            proxy: {},
             intercept: []
         },
         module: {
             rules: []
         }
     };
+
+    if (argvObj["--proxy"] && argvObj["--proxy"].length === 2) {
+        config.devServer.proxy[argvObj["--proxy"][0]] = {
+            target: argvObj["--proxy"][1],
+            pathRewrite: { ['^' + argvObj["--proxy"][0]]: '' }
+        };
+    }
 
     // 如果设置了配置文件
     if (argvObj["--config"]) {
