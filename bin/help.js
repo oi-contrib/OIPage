@@ -11,6 +11,9 @@ OIPage@v${packageValue.version}
         默认8080
     --baseUrl [文件夹地址]
         服务器根目录
+    --open
+        自动打开浏览器
+    （也可以设置打开地址，比如 oipage-cli serve --open docs/index.html）
     --config|-c [配置文件地址]
         设置配置文件，相对地址是相对当前命令行
     --cache [true|false]

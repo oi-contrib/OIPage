@@ -15,12 +15,14 @@
     }
 
     ul {
-        text-align: center;
-        padding: 50px 0;
+        text-align: left;
+        padding: 20px 10px;
 
         &>li {
+            text-align: center;
             display: inline-block;
-            margin: 0 10px;
+            margin: 10px;
+            width: 90px;
 
             &:hover {
                 text-decoration: underline;
@@ -29,7 +31,7 @@
 
             &>img {
                 border-radius: 10px;
-                width: 70px;
+                width: 50px;
             }
 
             &>h2 {

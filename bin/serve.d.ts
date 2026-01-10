@@ -2,6 +2,13 @@
 interface DevServerType {
 
     /**
+     * 是否自动打开浏览器，默认false，true表示打开
+     * 
+     * 也可以是一段地址，比如设置open=“docs/index.html”
+     */
+    open?: boolean | string
+
+    /**
      * 服务器端口号
      */
     port: number

@@ -6,6 +6,7 @@ const network = require("./tools/network.js");
 const mineTypes = require("./data/mineTypes.json");
 const resolve404 = require("./tools/resolve404.js");
 const resolveImportFactory = require("./tools/resolveImport.js");
+const openBrowser = require("./tools/openBrowser.js");
 const { doIntercept } = require("./intercept.js");
 const proxy = require("./proxy.js");
 
@@ -175,6 +176,13 @@ module.exports = function (config) {
     for (let ipv4Item of networkValue.IPv4) console.log('<i> \x1b[1m\x1b[32m[' + name + '] On Your Network (IPv4):\x1b[36m http://' + ipv4Item.address + ':' + port + '/\x1b[0m');
     for (let ipv6Item of networkValue.IPv6) console.log('<i> \x1b[1m\x1b[32m[' + name + '] On Your Network (IPv6): \x1b[36mhttp://[' + ipv6Item.address + ']:' + port + '/\x1b[0m');
     console.log('<i> \x1b[1m\x1b[32m[' + name + '] Content not from ' + (config.name || "OIPage") + ' is served from \x1b[36m"' + basePath + '" \x1b[0mdirectory');
+
+    if (typeof config.devServer.open === "string" || config.devServer.open) {
+        let url = 'http://localhost:' + port + "/" + (typeof config.devServer.open === "string" ? config.devServer.open : "");
+        openBrowser(url);
+        console.log('<i> \x1b[1m\x1b[32m[' + name + '] Open: \x1b[36m' + url + '\x1b[0m');
+    }
+
     if (!cache) console.log('<i> \x1b[1m\x1b[32m[' + name + '] Cancel 304 Cache!\x1b[0m');
-    console.log('\n' + (config.name || "OIPage") + ' ' + version + ' compiled \x1b[1m\x1b[32msuccessfully\x1b[0m in ' + (new Date().valueOf() - startTime) + ' ms\n')
+    console.log('\n' + (config.name || "OIPage") + ' ' + version + ' compiled \x1b[1m\x1b[32msuccessfully\x1b[0m in ' + (new Date().valueOf() - startTime) + ' ms\n');
 };
