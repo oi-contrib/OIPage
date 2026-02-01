@@ -1,6 +1,9 @@
 .image-editor-view {
+    position: relative;
+    padding-top: 100px;
+
     &>.menu {
-        position: fixed;
+        position: absolute;
         left: 50%;
         top: 5px;
         transform: translateX(-50%);
@@ -28,7 +31,6 @@
 
     &>.content {
         text-align: center;
-        margin-top: 100px;
 
         #drawId {
             display: inline-block;

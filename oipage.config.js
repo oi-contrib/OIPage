@@ -20,7 +20,11 @@ module.exports = {
                 response.write("<div>自定义的 ok</div>");
                 response.end();
             }
-        }]
+        }],
+        // 404: function (filePath, url) {
+        //     console.log("自定义 404 页面：", filePath, url);
+        //     return "<h1>自定义的 404 页面</h1><p>你访问的页面不存在！</p>";
+        // }
     },
     module: {
         rules: [{ // 配置对文件的自定义处理

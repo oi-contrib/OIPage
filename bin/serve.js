@@ -4,12 +4,11 @@ const { createServer } = require('http');
 const packageValue = require("../package.json");
 const network = require("./tools/network.js");
 const mineTypes = require("./data/mineTypes.json");
-const resolve404 = require("./tools/resolve404.js");
 const resolveImportFactory = require("./tools/resolveImport.js");
 const openBrowser = require("./tools/openBrowser.js");
 const { doIntercept } = require("./intercept.js");
 const proxy = require("./proxy.js");
-
+const resolve404_default = require("./tools/resolve404.js");
 const websiteIntercept = require("./website-plugins/intercept/index.js");
 const websiteLoader = require("./website-plugins/loader/index.js");
 
@@ -19,6 +18,7 @@ const WebSocketClass = require("./WebSocket/index.js");
 module.exports = function (config) {
     let startTime = new Date().valueOf();
 
+    const resolve404 = config.devServer["404"] || resolve404_default;
     const cache = "cache" in config.devServer ? config.devServer.cache : true;
     const port = +config.devServer.port; // 端口号
     const basePath = (/^\./.test(config.devServer.baseUrl)) ? join(process.cwd(), config.devServer.baseUrl) : config.devServer.baseUrl; // 服务器根路径
@@ -98,7 +98,7 @@ module.exports = function (config) {
                 if (lastModified === ifModifiedSince) {
                     response.writeHead('304', responseHeader);
                     response.end();
-                    console.log("<i> \x1b[1m\x1b[32m[" + name + "] Cache File: " + url + "\x1b[0m " + new Date().toLocaleString() + "\x1b[33m\x1b[1m 304" + (isXHR ? " 请求" : "") + "\x1b[0m");
+                    console.log("<i> \x1b[1m\x1b[32m[" + name + "] Cache File: " + url + "\x1b[0m " + new Date().toLocaleString() + "\x1b[33m\x1b[1m 304" + (isXHR ? " "+request.method : "") + "\x1b[0m");
                     return;
                 }
             }
@@ -149,7 +149,7 @@ module.exports = function (config) {
                 createReadStream(filePath).pipe(response);
             }
 
-            console.log("<i> \x1b[1m\x1b[32m[" + name + "] " + sendType + " File: " + url + '\x1b[0m ' + new Date().toLocaleString() + "\x1b[33m\x1b[1m" + (isXHR ? " 请求" : "") + "\x1b[0m");
+            console.log("<i> \x1b[1m\x1b[32m[" + name + "] " + sendType + " File: " + url + '\x1b[0m ' + new Date().toLocaleString() + "\x1b[33m\x1b[1m" + (isXHR ? " "+request.method : "") + "\x1b[0m");
         }
 
         // 否则就是404

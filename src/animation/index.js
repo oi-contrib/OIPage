@@ -38,13 +38,17 @@ function animation(doback, duration, callback) {
         //开启唯一的定时器timerId
         "start": function () {
             if (!$timerId) {
-                if (!globalThis.requestAnimationFrame) {
+                try {
+                    if (globalThis && globalThis.requestAnimationFrame) {
+                        $timerId = globalThis.requestAnimationFrame(function step() {
+                            clock.tick();
+                            if ($timerId) $timerId = globalThis.requestAnimationFrame(step);
+                        });
+                    } else {
+                        $timerId = setInterval(clock.tick, $interval);
+                    }
+                } catch (e) {
                     $timerId = setInterval(clock.tick, $interval);
-                } else {
-                    $timerId = globalThis.requestAnimationFrame(function step() {
-                        clock.tick();
-                        if ($timerId) $timerId = globalThis.requestAnimationFrame(step);
-                    });
                 }
             }
         },
@@ -83,8 +87,12 @@ function animation(doback, duration, callback) {
         //停止定时器，重置timerId=null
         "stop": function () {
             if ($timerId) {
-                if (!globalThis.requestAnimationFrame) clearInterval($timerId);
-                else globalThis.cancelAnimationFrame($timerId);
+                try {
+                    if (globalThis && globalThis.requestAnimationFrame) globalThis.cancelAnimationFrame($timerId);
+                    else clearInterval($timerId);
+                } catch (e) {
+                    clearInterval($timerId);
+                }
                 $timerId = null;
             }
         }

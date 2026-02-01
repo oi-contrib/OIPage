@@ -2,13 +2,14 @@
     &>.content {
         position: fixed;
         width: 350px;
-        height: calc(100% - 130px);
+        height: calc(100% - 150px);
         border: 2px solid #000000;
         left: 50%;
-        top: 50px;
+        top: 100px;
         transform: translateX(-50%);
         padding: 5px;
         overflow: auto;
+        border-radius: 10px 10px 0 0;
 
         &::-webkit-scrollbar {
             width: 0;

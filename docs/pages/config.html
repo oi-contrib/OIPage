@@ -54,6 +54,20 @@
     服务器根目录，默认当前命令行目录。可以是绝对路径，如果为相对路径，则是相对当前命令行目录。
 </p>
 <h3>
+    404
+</h3>
+<div class="version">
+    始于 v1.8.0
+</div>
+<p>
+    自定义 404 页面，函数接收两个参数 filePath（文件磁盘路径） 和 url（请求地址）。
+</p>
+<pre tag="javascript">
+404: function (filePath, url) {
+    return "&lt;h1&gt;自定义的 404 页面&lt;/h1&gt;&lt;p&gt;你访问的页面不存在！&lt;/p&gt;";
+} 
+</pre>
+<h3>
     proxy
 </h3>
 <div class="version">

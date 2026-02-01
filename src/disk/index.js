@@ -1,6 +1,5 @@
 const { join } = require("path");
 const { existsSync, readdirSync, lstatSync, unlinkSync, rmdirSync, mkdirSync, copyFileSync, symlinkSync } = require("fs");
-const { execSync } = require("child_process");
 
 /**
  * 删除文件或文件夹
@@ -156,10 +155,11 @@ function listDisk(sourcePath, callback) {
 
 /**
  * 软链接文件或文件夹
- * @param {*} sourcePath 
- * @param {*} targetPath 
+ * @param {string} sourcePath 
+ * @param {string} targetPath 
  */
 function linkDisk(sourcePath, targetPath) {
     const type = lstatSync(sourcePath).isDirectory() ? 'junction' : 'file';
     symlinkSync(sourcePath, targetPath, type);
 }
+

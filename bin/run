@@ -25,7 +25,8 @@ if (process.argv[2] === "serve") {
             open: false,
             cache: true,
             proxy: {},
-            intercept: []
+            intercept: [],
+            404: null
         },
         module: {
             rules: []
@@ -55,6 +56,8 @@ if (process.argv[2] === "serve") {
     if (argvObj["--baseUrl"]) config.devServer.baseUrl = argvObj["--baseUrl"][0];
     if (argvObj["--cache"]) config.devServer.cache = argvObj["--cache"][0] === "true";
     if (argvObj["--open"]) config.devServer.open = argvObj["--open"][0] || true;
+
+    console.log(config)
 
     require("./serve.js")(config);
 }

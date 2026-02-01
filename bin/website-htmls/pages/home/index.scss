@@ -1,0 +1,29 @@
+.home-view {
+    ul {
+        text-align: left;
+        padding: 20px 10px;
+
+        &>li {
+            text-align: center;
+            display: inline-block;
+            margin: 10px;
+            width: 90px;
+
+            &:hover {
+                text-decoration: underline;
+                cursor: pointer;
+            }
+
+            &>img {
+                border-radius: 10px;
+                width: 50px;
+            }
+
+            &>h2 {
+                font-size: 14px;
+                line-height: 2em;
+            }
+        }
+    }
+
+}
