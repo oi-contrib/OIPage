@@ -1,6 +1,6 @@
 {
   "name": "oipage",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "前端网页或应用快速开发助手，包括开发服务器、辅助命令、实用API等",
   "sideEffects": false,
   "typings": "./types/index.d.ts",
