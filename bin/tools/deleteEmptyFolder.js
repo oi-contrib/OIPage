@@ -20,5 +20,5 @@ module.exports = function (rootPath) {
                 folderPath = join(folderPath, "..");
             }
         }
-    })(params.path);
+    })(rootPath);
 };

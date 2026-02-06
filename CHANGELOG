@@ -169,3 +169,8 @@ v1.8.1:
     changes:
         - 修复bug
           1、开发服务器删除多余的打印语句
+v1.8.2:
+    date:2026-02-07
+    changes:
+        - 修复bug
+          1、修复oipage-cli disk --delempty 命令错误
