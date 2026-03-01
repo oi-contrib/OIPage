@@ -174,3 +174,8 @@ v1.8.2:
     changes:
         - 修复bug
           1、修复oipage-cli disk --delempty 命令错误
+v1.9.0:
+    date:
+    changes:
+        - 优化改造
+          1、调整打包若干细节

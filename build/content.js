@@ -1,12 +1,5 @@
 const packageValue = require("../package.json");
 
-let banner = (itemName) => {
-    return `/*!
-* ${itemName} of OIPage v${packageValue.version}
-* git+https://github.com/oi-contrib/OIPage.git
-*/`
-};
-
 exports.nodejsContent = function (itemName, content, config) {
 
     // 导入
@@ -22,8 +15,7 @@ exports.nodejsContent = function (itemName, content, config) {
 `;
     }
 
-    return `${banner(itemName)}
-${importValue}
+    return `${importValue}
 ${content}
 ${exportValue}`;
 };
@@ -41,7 +33,6 @@ exports.webContent = function (itemName, content, config) {
         content = content.replace("function " + exportKey + "(", "export function " + exportKey + "(");
     }
 
-    return `${banner(itemName)}
-${importValue}
+    return `${importValue}
 ${content}`;
 };
