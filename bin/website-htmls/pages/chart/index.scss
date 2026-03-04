@@ -1,74 +1,72 @@
 .chart-view {
-    &>.content {
-        position: fixed;
-        width: 350px;
-        height: calc(100% - 150px);
-        border: 2px solid #000000;
-        left: 50%;
-        top: 100px;
-        transform: translateX(-50%);
-        padding: 5px;
+    padding: 20px 12px 90px;
+    box-sizing: border-box;
+
+    .content {
+        margin: 0 auto 12px;
+        max-width: 720px;
+        height: calc(100vh - 200px);
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 12px;
         overflow: auto;
-        border-radius: 10px 10px 0 0;
-
-        &::-webkit-scrollbar {
-            width: 0;
-            height: 0;
-        }
-
-        &>.item {
-            display: flex;
-            padding: 5px;
-
-            &[tag="sender"] {
-                flex-direction: row-reverse;
-                padding-left: 50px;
-            }
-
-            &[tag="receiver"] {
-                flex-direction: row;
-                padding-right: 50px;
-            }
-
-            &>.text {
-                background-color: #dfdbdb;
-                padding: 5px;
-                width: fit-content;
-                border-radius: 5px;
-                font-size: 12px;
-            }
-        }
+        box-shadow: 0 8px 20px rgba(15,23,42,0.06);
     }
 
-    &>.input {
-        position: fixed;
-        width: 350px;
-        height: 30px;
-        left: 50%;
-        bottom: 50px;
-        transform: translateX(-50%);
+    .content::-webkit-scrollbar { width: 8px; }
+    .content::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 8px; }
+
+    .item {
         display: flex;
+        margin: 8px 0;
+        width: 100%;
+        justify-content: flex-start;
+    }
 
-        &>input {
-            flex-grow: 1;
-            resize: none;
-            outline: none;
-            border: 2px solid #000000;
-            border-top-width: 0;
-            border-radius: 0;
-        }
+    .item[tag="sender"] { justify-content: flex-end; }
 
-        &>button {
-            width: 70px;
-            cursor: pointer;
-            background-color: #000000;
-            color: white;
-            outline: none;
-            border: none;
+    .item .text {
+        background-color: #eef2ff;
+        padding: 8px 12px;
+        max-width: 68%;
+        border-radius: 12px;
+        font-size: 14px;
+        word-break: break-word;
+    }
 
-            &:hover {
-                text-decoration: underline;
-            }
-        }
+    .item[tag="sender"] .text { background-color: #dcfce7; }
+
+    .input {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 18px;
+        width: calc(100% - 32px);
+        max-width: 720px;
+        display: flex;
+        gap: 8px;
+        background: transparent;
+    }
+
+    .input > input {
+        flex: 1;
+        border: 1px solid #e6e9ee;
+        border-radius: 10px;
+        padding: 8px 12px;
+        box-sizing: border-box;
+    }
+
+    .input > button {
+        width: 84px;
+        border-radius: 10px;
+        background: #111827;
+        color: #fff;
+        border: none;
+    }
+
+    @media (max-width: 480px) {
+        .content { height: calc(100vh - 180px); padding: 10px; }
+        .item .text { max-width: 78%; font-size: 13px; }
+        .input { width: calc(100% - 24px); bottom: 12px; }
     }
 }

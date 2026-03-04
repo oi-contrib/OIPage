@@ -1,28 +1,87 @@
 .home-view {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    box-sizing: border-box;
+
     ul {
-        text-align: left;
-        padding: 20px 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
 
-        &>li {
-            text-align: center;
-            display: inline-block;
-            margin: 10px;
-            width: 90px;
+    ul > li {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+        padding: 14px;
+        width: calc(50% - 16px);
+        max-width: 130px;
+        text-align: center;
+        cursor: pointer;
+        transition: transform .18s ease, box-shadow .18s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
 
-            &:hover {
-                text-decoration: underline;
-                cursor: pointer;
-            }
+    ul > li:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 26px rgba(15,23,42,0.12);
+        text-decoration: none;
+    }
 
-            &>img {
-                border-radius: 10px;
-                width: 50px;
-            }
+    ul > li > img {
+        border-radius: 10px;
+        width: 64px;
+        height: 64px;
+        object-fit: cover;
+    }
 
-            &>h2 {
-                font-size: 14px;
-                line-height: 2em;
-            }
+    ul > li > h2 {
+        font-size: 14px;
+        line-height: 1.2;
+        margin: 0;
+        color: #111827;
+        font-weight: 600;
+    }
+
+    @media (min-width: 768px) {
+        ul > li {
+            width: calc(33.333% - 16px);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        ul > li {
+            width: calc(25% - 16px);
+        }
+    }
+
+    @media (max-width: 420px) {
+        padding: 12px;
+        ul > li {
+            width: 100%;
+            max-width: none;
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+        }
+
+        ul > li > img {
+            width: 48px;
+            height: 48px;
+        }
+
+        ul > li > h2 {
+            text-align: left;
+            font-size: 15px;
         }
     }
 

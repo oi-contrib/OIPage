@@ -1,48 +1,70 @@
 .image-editor-view {
     position: relative;
-    padding-top: 100px;
+    padding: 90px 12px 24px;
+    box-sizing: border-box;
 
-    &>.menu {
-        position: absolute;
+    .menu {
+        position: fixed;
+        bottom: 10px;
         left: 50%;
-        top: 5px;
         transform: translateX(-50%);
-        white-space: nowrap;
-
-        &>li {
-            display: inline-block;
-            background-color: #FF5722;
-            color: white;
-            margin: 0 5px;
-            border-radius: 5px;
-
-            &>label {
-                line-height: 30px;
-                padding: 0 5px;
-                display: inline-block;
-                cursor: pointer;
-            }
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
+        display: flex;
+        gap: 8px;
+        z-index: 40;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 6px;
+        border-radius:10px;
+        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
     }
 
-    &>.content {
+    .menu>li {
+        list-style: none;
+    }
+
+    .menu>li>label {
+        display: inline-block;
+        padding: 8px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #111827;
+        color: #fff;
+        font-size: 14px;
+    }
+
+    .content {
         text-align: center;
-
-        #drawId {
-            display: inline-block;
-
-            &>canvas {
-                background-image: url("./images/mosaic.png");
-                outline: 2px solid #CDDC39;
-            }
-        }
+        padding-top: 12px;
     }
 
-    &>.no-view {
+    #drawId {
+        display: inline-block;
+        max-width: 100%;
+    }
+
+    #drawId>canvas {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .no-view {
         display: none;
+    }
+
+    @media (max-width: 600px) {
+        .menu {
+            left: 12px;
+            transform: none;
+            top: 8px;
+        }
+
+        .menu>li>label {
+            padding: 6px 8px;
+            font-size: 13px;
+        }
+
+        .image-editor-view {
+            padding-top: 64px;
+        }
     }
 }

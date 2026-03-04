@@ -1,22 +1,16 @@
 <div class="home-view">
-    <ul>
-        <li z-on:click.prevent="goto" tag="chart">
-            <img src="./images/chart.png" />
-            <h2>
-                群聊天
-            </h2>
+    <ul role="list" class="home-list">
+        <li role="listitem" z-on:click.prevent="goto" tag="chart">
+            <img src="./images/chart.png" alt="群聊天" />
+            <h2>群聊天</h2>
         </li>
-        <li z-on:click="goto" tag="image-editor">
-            <img src="./images/image-editor.png" />
-            <h2>
-                图片编辑器
-            </h2>
+        <li role="listitem" z-on:click="goto" tag="image-editor">
+            <img src="./images/image-editor.png" alt="图片编辑器" />
+            <h2>图片编辑器</h2>
         </li>
-        <li z-on:click="goto" tag="img-to-pdf">
-            <img src="./images/img-to-pdf.svg" />
-            <h2>
-                图片转PDF
-            </h2>
+        <li role="listitem" z-on:click="goto" tag="img-to-pdf">
+            <img src="./images/img-to-pdf.svg" alt="图片转PDF" />
+            <h2>图片转PDF</h2>
         </li>
     </ul>
 </div>

@@ -1,8 +1,18 @@
-const { readdirSync, lstatSync, rmdirSync } = require("fs");
+const { readdirSync, lstatSync, rmdirSync, existsSync } = require("fs");
 const { join } = require("path");
 
 module.exports = function (rootPath) {
-    (function deleteEmptyFolder(folderPath) {
+
+    // 命令地方已经确保是全路径
+    // rootPath = path.resolve(rootPath);
+
+    // 路径不存在，什么也不用干
+    if (!existsSync(rootPath)) {
+        console.log("路径不存在：\x1b[31m" + rootPath + "\x1b[0m");
+        return;
+    }
+
+    ; (function deleteEmptyFolder(folderPath) {
         let subItems = readdirSync(folderPath);
         if (subItems.length > 0) {
             for (let i = 0; i < subItems.length; i++) {

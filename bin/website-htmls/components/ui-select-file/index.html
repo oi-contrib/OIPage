@@ -2,7 +2,8 @@
     <h2 class="title" z-bind="_props.title"></h2>
     <div class="tips" z-bind="_props.tips"></div>
     <div class="file">
-        <input type="file" multiple id="input" z-on:change.stop="doChange" z-bind:accept="accept" />
+        <input type="file" :multiple="_props.multiple?'multiple':'none'" id="input" z-on:change.stop="doChange"
+            z-bind:accept="accept" />
         <label for="input" z-bind="'选择'+_props.type+'文件'"></label>
     </div>
 </div>

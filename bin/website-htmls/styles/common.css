@@ -1,0 +1,44 @@
+/* Global base styles for improved look and responsiveness */
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+	background: #f7f9fc;
+	color: #0f1723;
+	-webkit-font-smoothing: antialiased;
+}
+
+.container {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 16px;
+	box-sizing: border-box;
+}
+
+/* Buttons and inputs */
+button {
+	font-family: inherit;
+	border-radius: 8px;
+	padding: 8px 12px;
+	background: #111827;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+input[type="text"], input[type="search"], input, textarea {
+	font-family: inherit;
+	padding: 8px 10px;
+	border-radius: 8px;
+	border: 1px solid #e6e9ee;
+	outline: none;
+}
+
+/* Utility helpers */
+.hidden { display: none !important; }
+
+@media (prefers-color-scheme: dark) {
+	html, body { background: #0b1220; color: #e6eef8; }
+	button { background: #e6eef8; color: #0b1220; }
+}

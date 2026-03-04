@@ -175,7 +175,9 @@ v1.8.2:
         - 修复bug
           1、修复oipage-cli disk --delempty 命令错误
 v1.9.0:
-    date:
+    date:2026-03-04
     changes:
         - 优化改造
           1、调整打包若干细节
+          2、针对应用市场优化UI设计
+          3、优化oipage-cli disk --delempty 命令路径不存在时提示

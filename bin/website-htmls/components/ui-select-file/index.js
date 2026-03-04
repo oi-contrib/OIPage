@@ -18,12 +18,17 @@ export default defineElement({
             type: String,
             required: true,
         },
+        multiple: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
             accept: {
                 pdf: "application/pdf",
-                image: "image/*"
+                image: "image/*",
+                video: "video/*",
             }[this._props.type]
         };
     },
