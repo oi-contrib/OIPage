@@ -20,6 +20,7 @@ module.exports = function (config) {
 
     const resolve404 = config.devServer["404"] || resolve404_default;
     const cache = "cache" in config.devServer ? config.devServer.cache : true;
+    const website = "website" in config.devServer ? config.devServer.website : true;
     const port = +config.devServer.port; // 端口号
     const basePath = (/^\./.test(config.devServer.baseUrl)) ? join(process.cwd(), config.devServer.baseUrl) : config.devServer.baseUrl; // 服务器根路径
 
@@ -38,7 +39,7 @@ module.exports = function (config) {
         // 请求的文件路径
         let filePath;
 
-        let isWebsite = /^\/_oipage_website_\//.test(url);
+        let isWebsite = website && /^\/_oipage_website_\//.test(url);
         if (isWebsite) {
             filePath = join(__dirname, "./website-htmls/", url.replace(/^\/_oipage_website_\//, ""));
         } else {
@@ -98,7 +99,7 @@ module.exports = function (config) {
                 if (lastModified === ifModifiedSince) {
                     response.writeHead('304', responseHeader);
                     response.end();
-                    console.log("<i> \x1b[1m\x1b[32m[" + name + "] Cache File: " + url + "\x1b[0m " + new Date().toLocaleString() + "\x1b[33m\x1b[1m 304" + (isXHR ? " "+request.method : "") + "\x1b[0m");
+                    console.log("<i> \x1b[1m\x1b[32m[" + name + "] Cache File: " + url + "\x1b[0m " + new Date().toLocaleString() + "\x1b[33m\x1b[1m 304" + (isXHR ? " " + request.method : "") + "\x1b[0m");
                     return;
                 }
             }
@@ -149,7 +150,7 @@ module.exports = function (config) {
                 createReadStream(filePath).pipe(response);
             }
 
-            console.log("<i> \x1b[1m\x1b[32m[" + name + "] " + sendType + " File: " + url + '\x1b[0m ' + new Date().toLocaleString() + "\x1b[33m\x1b[1m" + (isXHR ? " "+request.method : "") + "\x1b[0m");
+            console.log("<i> \x1b[1m\x1b[32m[" + name + "] " + sendType + " File: " + url + '\x1b[0m ' + new Date().toLocaleString() + "\x1b[33m\x1b[1m" + (isXHR ? " " + request.method : "") + "\x1b[0m");
         }
 
         // 否则就是404
@@ -159,7 +160,7 @@ module.exports = function (config) {
                 'Access-Control-Allow-Origin': '*',
                 'Server': 'Powered by ' + name + '@' + version
             });
-            response.write(resolve404(filePath, url));
+            response.write(resolve404(filePath, url, website));
             response.end();
         }
 

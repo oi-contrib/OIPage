@@ -35,8 +35,10 @@
                 &>button {
                     height: 30px;
                     border-radius: 15px;
-                    width: 50px;
+                    width: 60px;
                     margin-top: 10px;
+                    white-space: nowrap;
+                    padding: 0;
 
                     &:hover {
                         background-color: rgb(127, 131, 131);

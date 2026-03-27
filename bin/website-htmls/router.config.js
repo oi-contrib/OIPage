@@ -22,6 +22,9 @@ export default defineRouter({
         }, {
             path: "/img-to-pdf",
             component: () => import("./pages/img-to-pdf/index.js"),
+        }, {
+            path: "/recorder-screen",
+            component: () => import("./pages/recorder-screen/index.js"),
         }]
     }]
 })

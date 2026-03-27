@@ -23,6 +23,11 @@ interface DevServerType {
      */
     cache: boolean
 
+    /**
+     * 是否开启应用市场，默认true表示开启
+     */
+    website: boolean
+
     intercept?: Array<InterceptType>
 
     proxy?: {

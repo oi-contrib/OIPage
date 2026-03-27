@@ -12,7 +12,7 @@ const template_404 = readFileSync(join(__dirname, "../template/404.html"), {
     .replace("${img_folder}", img_folder)
     .replace("${img_file}", img_file);
 
-module.exports = function (filePath, url) {
+module.exports = function (filePath, url, website) {
 
     let subItems = [];
 
@@ -80,5 +80,5 @@ module.exports = function (filePath, url) {
         }
     }
 
-    return template_404.replace("${current}", filePath).replace("${template}", template);
+    return template_404.replace("${website}", website ? '<a class="website-link" href="/_oipage_website_/index.html">打开应用市场</a>' : '').replace("${current}", filePath).replace("${template}", template);
 };

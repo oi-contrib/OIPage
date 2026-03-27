@@ -14,6 +14,8 @@ OIPage@v${packageValue.version}
     --open
         自动打开浏览器
     （也可以设置打开地址，比如 oipage-cli serve --open docs/index.html）
+    --website [true|false]
+        是否开启应用市场（默认true表示开启）
     --config|-c [配置文件地址]
         设置配置文件，相对地址是相对当前命令行
     --cache [true|false]

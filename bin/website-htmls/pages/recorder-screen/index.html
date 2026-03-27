@@ -1,0 +1,16 @@
+<div class="recorder-screen-view">
+    <div class="controls">
+        <button z-on:click="startRecorder" z-bind:active="isRun?'no':'yes'">
+            开始录制
+        </button>
+        <div class="audio-options">
+            <label>
+                <input type="checkbox" z-model="includeSystemAudio"> 包含系统音频
+            </label>
+            <label>
+                <input type="checkbox" z-model="includeMicrophoneAudio"> 包含麦克风音频
+            </label>
+        </div>
+    </div>
+    <video id="video-el"></video>
+</div>
