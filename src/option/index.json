@@ -1,0 +1,15 @@
+{
+    "type": [
+        "web",
+        "nodejs"
+    ],
+    "import": {
+        "__types": [
+            "isPlainObject"
+        ]
+    },
+    "export": [
+        "initOption",
+        "mergeOption"
+    ]
+}

@@ -1,7 +1,7 @@
 function XHRIntercept(callbackFactory) {
 
     // 原生的请求方法
-    var { open, send } = window.XMLHttpRequest.prototype;
+    let { open, send } = window.XMLHttpRequest.prototype;
 
     window.XMLHttpRequest.prototype.open = function (method, url) {
         this.callback = callbackFactory();

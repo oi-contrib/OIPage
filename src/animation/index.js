@@ -1,9 +1,9 @@
 //当前正在运动的动画的tick函数堆栈
-var $timers = [];
+let $timers = [];
 //唯一定时器的定时间隔
-var $interval = 13;
+let $interval = 13;
 //定时器ID
-var $timerId;
+let $timerId;
 
 /**
  * 动画轮播
@@ -17,13 +17,13 @@ function animation(doback, duration, callback) {
     if (arguments.length < 2) duration = 400;
     if (arguments.length < 3) callback = function () { };
 
-    var clock = {
+    let clock = {
         //把tick函数推入堆栈
         "timer": function (tick, duration, callback) {
             if (!tick) {
                 throw new Error('Tick is required!');
             }
-            var id = new Date().valueOf() + "_" + (Math.random() * 1000).toFixed(0);
+            let id = new Date().valueOf() + "_" + (Math.random() * 1000).toFixed(0);
             $timers.push({
                 "id": id,
                 "createTime": new Date(),
@@ -55,7 +55,7 @@ function animation(doback, duration, callback) {
 
         //被定时器调用，遍历timers堆栈
         "tick": function () {
-            var createTime, flag, tick, callback, timer, duration, passTime, timers = $timers;
+            let createTime, flag, tick, callback, timer, duration, passTime, timers = $timers;
 
             $timers = [];
             $timers.length = 0;
@@ -98,7 +98,7 @@ function animation(doback, duration, callback) {
         }
     };
 
-    var id = clock.timer(function (deep) {
+    let id = clock.timer(function (deep) {
         //其中deep为0-1，表示改变的程度
         doback(deep);
     }, duration, callback);
@@ -107,7 +107,7 @@ function animation(doback, duration, callback) {
         // 一个函数
         // 用于在动画结束前结束动画
         stop: function () {
-            var i;
+            let i;
             for (i in $timers) {
                 if ($timers[i].id == id) {
                     $timers[i].id = void 0;

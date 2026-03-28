@@ -1,5 +1,5 @@
 const { join } = require("path");
-const { existsSync, readdirSync, lstatSync, unlinkSync, rmdirSync, mkdirSync, copyFileSync, symlinkSync } = require("fs");
+const { existsSync, readdirSync, readFileSync, writeFileSync, lstatSync, unlinkSync, rmdirSync, mkdirSync, copyFileSync, symlinkSync } = require("fs");
 
 /**
  * 删除文件或文件夹
@@ -163,3 +163,38 @@ function linkDisk(sourcePath, targetPath) {
     symlinkSync(sourcePath, targetPath, type);
 }
 
+function readPlain(filePath) {
+    if (existsSync(filePath)) {
+        return readFileSync(filePath, {
+            encoding: "utf8"
+        });
+    } else {
+        return "";
+    }
+}
+
+function writePlain(filePath, content) {
+    if (!existsSync(filePath)) {
+        const folder = join(filePath, "../");
+        if (!existsSync(folder)) {
+            mkdirSync(folder, { recursive: true });
+        }
+    }
+
+    writeFileSync(filePath, content, {
+        encoding: "utf8"
+    });
+}
+
+function readJSON(filePath) {
+    const content = readPlain(filePath);
+    try {
+        return JSON.parse(content);
+    } catch (e) {
+        return {};
+    }
+}
+
+function writeJSON(filePath, json) {
+    writePlain(filePath, JSON.stringify(json, null, 4));
+}

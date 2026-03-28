@@ -1,5 +1,5 @@
 function setStyle(el, styles) {
-    for (var key in styles) {
+    for (let key in styles) {
         el.style[key] = styles[key];
     }
 }
@@ -7,7 +7,7 @@ function setStyle(el, styles) {
 function getStyle(el, name) {
 
     // 获取结点的全部样式
-    var allStyle = document.defaultView && document.defaultView.getComputedStyle ?
+    let allStyle = document.defaultView && document.defaultView.getComputedStyle ?
         document.defaultView.getComputedStyle(el, null) :
         el.currentStyle;
 

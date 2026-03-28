@@ -8,6 +8,10 @@
         "copyDisk",
         "moveDisk",
         "listDisk",
-        "linkDisk"
+        "linkDisk",
+        "readPlain",
+        "writePlain",
+        "readJSON",
+        "writeJSON"
     ]
 }

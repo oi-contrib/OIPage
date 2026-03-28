@@ -29,56 +29,36 @@
 <img src="https://nodei.co/npm/oipage.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="NPM">
 
 # [OIPage](https://github.com/oi-contrib/OIPage)
-前端网页或应用快速开发助手，包括开发服务器、辅助命令、实用API等。官网地址：[https://oi-contrib.github.io/OIPage](https://oi-contrib.github.io/OIPage)
+主要是提供前端开发中常用的API接口，支持nodejs和浏览器端使用。官网地址：[https://oi-contrib.github.io/OIPage](https://oi-contrib.github.io/OIPage)
 
 ## 如何使用？
 
-你可以作为一个命令行使用，那么你需要全局安装：
-
-```shell
-npm install -g oipage
-```
-
-也可以作为项目开发中的一个功能加强，在 package.json 中配置命令或nodejs文件中引入需要的模块使用，那么就在项目中执行安装命令：
+首先需要在项目中进行安装：
 
 ```shell
 npm install oipage --save
 ```
 
-安装后，就可以直接作为命令行使用了。你可以打印帮助查看：
+我们提供了若干前端开发基础API，现在就可以在项目中使用了。
 
-```shell
-oipage-cli
-```
+> 基于更长远的考虑，原命令行功能将作为一个独立的项目进行维护： https://github.com/oi-contrib/oipage-cli
 
-比如会出现类似下列内容：
+比如：
 
-```
-OIPage@v1.2.0
+### nodejs端
 
-可以使用的命令如下：
+- [cmdlog 命令行单行打印、进度条显示等](https://oi-contrib.github.io/OIPage/index.html#/api/nodejs/cmdlog)
+- [logform 实现在命令行中录入表单](https://oi-contrib.github.io/OIPage/index.html#/api/nodejs/logform)
+- [disk 复制、删除、移动等磁盘操作](https://oi-contrib.github.io/OIPage/index.html#/api/nodejs/disk)
+- 等...
 
-【1】oipage-cli serve 开发服务器
-    --port|-p 端口号
-    --baseUrl 服务器根目录
-......
-```
+### 浏览器
 
-根据提示我们知道，比如第一个命令，其提供了一个快速访问本地资源服务器的功能，比如执行：
+- [performChunk 空闲执行分片函数](https://oi-contrib.github.io/OIPage/index.html#/api/web/performChunk)
+- [XMLHttpRequest 请求埋点](https://oi-contrib.github.io/OIPage/index.html#/api/web/XMLHttpRequest)
+- 等...
 
-```shell
-oipage-cli serve -p 8080
-```
-
-启动成功后，直接访问： http://localhost:8080/ 即可。
-
-如果你需要在项目中使用，我们也提供了一些有用的API，具体可以访问[ 在线文档 ](https://oi-contrib.github.io/OIPage)进行了解。
-
-## 应用市场
-
-为了方便日常使用，内置了一个应用市场网站，比如有如下功能：群聊天、图片编辑器等。
-
-已有功能或更多功能我们将根据实际情况逐步完善和维护，当然，你可以通过 [issue](https://github.com/oi-contrib/OIPage/issues) 给我们留言，告诉我们你的改进意见。
+你可以通过 [issue](https://github.com/oi-contrib/OIPage/issues) 给我们留言，告诉我们你的任何意见或报告BUG给我们。
 
 ## 版权
 

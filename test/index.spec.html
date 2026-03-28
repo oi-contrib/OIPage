@@ -4,16 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../node_modules/@oipage/testjs/dist/test.min.js"></script>
 </head>
 
 <body>
+    <div id="demo1-id"></div>
     <script type="module">
-
-        import TreeLayout from "vislite/lib/TreeLayout/index.es.js";
-        console.log(TreeLayout);
-
-        // import * as VISLite from "vislite";
-        // console.log(VISLite);
 
         import { animation } from "../web/animation/index.js";
         import { setStyle, getStyle } from "../web/style/index.js";
@@ -23,11 +19,12 @@
         import { performChunk } from "../web/performChunk/index.js";
         import { strToJson } from "../web/json/index.js";
         import { XHRIntercept } from "../web/XMLHttpRequest/index.js";
+        import { initOption, mergeOption } from "../web/option/index.js";
 
         /* 测试一：引入 */
 
         let apis = {
-            animation, setStyle, getStyle, throttle, onReady, reader, performChunk, strToJson, XHRIntercept
+            animation, setStyle, getStyle, throttle, onReady, reader, performChunk, strToJson, XHRIntercept, initOption, mergeOption
         };
 
         for (let apiName in apis) {
@@ -35,6 +32,44 @@
         }
 
         /* 测试二：单元测试 */
+
+        let { describe, it, expect } = testjs.Unit.web();
+
+        describe("strToJson", () => {
+            it("{key:'value'}", () => {
+                expect(strToJson("{key:'value'}")).toEqual({ key: "value" });
+            });
+        });
+
+        describe("option", () => {
+            it("initOption", () => {
+                expect(initOption({}, {})).toEqual({})
+            });
+            it("mergeOption", () => {
+                let myOption = { key: "oldValue" };
+                let newOption = { key: "newValue", newKey: "newValue" };
+                mergeOption(myOption, newOption);
+
+                expect(myOption).toEqual({ key: "newValue", newKey: "newValue" });
+            });
+        });
+
+        describe("getStyle, setStyle", () => {
+
+            let demoEl = document.getElementById("demo1-id");
+
+            setStyle(demoEl, {
+                color: "blue",
+                backgroundColor: "pink"
+            });
+
+            it("color", () => {
+                expect(getStyle(demoEl, "color")).toBe("rgb(0, 0, 255)");
+            });
+            it("background-color", () => {
+                expect(getStyle(demoEl, "background-color")).toBe("rgb(255, 192, 203)");
+            });
+        });
 
 
     </script>

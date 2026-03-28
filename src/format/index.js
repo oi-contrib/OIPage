@@ -4,20 +4,20 @@ function numberFormat(input) {
     } else {
         input = input + "";
 
-        var decimalValue, integerValue;
+        let decimalValue, integerValue;
 
-        var dotIndex = input.indexOf('.');
+        let dotIndex = input.indexOf('.');
         if (dotIndex == -1) {
             decimalValue = ".00";
             integerValue = input;
         } else {
-            var temp = input.split(".");
+            let temp = input.split(".");
             decimalValue = "." + (temp[1] + "0").substring(0, 2);
             integerValue = temp[0];
         }
 
-        var integerArray = []
-        for (var index = integerValue.length; index > 0; index -= 3) {
+        let integerArray = []
+        for (let index = integerValue.length; index > 0; index -= 3) {
             integerArray.unshift(integerValue.substring(index > 2 ? index - 3 : 0, index));
         }
 
@@ -27,7 +27,7 @@ function numberFormat(input) {
 
 function dateFormat(input, option) {
     option = option || {};
-    var dateObj;
+    let dateObj;
 
     // 如果无值，就用当前日期
     if (!input) {
@@ -49,7 +49,7 @@ function dateFormat(input, option) {
     }
 
     // 年、月、日、时、分、秒
-    var single = {
+    let single = {
         yyyy: 0, MM: 0, dd: 0, HH: 0, mm: 0, ss: 0
     };
 
@@ -67,8 +67,8 @@ function dateFormat(input, option) {
 
     // 否则只能借助 inputFormat 来解析
     else {
-        var inputFormat = option.inputFormat + "", valIndex = 0;
-        for (var index = 0; index < inputFormat.length; index++) {
+        let inputFormat = option.inputFormat + "", valIndex = 0;
+        for (let index = 0; index < inputFormat.length; index++) {
 
             // 年
             if (inputFormat.substring(index, index + 4) == "yyyy") {
@@ -77,9 +77,9 @@ function dateFormat(input, option) {
                 valIndex += 4;
                 index += 3;
             } else {
-                var curFlag = inputFormat.substring(index, index + 2);
+                let curFlag = inputFormat.substring(index, index + 2);
                 if (["MM", "dd", "HH", "mm", "ss"].indexOf(curFlag) > -1) {
-                    var valContent = input[valIndex];
+                    let valContent = input[valIndex];
                     if (/\d/.test(input[valIndex + 1])) {
                         valContent += input[valIndex + 1];
                         valIndex += 2;
@@ -102,6 +102,6 @@ function dateFormat(input, option) {
     if (single.mm < 10) single.mm = "0" + single.mm;
     if (single.ss < 10) single.ss = "0" + single.ss;
 
-    var format = option.format || "yyyy/MM/dd";
+    let format = option.format || "yyyy/MM/dd";
     return format.replace("yyyy", single.yyyy).replace("MM", single.MM).replace("dd", single.dd).replace("HH", single.HH).replace("mm", single.mm).replace("ss", single.ss);
 };

@@ -188,6 +188,27 @@ body>header>.install>.code {
     margin-top: 5px;
 }
 
+.note-view .code-container {
+    position: relative;
+}
+
+.note-view .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: #2d618c;
+    color: white;
+    border: none;
+    padding: 2px 7px;
+}
+
+.note-view .copy-btn:hover {
+    background: #023258;
+    cursor: pointer;
+}
+
 body>header>.install>a {
     background-color: #ffd343;
     background-image: linear-gradient(#ffdf76 10%, #ffd343 90%);
@@ -211,33 +232,11 @@ body>header>.install>a:hover {
     text-decoration: underline;
 }
 
-body>.more-view {
-    width: 900px;
-    margin: auto;
-    padding-top: 50px;
-}
-
-body>.oipage-cli {
-    width: 900px;
-    margin: auto;
-    padding-top: 50px;
-}
-
-body>.oipage-cli>h2 {
-    font-weight: 400;
-    color: #444444;
-}
-
-body>.oipage-cli>.tips {
-    line-height: 30px;
-    font-size: 14px;
-    color: #3776ab;
-}
-
 body>.api-content {
     width: 1000px;
     margin: auto;
-    padding-top: 50px;
+    padding-top: 100px;
+    padding-bottom: 50px;
     font-size: 0;
 }
 
@@ -333,37 +332,61 @@ footer a:hover {
     top: 0;
     width: 100vw;
     height: 100vh;
-    background-color: white;
+    background-color: #00000070;
     z-index: 10;
-    padding: 0 calc(50vw - 400px);
     display: none;
     overflow: auto;
 }
 
+.note-view {
+    width: 900px;
+    height: calc(100vh - 100px);
+    margin-top: 50px;
+    margin-left: calc(50vw - 450px);
+    background-color: white;
+    overflow: auto;
+    padding: 50px;
+    box-sizing: border-box;
+    position: relative;
+}
+
 .note-view>header {
-    font-size: 28px;
-    padding: 20px 0;
+    font-size: 20px;
     font-weight: 800;
+    position: fixed;
+    top: 50px;
+    text-align: left;
+    line-height: 50px;
+    color: white;
+    background-color: #1e415e;
+    width: 900px;
+    left: calc(50vw - 450px);
+    z-index: 1;
+    padding-left: 65px;
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-size: auto 50px;
+    background-position: 10px center;
+}
+
+.note-view>header>.close-btn {
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 0;
+    width: 59px;
+    height: 24px;
+    background-image: url("../images/close.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    font-size: 0;
 }
 
 .note-view>h2 {
     font-size: 20px;
     line-height: 2em;
     padding: 20px 0;
-}
-
-.note-view>.close-btn {
-    cursor: pointer;
-    position: fixed;
-    right: 20px;
-    top: 20px;
-    width: 50px;
-    height: 50px;
-    background-image: url("../images/close.png");
-    background-size: 90% auto;
-    background-repeat: no-repeat;
-    background-position: center center;
-    font-size: 0;
 }
 
 .note-view>.close-btn:hover {
@@ -421,6 +444,8 @@ footer a:hover {
     outline: 1px solid #9E9E9E;
     border-radius: 5px;
     line-height: 1.4em;
+    font-weight: 800;
+    font-family: monospace;
 }
 
 .note-view h3 {
@@ -465,6 +490,10 @@ footer a:hover {
     text-indent: 2em;
 }
 
+.note-view table {
+    margin: 20px 0;
+}
+
 .note-view table>tbody>tr>* {
     border-width: 0 1px 1px 0;
     border-style: solid;
@@ -473,8 +502,7 @@ footer a:hover {
 
 .note-view table>*>tr>td,
 .note-view table>*>tr>th {
-    padding: 0 5px;
-    color: #3c3939;
+    padding: 5px 10px;
     font-weight: 400;
     font-size: 12px;
     line-height: 2em;
@@ -493,9 +521,8 @@ footer a:hover {
 }
 
 .note-view table>thead>tr {
-    background-color: #c1bcbc;
-    border: 1px solid #c1bcbc;
-    color: #fff;
+    background-color: #c3c3c3;
+    border: 1px solid #c3c3c3;
     white-space: nowrap;
 }
 
@@ -512,4 +539,24 @@ footer a:hover {
 
 .note-view ul>li {
     list-style-type: disc;
+}
+
+@media (max-width: 1000px) {
+
+    .note-view {
+        margin-left: 5vw;
+        margin-top: 5vh;
+        width: 90vw;
+        height: 90vh;
+    }
+
+    .note-view>header {
+        left: 5vw;
+        top: 5vh;
+        width: 90vw;
+    }
+
+    .note-view pre {
+        overflow: auto;
+    }
 }

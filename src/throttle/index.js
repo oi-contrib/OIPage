@@ -1,7 +1,7 @@
 function throttle(callback, _option) {
 
     // 缺省值
-    var option = {
+    let option = {
         time: 200,
         keep: false,
         opportunity: "end"
@@ -9,12 +9,12 @@ function throttle(callback, _option) {
     
     // 校对
     if (_option) {
-        for (var key in _option) {
+        for (let key in _option) {
             option[key] = _option[key];
         }
     }
 
-    var hadInterval = false, hadClick = false, oneClick = false, arg;
+    let hadInterval = false, hadClick = false, oneClick = false, arg;
     return function () {
         const _this = this;
         arg = arguments;
@@ -26,7 +26,7 @@ function throttle(callback, _option) {
             }
             hadInterval = true;
 
-            var interval = setInterval(() => {
+            let interval = setInterval(() => {
                 if (hadClick) {
                     if (!option.keep) {
                         callback.apply(_this, arg);

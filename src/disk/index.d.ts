@@ -46,3 +46,39 @@ export interface linkDiskType {
 }
 
 export let linkDisk: linkDiskType
+
+/**
+ * 读取文件内容
+ */
+export interface readPlainType {
+    (filePath: string): string
+}
+
+export let readPlain: readPlainType
+
+/**
+ * 写入内容到文件
+ */
+export interface writePlainTypes {
+    (filePath: string, content: string): void
+}
+
+export let writePlain: writePlainTypes
+
+/**
+ * 读取JSON文件内容
+ */
+export interface readJSONType {
+    (filePath: string): string
+}
+
+export let readJSON: readJSONType
+
+/**
+ * 写入JSON内容到文件
+ */
+export interface writeJSONTypes {
+    (filePath: string, content: string): void
+}
+
+export let writeJSON: writeJSONTypes

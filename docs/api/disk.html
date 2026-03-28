@@ -50,8 +50,8 @@ moveDisk(sourcePath, function(fileInfo){
 </pre>
 <p>
     其中callback是一个函数，所有的文件都会对其进行回调。
-</p
-h3>
+</p>
+<h3>
     linkDisk
 </h3>
 <div class="version">
@@ -62,4 +62,52 @@ h3>
 </p>
 <pre>
 linkDisk(sourcePath, targetPath);
+</pre>
+<h3>
+    readPlain
+</h3>
+<div class="version">
+    始于 v2.0.0
+</div>
+<p>
+    读取文件内容：
+</p>
+<pre>
+let content = readPlain(filePath);
+</pre>
+<h3>
+    writePlain
+</h3>
+<div class="version">
+    始于 v2.0.0
+</div>
+<p>
+    内容写入到文件：
+</p>
+<pre>
+writePlain(filePath, content);
+</pre>
+<h3>
+    readJSON
+</h3>
+<div class="version">
+    始于 v2.0.0
+</div>
+<p>
+    读取JSON文件内容：
+</p>
+<pre>
+let content = readJSON(filePath);
+</pre>
+<h3>
+    writeJSON
+</h3>
+<div class="version">
+    始于 v2.0.0
+</div>
+<p>
+    JSON内容写入到文件:
+</p>
+<pre>
+writeJSON(filePath, content);
 </pre>

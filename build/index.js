@@ -24,6 +24,7 @@ function forEachItem(callback) {
 }
 
 function createModule(type, name) {
+    if (/^__/.test(name)) return;
     appendFileSync(join("./types/index.d.ts"), `import "../${type}/${name}/index";
 declare module "oipage/${type}/${name}/index.js" {}
 `);
@@ -46,10 +47,10 @@ function doBuild(notWatch) {
     let nodejsItems = [];
     forEachItem(function (itemName, config, content) {
         if (config.type.indexOf("nodejs") > -1) {
-            nodejsItems.push(itemName);
+            if (!/^__/.test(itemName)) nodejsItems.push(itemName);
             mkdirSync(join("./nodejs", itemName));
             copyFileSync(join("./src", itemName, "index.d.ts"), join("./nodejs", itemName, "index.d.ts"));
-            writeFileSync(join("./nodejs", itemName, "index.js"), nodejsContent(itemName, content, config));
+            writeFileSync(join("./nodejs", itemName, "index.js"), nodejsContent(content, config));
 
             createModule("nodejs", itemName);
         }
@@ -62,10 +63,10 @@ function doBuild(notWatch) {
     let webItems = [];
     forEachItem(function (itemName, config, content) {
         if (config.type.indexOf("web") > -1) {
-            webItems.push(itemName);
+            if (!/^__/.test(itemName)) webItems.push(itemName);
             mkdirSync(join("./web", itemName));
             copyFileSync(join("./src", itemName, "index.d.ts"), join("./web", itemName, "index.d.ts"));
-            writeFileSync(join("./web", itemName, "index.js"), webContent(itemName, content, config));
+            writeFileSync(join("./web", itemName, "index.js"), webContent(content, config));
 
             createModule("web", itemName);
         }

@@ -1,6 +1,4 @@
-const packageValue = require("../package.json");
-
-exports.nodejsContent = function (itemName, content, config) {
+exports.nodejsContent = function (content, config) {
 
     // 导入
     let importValue = ``;
@@ -20,7 +18,7 @@ ${content}
 ${exportValue}`;
 };
 
-exports.webContent = function (itemName, content, config) {
+exports.webContent = function (content, config) {
 
     // 导入
     let importValue = ``;
