@@ -1,6 +1,6 @@
 {
   "name": "oipage",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "主要是提供前端开发中常用的API接口，支持nodejs和浏览器端使用",
   "sideEffects": false,
   "typings": "./types/index.d.ts",

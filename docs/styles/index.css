@@ -456,6 +456,8 @@ footer a:hover {
 .note-view h4 {
     font-size: 14px;
     line-height: 2em;
+    position: relative;
+    padding-left: 21px;
 }
 
 .note-view h4::before {
@@ -463,10 +465,14 @@ footer a:hover {
     display: inline-block;
     width: 0;
     height: 0;
-    border-width: 5px;
+    border-width: 5px 10px;
     border-style: solid;
     border-color: transparent transparent transparent rgb(0, 0, 0);
-    margin-left: 10px;
+    margin-left: 7px;
+    position: absolute;
+    left: 0;
+    transform: translateY(-50%);
+    top: 50%;
 }
 
 .note-view .btn {

@@ -14,3 +14,10 @@ v2.0.0:
             * writePlain
             * readJSON
             * writeJSON
+v2.0.1:
+    date:2026-04-27
+    changes:
+        - 修复bug
+          1、类型定义错误
+            * logform/index.d.ts 
+            * performChunk/index.d.ts

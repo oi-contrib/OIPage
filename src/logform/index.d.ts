@@ -16,4 +16,4 @@ export interface logformType {
     (config: Array<inputType | selectType>): Promise<Array<string | number>>
 }
 
-export let deeplog: logformType
+export let logform: logformType

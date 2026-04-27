@@ -26,7 +26,10 @@ function animation(doback, duration, callback) {
             let id = new Date().valueOf() + "_" + (Math.random() * 1000).toFixed(0);
             $timers.push({
                 "id": id,
-                "createTime": new Date(),
+                "createTime": new Date(), // 开始时间
+                "pauseTime": -1, // 暂停的时间，继续运行的时候，借助此计算暂停的时间差
+                "pauseKeepTime": 0, // 暂停用去的时间
+                "status": "running", // running(运行中), paused(暂停中)
                 "tick": tick,
                 "duration": duration,
                 "callback": callback
@@ -69,15 +72,21 @@ function animation(doback, duration, callback) {
                 callback = timer.callback;
 
                 //执行
-                passTime = (+new Date().valueOf() - createTime.valueOf()) / duration;
+                passTime = (+new Date().valueOf() - createTime.valueOf() - timer.pauseKeepTime) / duration;
                 passTime = passTime > 1 ? 1 : passTime;
-                tick(passTime);
-                if (passTime < 1 && timer.id) {
+
+                if (timer.status === "running") {
+                    tick(passTime);
+                }
+
+                // 只有当动画没有结束或者动画处于暂停状态时，才继续添加到timers堆栈
+                if ((passTime < 1 || timer.status === "paused") && timer.id) {
                     //动画没有结束再添加
                     $timers.push(timer);
                 } else {
                     callback(passTime);
                 }
+
             }
             if ($timers.length <= 0) {
                 clock.stop();
@@ -104,14 +113,34 @@ function animation(doback, duration, callback) {
     }, duration, callback);
 
     return {
-        // 一个函数
-        // 用于在动画结束前结束动画
+        // 结束动画
         stop: function () {
-            let i;
-            for (i in $timers) {
+            for (let i in $timers) {
                 if ($timers[i].id == id) {
                     $timers[i].id = void 0;
-                    return;
+                }
+            }
+        },
+        // 暂停动画
+        pause: function () {
+            for (let i in $timers) {
+                if ($timers[i].id == id) {
+                    if ($timers[i].pauseTime === -1) {
+                        $timers[i].pauseTime = new Date();
+                        $timers[i].status = "paused";
+                    }
+                }
+            }
+        },
+        // 继续动画
+        resume: function () {
+            for (let i in $timers) {
+                if ($timers[i].id == id) {
+                    if ($timers[i].pauseTime !== -1) {
+                        $timers[i].pauseKeepTime += (new Date().valueOf() - $timers[i].pauseTime.valueOf());
+                        $timers[i].pauseTime = -1;
+                        $timers[i].status = "running";
+                    }
                 }
             }
         }

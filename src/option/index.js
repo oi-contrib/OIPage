@@ -23,4 +23,6 @@ function mergeOption(oldOption, newOption) {
         }
 
     })(oldOption, newOption);
+
+    return oldOption;
 }

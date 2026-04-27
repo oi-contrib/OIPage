@@ -19,19 +19,30 @@
     <div class="bar" id="bar-id"></div>
 
     <button onClick="stopAnimation()">停止</button>
+    <button onClick="pauseAnimation()">暂停</button>
+    <button onClick="resumeAnimation()">继续</button>
 
     <script type="module">
         import { animation } from "../../web/animation/index.js";
 
         let barEl = document.getElementById("bar-id");
-        let { stop } = animation((deep) => {
+        let { stop, pause, resume } = animation((deep) => {
             barEl.style.width = (500 * deep) + "px";
+            console.log("轮询：deep=" + deep);
         }, 5000, (deep) => {
             console.log("结束：deep=" + deep);
         });
 
         window.stopAnimation = function () {
             stop();
+        }
+
+        window.pauseAnimation = function () {
+            pause();
+        }
+
+        window.resumeAnimation = function () {
+            resume();
         }
 
     </script>

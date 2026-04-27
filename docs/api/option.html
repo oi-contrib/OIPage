@@ -7,12 +7,21 @@
 <pre>
 let option = initOption(setOption, defaultOption);
 </pre>
+<p>
+    把设置的值合并到默认配置中（不会深入处理子对象），会改变默认配置的值同时返回合并后的配置。
+</p>
 <h3>
     mergeOption
 </h3>
 <p>
-    合并配置（会把新配置合并到旧配置中）：
+    合并配置：
 </p>
 <pre>
-mergeOption(oldOption, newOption);
+let option = mergeOption(oldOption, newOption);
 </pre>
+<div class="version">
+    返回合并后的配置始于v2.1.0
+</div>
+<p>
+    把新配置合并到旧配置中（会深入处理子对象），会改变旧配置的值同时返回合并后的配置。
+</p>
