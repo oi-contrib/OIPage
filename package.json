@@ -1,6 +1,6 @@
 {
   "name": "oipage",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "主要是提供前端开发中常用的API接口，支持nodejs和浏览器端使用",
   "sideEffects": false,
   "typings": "./types/index.d.ts",
@@ -32,6 +32,6 @@
   },
   "homepage": "https://oi-contrib.github.io/OIPage",
   "devDependencies": {
-    "@oipage/testjs": "^0.1.0"
+    "@oipage/testjs": "^0.1.1"
   }
 }

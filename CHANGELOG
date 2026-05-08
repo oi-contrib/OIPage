@@ -21,3 +21,10 @@ v2.0.1:
           1、类型定义错误
             * logform/index.d.ts 
             * performChunk/index.d.ts
+v2.1.0:
+    date:2026-05-08
+    changes:
+        - 优化改造
+          1、mergeOption优化调整，返回合并后的配置以方便实际使用
+        - 新增功能
+          1、animation功能新增，支持动画暂停和恢复
