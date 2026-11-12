@@ -69,7 +69,7 @@ export let writePlain: writePlainTypes
  * 读取JSON文件内容
  */
 export interface readJSONType {
-    (filePath: string): string
+    (filePath: string): any
 }
 
 export let readJSON: readJSONType
@@ -78,7 +78,7 @@ export let readJSON: readJSONType
  * 写入JSON内容到文件
  */
 export interface writeJSONTypes {
-    (filePath: string, content: string): void
+    (filePath: string, content: any): void
 }
 
 export let writeJSON: writeJSONTypes

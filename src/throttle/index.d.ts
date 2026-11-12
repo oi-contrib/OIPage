@@ -19,6 +19,11 @@ export interface throttleOptionType {
      */
     opportunity?: throttleOpportunityType
 
+    /**
+     * 定期必触发机制
+     */
+    dida?: number
+
 }
 
 /**

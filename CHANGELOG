@@ -28,3 +28,11 @@ v2.1.0:
           1、mergeOption优化调整，返回合并后的配置以方便实际使用
         - 新增功能
           1、animation功能新增，支持动画暂停和恢复
+v2.2.0:
+    date:2026-10-12
+    changes:
+        - 修复bug
+          1、类型定义错误
+            * disk/index.d.ts
+        - 新增功能
+          1、throttle新增dida配置项，支持定期必触发机制

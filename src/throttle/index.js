@@ -4,9 +4,10 @@ function throttle(callback, _option) {
     let option = {
         time: 200,
         keep: false,
-        opportunity: "end"
+        opportunity: "end",
+        dida: 0
     };
-    
+
     // 校对
     if (_option) {
         for (let key in _option) {
@@ -15,9 +16,22 @@ function throttle(callback, _option) {
     }
 
     let hadInterval = false, hadClick = false, oneClick = false, arg;
+    let didaBegin = void 0;
     return function () {
         const _this = this;
         arg = arguments;
+
+        if (option.dida) {
+            if (!didaBegin) {
+                didaBegin = new Date().valueOf();
+            } else {
+                if (new Date().valueOf() - didaBegin > option.dida) {
+                    callback.apply(_this, arg);
+                    didaBegin = new Date().valueOf();
+                    return;
+                }
+            }
+        }
 
         // 如果前置任务都完成了
         if (!hadInterval) {
